@@ -5,8 +5,9 @@ LocalStroage of the timetable file!
 
 */
 //error_reporting(E_ALL ^ E_NOTICE);
-require 'excel_reader2.php';
+//require 'excel_reader2.php';
 
+/*******************SET UP**************************/
 session_start();
 
 $timetable_tmp = $_FILES['uploadedfile']['tmp_name'];
@@ -18,7 +19,9 @@ if (isset ($_FILES['uploadedfile']['tmp_name'])){
 
 
 //using excel reader
-$data = new Spreadsheet_Excel_Reader($timetable_name);
+//$data = new Spreadsheet_Excel_Reader($timetable_name);
+
+
 //if its a broken excel file try it as html:
 //$data = false;
 if(!$data && !strpos($timetable_name, 'html')){
@@ -27,7 +30,7 @@ if(!$data && !strpos($timetable_name, 'html')){
 }
 
 //stores the file somewhere and sets the target path of the timetable
-$target_path  = "../!FYP/excelFiles/" . trim($timetable_name, " "); 
+$target_path  = "../timemap/excelFiles/" . trim($timetable_name, " "); 
 
 if(move_uploaded_file($timetable_tmp, $target_path)) 
 {
@@ -35,6 +38,8 @@ if(move_uploaded_file($timetable_tmp, $target_path))
     $_SESSION['timetable']  = $target_path;
 }
 
+
+//initiialise variables:
 $timetable = new DOMDocument;
 $timetable->preserveWhiteSpace = FALSE;
 $timetable->loadHTMLFile($target_path);
@@ -47,6 +52,7 @@ $sem2 = array();
 $timetable_arr = array();
 $x = 0;
 
+
 //convert from DOM to array 
 foreach ($lectures as $tag) {
     $timetable_arr[$x] = $tag->nodeValue;
@@ -54,7 +60,8 @@ foreach ($lectures as $tag) {
 }
 
 
-/**************Â == chr(194)*****************/
+
+//Â == chr(194)
 //chr(160) == &nbsp;        chr(93) == ]
 //$timetable_arr[0] = str_replace(chr(194), "..", $timetable_arr[0]);
 //echo $timetable_arr[0]."</br>";
@@ -97,6 +104,10 @@ echo '<pre>';
 print_r(json_decode($sem1_JSON));
 echo '</pre>'; 
 */
+/*******************************************************************************/
+
+
+
 
 /*****************************JSON FORMATTER*********************************/
 function JSONEncoder($semester){
@@ -222,7 +233,7 @@ foreach($days_array as $day){
 
 <!--Go back to the previous page after its done uploading-->
 <script>
-    window.location = '../!fyp';
+    window.location = '../timemap';
 </script>
 
 <!--
