@@ -23,7 +23,7 @@ if (isset ($_FILES['uploadedfile']['tmp_name'])){
 
 
 //if its a broken excel file try it as html:
-//$data = false;
+$data = false;
 if(!$data && !strpos($timetable_name, 'html')){
 	$timetable_name = basename($timetable_name, "xls") . "html";
 	echo "<br>" . trim($timetable_name, " ") . "<br>";
@@ -84,11 +84,14 @@ for($x = 0; $x < sizeof($timetable_arr); $x++){
 $sem1 = array_slice($timetable_arr, 0, 55);
 $sem2 = array_slice($timetable_arr, 55);
 
+
+
+/****TEST TEST TEST****/
 //25
 //chr(160) == &nbsp;    chr(93) == ]
-echo "</br>"."</br>"."<b>"."nine o'clock semester 1: "."</b></br>";
-echo $sem1[1]." ".str_word_count($sem1[1],0,chr(160))."</br>";
-print_r (preg_split("/t\s/",$sem1[1]));
+//echo "</br>"."</br>"."<b>"."nine o'clock semester 1: "."</b></br>";
+//echo $sem1[1]." ".str_word_count($sem1[1],0,chr(160))."</br>";
+//print_r (preg_split("/t\s/",$sem1[1]));
 //=> Array ( [0] => 09:00 [1] => CS355 ELT [2] => CS424 CB1 [3] => CS322 RH2.21 [4] => CS322 PH [5] => [6] => ) 
 
 
@@ -208,11 +211,7 @@ function splitTimetable($time){
 
 //return $timetable->saveHTML();
 
-
-
-
-
-
+/*** TEST ***/
 //get the days and times
 /**$days = $timetable->getElementsByTagname('th');
 $days_array = array();
@@ -235,6 +234,15 @@ foreach($days_array as $day){
 <script>
     window.location = '../timemap';
 </script>
+
+
+
+
+
+
+
+
+
 
 <!--
     *****NOTES:*****

@@ -1,37 +1,66 @@
 <!--GOOGLE MAPS API KEY:
 	AIzaSyC-cgzdVAPjujK1ET49QHxj_9f1fIoCdQk-->
 <?php
-require 'config.php';
-session_start();
+	require 'config.php';
+	session_start();
 ?>
 
 <!DOCTYPE html>
 <html> 
 <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo AK; ?>&signed_in=true&callback=initMap&libraries=places" type="text/javascript"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="js/readTable.js" type = "text/javascript"></script>
 	<script src="js/map.js" type="text/javascript"></script>
-	<script type="text/javascript">initMap();</script>
-
+	<script src="js/main.js" type="text/javascript"></script>
 </head>
   
 <body>
-	<div class="header"><h1>TimeMap</h1></div>
-	<div class="container">
-		<form id ="submitTimetable" action="uploadExcel.php" method="post" enctype="multipart/form-data">
-		    Upload your timetable in xmls format:
-		    <input type="file" name="uploadedfile" id="uploadedfile">
-		    <input type="submit" value="Upload File" name="submit">
-		</form>
+	<div class="container">	
+		<h1>TimeMap</h1>
+		<!--To upload the excel file-->
+		<form class="form-inline" id="submitTimetable" action="uploadExcel.php" method="post" enctype="multipart/form-data" role="form">
+			<div class="form-group">
+			    Upload your timetable in xmls format:
+			    <div class="input-group">
+				    <span class="input-group-btn">
+					    <span class="btn btn-default btn-file">
+		    				Browse&hellip; <input type="file" name="uploadedfile" multiple>
+						</span>
+					</span>
+                	<input type="text" class="form-control" readonly>
+				</div>
+			    <input id="sbtn" class="btn btn-default form-control" type="submit" value="Upload File" name="submit">
+			</div>
+		</form>	
+
+		<!--Tab layout for calendar and map-->
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#gMap">Map</a></li>
+			<li><a data-toggle="tab" href="#calendar">Calendar</a></li>
+		</ul>
+		
+		<div class="tab-content">
+			<input id="searchMap" class="controls" type="text" placeholder="Search Box">
+			<div id="gMap" class="tab-pane fade in active"></div>
+			
+			<div id="calendar" class="tab-pane fade">
+				<h3>Calendar</h3>
+				hello
+			</div>
+		</div>
+		
 
 
-		<div id="calender"></div>
-
-		<input id="searchMap" class="controls" type="text" placeholder="Search Box">
-		<div id="gMap"></div>
 
 		<?php
+			//Initialising variables for use with uploadExcel.php
 			$timetable_path = "";
 			$sem1_JSON = "";
 			$sem2_JSON = "";
@@ -58,8 +87,6 @@ session_start();
 			var timetable_path = '<?php echo $timetable_path; ?>'
 			readTable("table_listing", timetable_path);
 		</script>
-
-
 	</div>
 
 </body>

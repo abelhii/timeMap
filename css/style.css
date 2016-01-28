@@ -5,24 +5,57 @@ html{
 body{
 	padding: 0px;
 	margin: 0px;
-	font-family: Roboto;
+	font-family: Arial;
 }
+
 /*--container--*/
 .container{
-	margin:50px;
+	margin:30px;
 }
+
+/*--- Submit File ---*/
+#submitTimetable{
+  margin-top:10px;
+  margin-bottom:10px;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
 
 
 /*--Map--*/
 #gMap{
-	height: 700px;
-	width: 1000px;
-  margin:10px;
+	height: 90vh;
+	width: 120vh;
+  margin:5px;
+}
+
+#gmap .tab-pane .fade{
+  height:0px;
+  width:0px;
+  margin:0px;
 }
 
 #searchMap{
 	background-color: #fff;
-	font-family: Roboto;
+	font-family: Arial;
 	font-size: 15px;
 	font-weight: 300;
 	margin-left: 12px;
@@ -34,7 +67,7 @@ body{
   border-color: #4d90fe;
 }
 .searchMap-container{
-  font-family: Roboto;
+  font-family: Arial;
 }
 .controls {
   margin-top: 10px;
@@ -53,12 +86,7 @@ body{
 }
 
 #type-selector label {
-  font-family: Roboto;
+  font-family: Arial;
   font-size: 13px;
   font-weight: 300;
-}
-
-/*--- Submit File ---*/
-#submitTimetable{
-  margin:15px;
 }
