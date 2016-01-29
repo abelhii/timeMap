@@ -31,13 +31,13 @@
 			    Upload your timetable as an excel file:
 			    <div class="input-group">
 				    <span class="input-group-btn">
-					    <span class="btn btn-primary btn-file">
+					    <span class="btn btn-default btn-file">
 		    				Browse&hellip; <input type="file" name="uploadedfile" multiple>
 						</span>
 					</span>
                 	<input type="text" class="form-control" readonly>
 				</div>
-			    <input id="sbtn" class="btn btn-primary form-control" type="submit" value="Upload File" name="submit">
+			    <input id="sbtn" class="btn btn-success form-control" type="submit" value="Upload File" name="submit">
 			</div>
 		</form>	
 
@@ -53,6 +53,7 @@
 			
 			<div id="calendar" class="tab-pane fade">
 				<h2>Calendar</h2>
+				<a href="PHP/GCOAuth.php">connect calendar</a>
 				<iframe src="https://calendar.google.com/calendar/embed?title= &amp;mode=WEEK&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=en.irish%23holiday%40group.v.calendar.google.com&amp;color=%235F6B02&amp;ctz=Europe%2FDublin" 
 				style="border-width:0" 
 				width="1000" 

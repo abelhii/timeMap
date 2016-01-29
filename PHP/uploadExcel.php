@@ -30,7 +30,7 @@ if(!$data && !strpos($timetable_name, 'html')){
 }
 
 //stores the file somewhere and sets the target path of the timetable
-$target_path  = "../timemap/excelFiles/" . trim($timetable_name, " "); 
+$target_path  = "../../timemap/excelFiles/" . trim($timetable_name, " "); 
 
 if(move_uploaded_file($timetable_tmp, $target_path)) 
 {
