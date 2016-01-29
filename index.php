@@ -1,7 +1,8 @@
 <!--GOOGLE MAPS API KEY:
 	AIzaSyC-cgzdVAPjujK1ET49QHxj_9f1fIoCdQk-->
 <?php
-	require 'config.php';
+	//require_once 'vendor/autoload.php';
+	require 'PHP/config.php';
 	session_start();
 ?>
 
@@ -22,26 +23,26 @@
 </head>
   
 <body>
+	<h1 class="text-center">Time Map</h1>
 	<div class="container">	
-		<h1>TimeMap</h1>
 		<!--To upload the excel file-->
-		<form class="form-inline" id="submitTimetable" action="uploadExcel.php" method="post" enctype="multipart/form-data" role="form">
+		<form class="form-inline" id="submitTimetable" action="PHP/uploadExcel.php" method="post" enctype="multipart/form-data" role="form">
 			<div class="form-group">
-			    Upload your timetable in xmls format:
+			    Upload your timetable as an excel file:
 			    <div class="input-group">
 				    <span class="input-group-btn">
-					    <span class="btn btn-default btn-file">
+					    <span class="btn btn-primary btn-file">
 		    				Browse&hellip; <input type="file" name="uploadedfile" multiple>
 						</span>
 					</span>
                 	<input type="text" class="form-control" readonly>
 				</div>
-			    <input id="sbtn" class="btn btn-default form-control" type="submit" value="Upload File" name="submit">
+			    <input id="sbtn" class="btn btn-primary form-control" type="submit" value="Upload File" name="submit">
 			</div>
 		</form>	
 
 		<!--Tab layout for calendar and map-->
-		<ul class="nav nav-tabs">
+		<ul class="nav nav-tabs nav-justified nav-size">
 			<li class="active"><a data-toggle="tab" href="#gMap">Map</a></li>
 			<li><a data-toggle="tab" href="#calendar">Calendar</a></li>
 		</ul>
@@ -51,8 +52,13 @@
 			<div id="gMap" class="tab-pane fade in active"></div>
 			
 			<div id="calendar" class="tab-pane fade">
-				<h3>Calendar</h3>
-				hello
+				<h2>Calendar</h2>
+				<iframe src="https://calendar.google.com/calendar/embed?title= &amp;mode=WEEK&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=en.irish%23holiday%40group.v.calendar.google.com&amp;color=%235F6B02&amp;ctz=Europe%2FDublin" 
+				style="border-width:0" 
+				width="1000" 
+				height="800" 
+				frameborder="0" 
+				scrolling="no"></iframe>
 			</div>
 		</div>
 		
@@ -78,14 +84,19 @@
 					'</p>';
 
 			/*TEST:*/
+			echo "<b>SEMESTER 1:</b>";
 			echo '<pre>'; 
 			print_r(json_decode($sem1_JSON));
 			echo '</pre>'; 
-			/**/
+
+			echo "<b>SEMESTER 2:</b>";
+			echo '<pre>'; 
+			print_r(json_decode($sem2_JSON));
+			echo '</pre>'; 
+			/**/   
 		?>
 		<script type="text/javascript">
 			var timetable_path = '<?php echo $timetable_path; ?>'
-			readTable("table_listing", timetable_path);
 		</script>
 	</div>
 

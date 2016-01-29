@@ -232,7 +232,7 @@ foreach($days_array as $day){
 
 <!--Go back to the previous page after its done uploading-->
 <script>
-    window.location = '../timemap';
+    window.location = '../../timemap';
 </script>
 
 

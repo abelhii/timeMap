@@ -7,16 +7,23 @@ body{
 	margin: 0px;
 	font-family: Arial;
 }
+body h1{
+  margin: 35px;
+  font-weight: bold ;
+  font-size: 6vh;
+}
 
 /*--container--*/
 .container{
 	margin:30px;
 }
 
+
 /*--- Submit File ---*/
 #submitTimetable{
   margin-top:10px;
   margin-bottom:10px;
+  font-size: 2vh;
 }
 .btn-file {
     position: relative;
@@ -38,13 +45,18 @@ body{
     display: block;
 }
 
+/*--Tab--*/
+.nav-size{
+  font-size: 20px;
+}
 
 
 /*--Map--*/
 #gMap{
 	height: 90vh;
-	width: 120vh;
-  margin:5px;
+	width: 115vh;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #gmap .tab-pane .fade{
@@ -89,4 +101,12 @@ body{
   font-family: Arial;
   font-size: 13px;
   font-weight: 300;
+}
+
+
+/*--Calendar--*/
+#calendar{
+  height: 95vh;
+  width: 120vh;
+  margin: 15px;
 }

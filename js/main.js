@@ -1,4 +1,5 @@
 //For Browse style feedback to user to show what file they uploaded:
+//http://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3/
 $(document).on('change', '.btn-file :file', function() {
   var input = $(this),
       numFiles = input.get(0).files ? input.get(0).files.length : 1,
