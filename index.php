@@ -1,7 +1,8 @@
 <!--GOOGLE MAPS API KEY:
 	AIzaSyC-cgzdVAPjujK1ET49QHxj_9f1fIoCdQk-->
 <?php
-	//require_once 'vendor/autoload.php';
+	require_once 'vendor/autoload.php';
+	//require 'Custom_Calendar/Custom_Calendar/custom_calendar.php';
 	require 'PHP/config.php';
 	session_start();
 ?>
@@ -12,6 +13,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="Custom_Calendar/Custom_Calendar/custom_calendar.css">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -54,12 +56,19 @@
 			<div id="calendar" class="tab-pane fade">
 				<h2>Calendar</h2>
 				<a href="PHP/GCOAuth.php">connect calendar</a>
-				<iframe src="https://calendar.google.com/calendar/embed?title= &amp;mode=WEEK&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=en.irish%23holiday%40group.v.calendar.google.com&amp;color=%235F6B02&amp;ctz=Europe%2FDublin" 
+				<span style="font-family: monospace;">
+				<?php 	 
+					require 'Custom_Calendar/Custom_Calendar/custom_calendar.php';
+				?> 
+				https://calendar.google.com/calendar/embed?src=p52pqevg7jmba3d8lla6l9afhs%40group.calendar.google.com&ctz=Europe/Dublin
+				</span>
+				<!--
+				<iframe src="<?php //require 'Custom_Calendar/Custom_Calendar/custom_calendar.php';?> "
 				style="border-width:0" 
-				width="1000" 
+				width="1500" 
 				height="800" 
 				frameborder="0" 
-				scrolling="no"></iframe>
+				scrolling="yes"></iframe>-->
 			</div>
 		</div>
 		
@@ -95,6 +104,9 @@
 			print_r(json_decode($sem2_JSON));
 			echo '</pre>'; 
 			/**/   
+
+			//Export the HTML for calendar
+			//echo $dom->saveHTML();
 		?>
 		<script type="text/javascript">
 			var timetable_path = '<?php echo $timetable_path; ?>'
