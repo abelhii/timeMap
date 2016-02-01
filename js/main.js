@@ -21,3 +21,6 @@ $(document).ready( function() {
         
     });
 });
+
+
+/* Javascript to setup/initialise FullCalendar */

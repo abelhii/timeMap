@@ -1,7 +1,9 @@
 <?php
 
-//API KEY
-define('AK', 'AIzaSyC-cgzdVAPjujK1ET49QHxj_9f1fIoCdQk'); 
+//Maps API KEY
+define('MAK', 'AIzaSyC-cgzdVAPjujK1ET49QHxj_9f1fIoCdQk'); 
+//Calendar API KEY
+define('CAK', 'AIzaSyD1JxlR86LiHAEd_h4zBcAVROocoN83c4o');
 
 //For OAuth2:
 //Client ID

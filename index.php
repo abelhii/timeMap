@@ -12,16 +12,42 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--Style-->
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="Custom_Calendar/Custom_Calendar/custom_calendar.css">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!--Script-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo AK; ?>&signed_in=true&callback=initMap&libraries=places" type="text/javascript"></script>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="js/readTable.js" type = "text/javascript"></script>
 	<script src="js/map.js" type="text/javascript"></script>
 	<script src="js/main.js" type="text/javascript"></script>
+	<!--FullCalendar.io-->
+	<link href="bower_components/fullcalendar/dist/fullcalendar.css" rel="stylesheet" />
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js" type="text/javascript"></script>
+	<script src='bower_components/moment/min/moment.min.js' type="text/javascript"></script>
+	<script src="bower_components/fullcalendar/dist/fullcalendar.js" type="text/javascript"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAK; ?>&signed_in=true&callback=initMap&libraries=places" type="text/javascript"></script>
+
+	<script type='text/javascript'>
+	/* Javascript to setup/initialise FullCalendar */
+	$(document).ready(function() {
+	    $('#calendarr').fullCalendar({
+    	 	googleCalendarApiKey: 'AIzaSyD1JxlR86LiHAEd_h4zBcAVROocoN83c4o',
+	        events: {
+	            googleCalendarId: 'p52pqevg7jmba3d8lla6l9afhs@group.calendar.google.com'
+	        },
+	        header: {
+	          left: 'prev,next today',
+	          center: 'title',
+	          right: 'month,agendaWeek'
+	        },
+	        editable: true
+	    });
+	});
+
+	</script>
 </head>
   
 <body>
@@ -50,25 +76,15 @@
 		</ul>
 		
 		<div class="tab-content">
+			<!--Map-->
 			<input id="searchMap" class="controls" type="text" placeholder="Search Box">
 			<div id="gMap" class="tab-pane fade in active"></div>
 			
+			<!--Calendar-->
 			<div id="calendar" class="tab-pane fade">
-				<h2>Calendar</h2>
-				<a href="PHP/GCOAuth.php">connect calendar</a>
-				<span style="font-family: monospace;">
-				<?php 	 
-					require 'Custom_Calendar/Custom_Calendar/custom_calendar.php';
-				?> 
-				https://calendar.google.com/calendar/embed?src=p52pqevg7jmba3d8lla6l9afhs%40group.calendar.google.com&ctz=Europe/Dublin
-				</span>
-				<!--
-				<iframe src="<?php //require 'Custom_Calendar/Custom_Calendar/custom_calendar.php';?> "
-				style="border-width:0" 
-				width="1500" 
-				height="800" 
-				frameborder="0" 
-				scrolling="yes"></iframe>-->
+				<a class="btn btn-info" href="PHP/GCOAuth.php">connect calendar</a>
+				<br>
+				<div id="calendarr"></div>
 			</div>
 		</div>
 		
