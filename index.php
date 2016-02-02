@@ -30,24 +30,6 @@
 	<script src="bower_components/fullcalendar/dist/fullcalendar.js" type="text/javascript"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAK; ?>&signed_in=true&callback=initMap&libraries=places" type="text/javascript"></script>
 
-	<script type='text/javascript'>
-	/* Javascript to setup/initialise FullCalendar */
-	$(document).ready(function() {
-	    $('#calendarr').fullCalendar({
-    	 	googleCalendarApiKey: 'AIzaSyD1JxlR86LiHAEd_h4zBcAVROocoN83c4o',
-	        events: {
-	            googleCalendarId: 'p52pqevg7jmba3d8lla6l9afhs@group.calendar.google.com'
-	        },
-	        header: {
-	          left: 'prev,next today',
-	          center: 'title',
-	          right: 'month,agendaWeek'
-	        },
-	        editable: true
-	    });
-	});
-
-	</script>
 </head>
   
 <body>
