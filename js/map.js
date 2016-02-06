@@ -2,6 +2,7 @@ var map;
 var infowindow;
 
 function initMap() {
+	//Maynooth University Coordinates
 	var myLatLng = {lat: 53.382207, lng: -6.598396};
 	// Create a map object and specify the DOM element for display.
 	map = new google.maps.Map(document.getElementById('gMap'), {
@@ -10,22 +11,20 @@ function initMap() {
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	});
 
-	var marker = new google.maps.Marker({
+
+	var ctaLayer = new google.maps.KmlLayer({
+    	url: 'https://drive.google.com/file/d/0BwbpeT2XI4VWdWFOQjg5ZThWcGM/view',
+    	map: map
+  	});
+
+	/**var marker = new google.maps.Marker({
 		position: myLatLng,
 	    map: map,
 	    title: 'Hello World!'
 	});
 
 	infowindow = new google.maps.InfoWindow();
-
-	var service = new google.maps.places.PlacesService(map);
-	service.nearbySearch({
-		location: myLatLng,
-		radius: 600,
-		types: ['store']
-	}, callback);
-
-	
+*/
 	// This example adds a search box to a map, using the Google Place Autocomplete
 	// feature. People can enter geographical searches. The search box will return a
 	// pick list containing a mix of places and predicted search terms.

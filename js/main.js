@@ -27,8 +27,12 @@ $(document).ready( function() {
  
 //googleCalendarApiKey: 'AIzaSyBIkPthcMusoSDbqB9gxVWbcS-lYo6mx34', 
 
-  $(document).ready(function() {
-    
+$(document).ready(function() {
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+
     $('#calendarr').fullCalendar({
       header: {
         left: 'prev,next today',
@@ -39,61 +43,58 @@ $(document).ready( function() {
       editable: true,
       eventLimit: true, // allow "more" link when too many events
       events: [
-        {
-          title: 'All Day Event',
-          start: '2016-01-01'
-        },
-        {
-          title: 'Long Event',
-          start: '2016-01-07',
-          end: '2016-01-10'
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: '2016-01-09T16:00:00'
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: '2016-01-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2016-01-11',
-          end: '2016-01-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2016-01-12T10:30:00',
-          end: '2016-01-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2016-01-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2016-01-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2016-01-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2016-01-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2016-01-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2016-01-28'
-        }
-      ]
+            // some original fullCalendar examples
+            {
+                title: 'All Day Event',
+                start: new Date(y, m, 1)
+            },
+            {
+                title: 'Long Event',
+                start: new Date(y, m, d-5),
+                end: new Date(y, m, d-2)
+            },
+            {
+                id: 999,
+                title: 'Repeating Event',
+                start: new Date(y, m, d-3, 16, 0),
+                allDay: false
+            }
+        ]
     });
+
+    // adding a every monday and wednesday events:
+    $('#calendarr').fullCalendar( 'addEventSource',        
+        function(start, end, callback) {
+            // When requested, dynamically generate virtual
+            // events for every monday and wednesday.
+            var events = [];
+
+            for (loop = start.getTime();
+                 loop <= end.getTime();
+                 loop = loop + (24 * 60 * 60 * 1000)) {
+
+                var test_date = new Date(loop);
+
+                if (test_date.is().monday()) {
+                    // we're in Moday, create the event
+                    events.push({
+                        title: 'I hate mondays - Garfield',
+                        start: test_date
+                    });
+                }
+
+                if (test_date.is().wednesday()) {
+                    // we're in Wednesday, create the Wednesday event
+                    events.push({
+                        title: 'It\'s the middle of the week!',
+                        start: test_date
+                    });
+                }
+            } // for loop
+
+            // return events generated
+            callback( events );
+        }
+    );
     
   });
