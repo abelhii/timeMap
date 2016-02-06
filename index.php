@@ -59,8 +59,8 @@
 		</ul>
 		
 		<div class="tab-content">
-			<!--Map-->
-			<input id="searchMap" class="controls" type="text" placeholder="Search Box">
+			<!--Map
+			<input id="searchMap" class="controls" type="text" placeholder="Search Box">-->
 			<div id="gMap" class="tab-pane fade in active"></div>
 			
 			<!--Calendar-->

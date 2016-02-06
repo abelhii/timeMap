@@ -1,4 +1,19 @@
-var map;
+function initMap() {
+	var map = new google.maps.Map(document.getElementById('gMap'), {
+		zoom: 16,
+		center: {lat: 53.382207, lng: -6.598396}
+	});
+
+	var kmlOptions = {
+		url: 'http://abelhii.com/timeMap/map/maynooth_campus.kml',
+		suppressInfoWindows: false,
+		preserveViewport: false,
+		map: map
+	};
+	var muLayer = new google.maps.KmlLayer(kmlOptions);
+}
+
+/**var map;
 var infowindow;
 
 function initMap() {
@@ -13,18 +28,19 @@ function initMap() {
 
 
 	var ctaLayer = new google.maps.KmlLayer({
-    	url: 'https://drive.google.com/file/d/0BwbpeT2XI4VWdWFOQjg5ZThWcGM/view',
+    	url: 'https://github.com/abelhii/timeMap/tree/master/map/maynooth_campus.kml',
     	map: map
   	});
 
-	/**var marker = new google.maps.Marker({
+  	ctaLayer.setMap(map);
+	var marker = new google.maps.Marker({
 		position: myLatLng,
 	    map: map,
 	    title: 'Hello World!'
 	});
 
 	infowindow = new google.maps.InfoWindow();
-*/
+
 	// This example adds a search box to a map, using the Google Place Autocomplete
 	// feature. People can enter geographical searches. The search box will return a
 	// pick list containing a mix of places and predicted search terms.
@@ -108,4 +124,4 @@ function createMarker(place) {
     infowindow.setContent(place.name);
     infowindow.open(map, this);
   });
-}
+}*/
