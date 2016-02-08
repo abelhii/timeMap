@@ -14,7 +14,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--Style-->
 	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="Custom_Calendar/Custom_Calendar/custom_calendar.css">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<!--Script-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -95,12 +94,12 @@
 			/*TEST:*/
 			echo "<b>SEMESTER 1:</b>";
 			echo '<pre>'; 
-			print_r(json_decode($sem1_JSON));
+			print_r(json_decode($sem1_JSON, true));
 			echo '</pre>'; 
 
 			echo "<b>SEMESTER 2:</b>";
 			echo '<pre>'; 
-			print_r(json_decode($sem2_JSON));
+			print_r(json_decode($sem2_JSON, true));
 			echo '</pre>'; 
 			/**/   
 

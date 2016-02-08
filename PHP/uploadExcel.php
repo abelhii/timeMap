@@ -99,6 +99,8 @@ $sem2 = array_slice($timetable_arr, 55);
 
 $sem1_JSON = JSONEncoder($sem1);
 $sem2_JSON = JSONEncoder($sem2);
+
+
 //Stores it as a session object for index to retrieve:
 $_SESSION['sem1_JSON']  = $sem1_JSON;
 $_SESSION['sem2_JSON']  = $sem2_JSON;
@@ -167,13 +169,8 @@ function JSONEncoder($semester){
     }
     //print_r($timetableForJSON);
     $timetableJSON = json_encode($timetableForJSON) ;
-    $object = json_decode($timetableJSON, true);
-    /*foreach ($timetableJSON->Monday["9:00"] as $data) {
-        foreach ($data as $key => $value) {
-            echo "$key=>$val" . "<br>";
-        }
-    }*/
-    print $object["Monday"]["9:00"] ;
+    //$object = json_decode($timetableJSON, true);
+    //print $object["Monday"]["9:00"] ;
     return FCJson($timetableJSON);
 }
 
@@ -202,33 +199,95 @@ dow: [ 1, 5 ]
 */
 //Function to convert JSON for FullCalendar.io
 function FCJson($timetableJ){
-    $fullCalendar = array(
-            "Monday" => array("allDay" => "", "title" => "", "id" => "", "end" => "", "start" => "", "dow" => "[1]"),
-            "Tuesday" => array("allDay" => "", "title" => "", "id" => "", "end" => "", "start" => "", "dow" => "[2]"),
-            "Wednesday" => array("allDay" => "", "title" => "", "id" => "", "end" => "", "start" => "", "dow" => "[3]"),
-            "Thursday" => array("allDay" => "", "title" => "", "id" => "", "end" => "", "start" => "", "dow" => "[4]"),
-            "Friday" => array("allDay" => "", "title" => "", "id" => "", "end" => "", "start" => "", "dow" => "[5]"),
-        );
+    /*$fullCalendar = array(
+            "Monday" => array("id" => "", "title" => "", "start" => "", "end" => "", "dow" => "[1]", "allDay" => ""),
+            "Tuesday" => array("id" => "", "title" => "", "start" => "", "end" => "", "dow" => "[2]", "allDay" => ""),
+            "Wednesday" => array("id" => "", "title" => "", "start" => "", "end" => "", "dow" => "[3]", "allDay" => ""),
+            "Thursday" => array("id" => "", "title" => "", "start" => "", "end" => "", "dow" => "[4]", "allDay" => ""),
+            "Friday" => array("id" => "", "title" => "", "start" => "", "end" => "", "dow" => "[5]", "allDay" => ""),
+        );*/
 
     //decode the JSON
     $forFC = json_decode($timetableJ,true);
-
+    $id = 0;
     for($days = 0; $days <= 5; $days++){
         for($hours = 9; $hours <= 17; $hours++){
-            if($forFC["Monday"][$hours.":00"] == null){
-                $hours++;
-            }else{
-                $fullCalendar->Monday["title"] = $forFC->Monday[$hours.":00"];
-                $fullCalendar->Monday["end"] = ($hours+1).":00";
-                $fullCalendar->Monday["start"] = $hours.":00";
+            switch($days){
+                case 1:
+                    if($forFC["Monday"][$hours.":00"] != null){
+                        $fullCalendar["M".$id]["allDay"] = "";
+                        $fullCalendar["M".$id]["title"] = $forFC["Monday"][$hours.":00"];
+                        $fullCalendar["M".$id]["id"] = $id;
+                        $fullCalendar["M".$id]["end"] = ($hours+1).":00";
+                        $fullCalendar["M".$id]["start"] = $hours.":00";
+                        $fullCalendar["M".$id]["dow"] = "[1]";
+                        $id++;
+                    }else{
+                        $hours++;
+                    }   
+                    break;
+                case 2:
+                    if($forFC["Tuesday"][$hours.":00"] != null){
+                        $fullCalendar["T".$id]["allDay"] = "";
+                        $fullCalendar["T".$id]["title"] = $forFC["Tuesday"][$hours.":00"];
+                        $fullCalendar["T".$id]["id"] = $id;
+                        $fullCalendar["T".$id]["end"] = ($hours+1).":00";
+                        $fullCalendar["T".$id]["start"] = $hours.":00";
+                        $fullCalendar["T".$id]["dow"] = "[2]";
+                        $id++;
+                    }else{
+                        $hours++;
+                    }
+                    break;
+                case 3:
+                    if($forFC["Wednesday"][$hours.":00"] != null){
+                        $fullCalendar["W".$id]["allDay"] = "";
+                        $fullCalendar["W".$id]["title"] = $forFC["Wednesday"][$hours.":00"];
+                        $fullCalendar["W".$id]["id"] = $id;
+                        $fullCalendar["W".$id]["end"] = ($hours+1).":00";
+                        $fullCalendar["W".$id]["start"] = $hours.":00";
+                        $fullCalendar["W".$id]["dow"] = "[3]";
+                        $id++;
+                    }else{
+                        $hours++;
+                    }
+                    break;
+                case 4:
+                    if($forFC["Thursday"][$hours.":00"] != null){
+                        $fullCalendar["TH".$id]["allDay"] = "";
+                        $fullCalendar["TH".$id]["title"] = $forFC["Thursday"][$hours.":00"];
+                        $fullCalendar["TH".$id]["id"] = $id;
+                        $fullCalendar["TH".$id]["end"] = ($hours+1).":00";
+                        $fullCalendar["TH".$id]["start"] = $hours.":00";
+                        $fullCalendar["TH".$id]["dow"] = "[4]";
+                        $id++;
+                    }else{
+                        $hours++;
+                    }
+                    break;
+                case 5:
+                    if($forFC["Friday"][$hours.":00"] != null){
+                        $fullCalendar["F".$id]["allDay"] = "";
+                        $fullCalendar["F".$id]["title"] = $forFC["Friday"][$hours.":00"];
+                        $fullCalendar["F".$id]["id"] = $id;
+                        $fullCalendar["F".$id]["end"] = ($hours+1).":00";
+                        $fullCalendar["F".$id]["start"] = $hours.":00";
+                        $fullCalendar["F".$id]["dow"] = "[5]";
+                        $id++;
+                    }else{
+                        $hours++;
+                    }
+                    break;
             }
+            
         }   
     }
 
-    $fullCalendar = json_encode($fullCalendar);
-    echo $fullCalendar->Monday["title"];
+    $fullCalendarJSON = json_encode($fullCalendar);
+   // $oo = json_decode($fullCalendarJSON, true);
+   // print $oo["Monday"]["title"];
 
-    return $fullCalendar;
+    return $fullCalendarJSON;
 }
 
 
@@ -276,6 +335,7 @@ function splitTimetable($time){
 
 /*** TEST ***/
 //get the days and times
+/***
 $days = $timetable->getElementsByTagname('th');
 $days_array = array();
 
@@ -288,16 +348,16 @@ foreach ($days as $day){
 foreach($days_array as $day){
     echo $day."</br>";
 }
-
+*/
 
 
 ?>
 
-<!--Go back to the previous page after its done uploading
+<!--Go back to the previous page after its done uploading-->
 <script>
     window.location = '../../timemap';
 </script>
--->
+
 
 
 

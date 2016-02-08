@@ -26,7 +26,6 @@ $(document).ready( function() {
 /* Javascript to setup/initialise FullCalendar */
  
 //googleCalendarApiKey: 'AIzaSyBIkPthcMusoSDbqB9gxVWbcS-lYo6mx34', 
-
 $(document).ready(function() {
     var date = new Date();
     var d = date.getDate();
@@ -42,7 +41,8 @@ $(document).ready(function() {
       defaultView: 'agendaWeek',
       editable: true,
       eventLimit: true, // allow "more" link when too many events
-      events: [
+      events: '/../PHP/timetable_json.php'
+      /**[
             // some original fullCalendar examples
             {
                 title:"My repeating event",
@@ -65,7 +65,7 @@ $(document).ready(function() {
                 start: new Date(y, m, d-3, 16, 0),
                 allDay: false
             }
-        ]
+        ]*/
     });
     
   });
