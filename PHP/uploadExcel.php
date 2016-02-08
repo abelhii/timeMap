@@ -102,11 +102,11 @@ $sem2_JSON = JSONEncoder($sem2);
 //Stores it as a session object for index to retrieve:
 $_SESSION['sem1_JSON']  = $sem1_JSON;
 $_SESSION['sem2_JSON']  = $sem2_JSON;
-/*** TEST: ***
+/*** TEST: ***/
 echo '<pre>'; 
 print_r(json_decode($sem1_JSON));
 echo '</pre>'; 
-*/
+
 /*******************************************************************************/
 
 
@@ -115,7 +115,7 @@ echo '</pre>';
 /*****************************JSON FORMATTER*********************************/
 function JSONEncoder($semester){
     //This stores the times of each semester in seperate arrays, 
-    //and splits them by the random characters inserted earlier e.g.  9:00 semester 1 = $sem1_9
+    //and splits them by the random characters (t & s) inserted earlier e.g.  9:00 o'clock semester 1 = $sem1_9
     $y = 9;
     for($x = 0; $x < sizeof($semester); $x++){
         $dummy= preg_split("/t\s/",$semester[$x]);
@@ -131,16 +131,17 @@ function JSONEncoder($semester){
         echo "</br>";
     }
     */
-    
-    //creates Days Mon-Fri in JSON format:
+    //$timetableForJSON = new StdClass;
+    /*creates Days 1-5 (Mon-Fri) in JSON format:*/
     $timetableForJSON = (object) array(
                 "Monday" => array("9:00" => "","10:00" => "","11:00" => "","12:00" => "","13:00" => "","14:00" => "","15:00" => ""), 
                 "Tuesday" => array("9:00" => "","10:00" => "","11:00" => "","12:00" => "","13:00" => "","14:00" => "","15:00" => ""),
                 "Wednesday" => array("9:00" => "","10:00" => "","11:00" => "","12:00" => "","13:00" => "","14:00" => "","15:00" => ""),
                 "Thursday" => array("9:00" => "","10:00" => "","11:00" => "","12:00" => "","13:00" => "","14:00" => "","15:00" => ""),
                 "Friday" => array("9:00" => "","10:00" => "","11:00" => "","12:00" => "","13:00" => "","14:00" => "","15:00" => ""));
+      
 
-    //echo "</br> ". $timetableForJSON->Monday["09:00"];
+    //echo "</br> ". $timetableForJSON->Monday["9:00"];
     echo "</br>";
 
     for($days = 1; $days <= 6; $days++){
@@ -166,8 +167,70 @@ function JSONEncoder($semester){
     }
     //print_r($timetableForJSON);
     $timetableJSON = json_encode($timetableForJSON) ;
-    return $timetableJSON;
+    $object = json_decode($timetableJSON, true);
+    /*foreach ($timetableJSON->Monday["9:00"] as $data) {
+        foreach ($data as $key => $value) {
+            echo "$key=>$val" . "<br>";
+        }
+    }*/
+    print $object["Monday"]["9:00"] ;
+    return FCJson($timetableJSON);
 }
+
+
+
+/***Full calendar JSON layout:
+[
+    "0",
+    {
+        "allDay": "",
+        "title": "Test event",
+        "id": "821",
+        "end": "2011-06-06 14:00:00",
+        "start": "2011-06-06 06:00:00"
+    },
+    "1",
+    {
+        "allDay": "",
+        "title": "Test event 2",
+        "id": "822",
+        "end": "2011-06-10 21:00:00",
+        "start": "2011-06-10 16:00:00"
+    }
+]
+dow: [ 1, 5 ]
+*/
+//Function to convert JSON for FullCalendar.io
+function FCJson($timetableJ){
+    $fullCalendar = array(
+            "Monday" => array("allDay" => "", "title" => "", "id" => "", "end" => "", "start" => "", "dow" => "[1]"),
+            "Tuesday" => array("allDay" => "", "title" => "", "id" => "", "end" => "", "start" => "", "dow" => "[2]"),
+            "Wednesday" => array("allDay" => "", "title" => "", "id" => "", "end" => "", "start" => "", "dow" => "[3]"),
+            "Thursday" => array("allDay" => "", "title" => "", "id" => "", "end" => "", "start" => "", "dow" => "[4]"),
+            "Friday" => array("allDay" => "", "title" => "", "id" => "", "end" => "", "start" => "", "dow" => "[5]"),
+        );
+
+    //decode the JSON
+    $forFC = json_decode($timetableJ,true);
+
+    for($days = 0; $days <= 5; $days++){
+        for($hours = 9; $hours <= 17; $hours++){
+            if($forFC["Monday"][$hours.":00"] == null){
+                $hours++;
+            }else{
+                $fullCalendar->Monday["title"] = $forFC->Monday[$hours.":00"];
+                $fullCalendar->Monday["end"] = ($hours+1).":00";
+                $fullCalendar->Monday["start"] = $hours.":00";
+            }
+        }   
+    }
+
+    $fullCalendar = json_encode($fullCalendar);
+    echo $fullCalendar->Monday["title"];
+
+    return $fullCalendar;
+}
+
 
 function assignLectures($day, $hour){
     if($hour[$day] != null){
@@ -213,7 +276,7 @@ function splitTimetable($time){
 
 /*** TEST ***/
 //get the days and times
-/**$days = $timetable->getElementsByTagname('th');
+$days = $timetable->getElementsByTagname('th');
 $days_array = array();
 
 foreach ($days as $day){
@@ -226,15 +289,15 @@ foreach($days_array as $day){
     echo $day."</br>";
 }
 
-*/
+
 
 ?>
 
-<!--Go back to the previous page after its done uploading-->
+<!--Go back to the previous page after its done uploading
 <script>
     window.location = '../../timemap';
 </script>
-
+-->
 
 
 

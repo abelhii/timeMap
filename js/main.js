@@ -39,11 +39,17 @@ $(document).ready(function() {
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
       },
-      defaultDate: '2016-01-12',
+      defaultView: 'agendaWeek',
       editable: true,
       eventLimit: true, // allow "more" link when too many events
       events: [
             // some original fullCalendar examples
+            {
+                title:"My repeating event",
+                start: '10:00', // a start time (10am in this example)
+                end: '14:00', // an end time (6pm in this example)
+                dow: [1, 5]// Repeat monday and friday
+            },
             {
                 title: 'All Day Event',
                 start: new Date(y, m, 1)
@@ -61,40 +67,5 @@ $(document).ready(function() {
             }
         ]
     });
-
-    // adding a every monday and wednesday events:
-    $('#calendarr').fullCalendar( 'addEventSource',        
-        function(start, end, callback) {
-            // When requested, dynamically generate virtual
-            // events for every monday and wednesday.
-            var events = [];
-
-            for (loop = start.getTime();
-                 loop <= end.getTime();
-                 loop = loop + (24 * 60 * 60 * 1000)) {
-
-                var test_date = new Date(loop);
-
-                if (test_date.is().monday()) {
-                    // we're in Moday, create the event
-                    events.push({
-                        title: 'I hate mondays - Garfield',
-                        start: test_date
-                    });
-                }
-
-                if (test_date.is().wednesday()) {
-                    // we're in Wednesday, create the Wednesday event
-                    events.push({
-                        title: 'It\'s the middle of the week!',
-                        start: test_date
-                    });
-                }
-            } // for loop
-
-            // return events generated
-            callback( events );
-        }
-    );
     
   });
