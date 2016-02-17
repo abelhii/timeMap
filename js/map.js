@@ -5,7 +5,7 @@ function initMap() {
 	});
 
 	var kmlOptions = {
-		url: 'http://abelhii.com/timeMap/map/maynooth_campus.kml',
+		url: 'http://abelhii.com/timeMap/maynooth_campus.kml',
 		suppressInfoWindows: false,
 		preserveViewport: false,
 		map: map

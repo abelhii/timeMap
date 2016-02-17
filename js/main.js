@@ -25,8 +25,8 @@ $(document).ready( function() {
 
 /* Javascript to setup/initialise FullCalendar */
  
-//googleCalendarApiKey: 'AIzaSyBIkPthcMusoSDbqB9gxVWbcS-lYo6mx34', 
-$(document).ready(function() {
+
+$(document).load(function() {
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
