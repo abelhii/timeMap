@@ -1,5 +1,4 @@
-<!--GOOGLE MAPS API KEY:
-	AIzaSyC-cgzdVAPjujK1ET49QHxj_9f1fIoCdQk-->
+<?php header('Access-Control-Allow-Origin: http://abelhii.com'); ?>
 <?php
 	require_once 'vendor/autoload.php';
 	//require 'Custom_Calendar/Custom_Calendar/custom_calendar.php';

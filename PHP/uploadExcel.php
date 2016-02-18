@@ -1,3 +1,4 @@
+<?php header('Access-Control-Allow-Origin: http://abelhii.com'); ?>
 <?php
 /***
 TODO: 
@@ -30,7 +31,7 @@ if(!$data && !strpos($timetable_name, 'html')){
 }
 
 //stores the file somewhere and sets the target path of the timetable
-$target_path  = "../../timemap/excelFiles/" . trim($timetable_name, " "); 
+$target_path  = "../../timeMap/excelFiles/" . trim($timetable_name, " "); 
 
 if(move_uploaded_file($timetable_tmp, $target_path)) 
 {
@@ -100,6 +101,9 @@ $sem2 = array_slice($timetable_arr, 55);
 $sem1_JSON = JSONEncoder($sem1);
 $sem2_JSON = JSONEncoder($sem2);
 
+$fp = fopen('results.json', 'w');
+fwrite($fp, $sem1_JSON);
+fclose($fp);
 
 //Stores it as a session object for index to retrieve:
 $_SESSION['sem1_JSON']  = $sem1_JSON;
@@ -108,6 +112,11 @@ $_SESSION['sem2_JSON']  = $sem2_JSON;
 echo '<pre>'; 
 print_r(json_decode($sem1_JSON));
 echo '</pre>'; 
+//<!--Go back to the previous page after its done uploading-->
+echo
+"<script>
+    window.history.go(-1);
+</script>";
 
 /*******************************************************************************/
 
@@ -215,12 +224,11 @@ function FCJson($timetableJ){
             switch($days){
                 case 1:
                     if($forFC["Monday"][$hours.":00"] != null){
-                        $fullCalendar["M".$id]["allDay"] = "";
-                        $fullCalendar["M".$id]["title"] = $forFC["Monday"][$hours.":00"];
-                        $fullCalendar["M".$id]["id"] = $id;
-                        $fullCalendar["M".$id]["end"] = ($hours+1).":00";
-                        $fullCalendar["M".$id]["start"] = $hours.":00";
-                        $fullCalendar["M".$id]["dow"] = "[1]";
+                        $fullCalendar[$id]["title"] = $forFC["Monday"][$hours.":00"];
+                        $fullCalendar[$id]["id"] = $id;
+                        $fullCalendar[$id]["end"] = ($hours+1).":00";
+                        $fullCalendar[$id]["start"] = $hours.":00";
+                        $fullCalendar[$id]["dow"] = "[1]";
                         $id++;
                     }else{
                         $hours++;
@@ -228,12 +236,12 @@ function FCJson($timetableJ){
                     break;
                 case 2:
                     if($forFC["Tuesday"][$hours.":00"] != null){
-                        $fullCalendar["T".$id]["allDay"] = "";
-                        $fullCalendar["T".$id]["title"] = $forFC["Tuesday"][$hours.":00"];
-                        $fullCalendar["T".$id]["id"] = $id;
-                        $fullCalendar["T".$id]["end"] = ($hours+1).":00";
-                        $fullCalendar["T".$id]["start"] = $hours.":00";
-                        $fullCalendar["T".$id]["dow"] = "[2]";
+                        $fullCalendar[$id]["allDay"] = "";
+                        $fullCalendar[$id]["title"] = $forFC["Tuesday"][$hours.":00"];
+                        $fullCalendar[$id]["id"] = $id;
+                        $fullCalendar[$id]["end"] = ($hours+1).":00";
+                        $fullCalendar[$id]["start"] = $hours.":00";
+                        $fullCalendar[$id]["dow"] = "[2]";
                         $id++;
                     }else{
                         $hours++;
@@ -241,12 +249,12 @@ function FCJson($timetableJ){
                     break;
                 case 3:
                     if($forFC["Wednesday"][$hours.":00"] != null){
-                        $fullCalendar["W".$id]["allDay"] = "";
-                        $fullCalendar["W".$id]["title"] = $forFC["Wednesday"][$hours.":00"];
-                        $fullCalendar["W".$id]["id"] = $id;
-                        $fullCalendar["W".$id]["end"] = ($hours+1).":00";
-                        $fullCalendar["W".$id]["start"] = $hours.":00";
-                        $fullCalendar["W".$id]["dow"] = "[3]";
+                        $fullCalendar[$id]["allDay"] = "";
+                        $fullCalendar[$id]["title"] = $forFC["Wednesday"][$hours.":00"];
+                        $fullCalendar[$id]["id"] = $id;
+                        $fullCalendar[$id]["end"] = ($hours+1).":00";
+                        $fullCalendar[$id]["start"] = $hours.":00";
+                        $fullCalendar[$id]["dow"] = "[3]";
                         $id++;
                     }else{
                         $hours++;
@@ -254,12 +262,12 @@ function FCJson($timetableJ){
                     break;
                 case 4:
                     if($forFC["Thursday"][$hours.":00"] != null){
-                        $fullCalendar["TH".$id]["allDay"] = "";
-                        $fullCalendar["TH".$id]["title"] = $forFC["Thursday"][$hours.":00"];
-                        $fullCalendar["TH".$id]["id"] = $id;
-                        $fullCalendar["TH".$id]["end"] = ($hours+1).":00";
-                        $fullCalendar["TH".$id]["start"] = $hours.":00";
-                        $fullCalendar["TH".$id]["dow"] = "[4]";
+                        $fullCalendar[$id]["allDay"] = "";
+                        $fullCalendar[$id]["title"] = $forFC["Thursday"][$hours.":00"];
+                        $fullCalendar[$id]["id"] = $id;
+                        $fullCalendar[$id]["end"] = ($hours+1).":00";
+                        $fullCalendar[$id]["start"] = $hours.":00";
+                        $fullCalendar[$id]["dow"] = "[4]";
                         $id++;
                     }else{
                         $hours++;
@@ -267,12 +275,12 @@ function FCJson($timetableJ){
                     break;
                 case 5:
                     if($forFC["Friday"][$hours.":00"] != null){
-                        $fullCalendar["F".$id]["allDay"] = "";
-                        $fullCalendar["F".$id]["title"] = $forFC["Friday"][$hours.":00"];
-                        $fullCalendar["F".$id]["id"] = $id;
-                        $fullCalendar["F".$id]["end"] = ($hours+1).":00";
-                        $fullCalendar["F".$id]["start"] = $hours.":00";
-                        $fullCalendar["F".$id]["dow"] = "[5]";
+                        $fullCalendar[$id]["allDay"] = "";
+                        $fullCalendar[$id]["title"] = $forFC["Friday"][$hours.":00"];
+                        $fullCalendar[$id]["id"] = $id;
+                        $fullCalendar[$id]["end"] = ($hours+1).":00";
+                        $fullCalendar[$id]["start"] = $hours.":00";
+                        $fullCalendar[$id]["dow"] = "[5]";
                         $id++;
                     }else{
                         $hours++;
@@ -284,8 +292,8 @@ function FCJson($timetableJ){
     }
 
     $fullCalendarJSON = json_encode($fullCalendar);
-   // $oo = json_decode($fullCalendarJSON, true);
-   // print $oo["Monday"]["title"];
+    // $oo = json_decode($fullCalendarJSON, true);
+    // print $oo["Monday"]["title"];
 
     return $fullCalendarJSON;
 }
@@ -352,12 +360,6 @@ foreach($days_array as $day){
 
 
 ?>
-
-<!--Go back to the previous page after its done uploading-->
-<script>
-    window.location = '../../timemap';
-</script>
-
 
 
 

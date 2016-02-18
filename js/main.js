@@ -24,8 +24,6 @@ $(document).ready( function() {
 
 
 /* Javascript to setup/initialise FullCalendar */
- 
-//googleCalendarApiKey: 'AIzaSyBIkPthcMusoSDbqB9gxVWbcS-lYo6mx34', 
 $(document).ready(function() {
     var date = new Date();
     var d = date.getDate();
@@ -41,9 +39,18 @@ $(document).ready(function() {
       defaultView: 'agendaWeek',
       editable: true,
       eventLimit: true, // allow "more" link when too many events
-      events: '/../PHP/timetable_json.php'
+      eventSources:'http://abelhii.com/timeMap/results.json'
+      
       /**[
             // some original fullCalendar examples
+            {
+              "allDay":"",
+              "title":"\n\t\tCS355 [ELT]",
+              "id":0,
+              "end":"10:00",
+              "start":"9:00",
+              "dow":"[1]"
+            }
             {
                 title:"My repeating event",
                 start: '10:00', // a start time (10am in this example)
