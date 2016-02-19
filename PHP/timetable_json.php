@@ -5,6 +5,6 @@
 		$sem2_JSON = $_SESSION['sem2_JSON'];
 	}
 	
-	echo $sem1_JSON;
+	echo $sem2_JSON;
 	exit;	
 ?>

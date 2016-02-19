@@ -1,4 +1,4 @@
-<?php header('Access-Control-Allow-Origin: http://abelhii.com'); ?>
+<?php header('Access-Control-Allow-Origin: http://54.229.52.202/*'); ?>
 <?php
 /***
 TODO: 
@@ -223,7 +223,7 @@ function FCJson($timetableJ){
         for($hours = 9; $hours <= 17; $hours++){
             switch($days){
                 case 1:
-                    if($forFC["Monday"][$hours.":00"] != null){
+                    if($forFC["Monday"][$hours.":00"] != "\n\t\t" && $forFC["Monday"][$hours.":00"] != "\r\n\t\t"){
                         $fullCalendar[$id]["title"] = $forFC["Monday"][$hours.":00"];
                         $fullCalendar[$id]["id"] = $id;
                         $fullCalendar[$id]["end"] = ($hours+1).":00";
@@ -235,7 +235,7 @@ function FCJson($timetableJ){
                     }   
                     break;
                 case 2:
-                    if($forFC["Tuesday"][$hours.":00"] != null){
+                    if($forFC["Tuesday"][$hours.":00"] != "\n\t\t" && $forFC["Tuesday"][$hours.":00"] != "\r\n\t\t" ){
                         $fullCalendar[$id]["allDay"] = "";
                         $fullCalendar[$id]["title"] = $forFC["Tuesday"][$hours.":00"];
                         $fullCalendar[$id]["id"] = $id;
@@ -248,7 +248,7 @@ function FCJson($timetableJ){
                     }
                     break;
                 case 3:
-                    if($forFC["Wednesday"][$hours.":00"] != null){
+                    if($forFC["Wednesday"][$hours.":00"] != "\n\t\t" && $forFC["Wednesday"][$hours.":00"] != "\r\n\t\t"){
                         $fullCalendar[$id]["allDay"] = "";
                         $fullCalendar[$id]["title"] = $forFC["Wednesday"][$hours.":00"];
                         $fullCalendar[$id]["id"] = $id;
@@ -261,7 +261,7 @@ function FCJson($timetableJ){
                     }
                     break;
                 case 4:
-                    if($forFC["Thursday"][$hours.":00"] != null){
+                    if($forFC["Thursday"][$hours.":00"] != "\n\t\t" && $forFC["Thursday"][$hours.":00"] != "\r\n\t\t"){
                         $fullCalendar[$id]["allDay"] = "";
                         $fullCalendar[$id]["title"] = $forFC["Thursday"][$hours.":00"];
                         $fullCalendar[$id]["id"] = $id;
@@ -274,7 +274,7 @@ function FCJson($timetableJ){
                     }
                     break;
                 case 5:
-                    if($forFC["Friday"][$hours.":00"] != null){
+                    if($forFC["Friday"][$hours.":00"] != "\n\t\t" && $forFC["Friday"][$hours.":00"] != "\r\n\t\t" ){
                         $fullCalendar[$id]["allDay"] = "";
                         $fullCalendar[$id]["title"] = $forFC["Friday"][$hours.":00"];
                         $fullCalendar[$id]["id"] = $id;
@@ -366,7 +366,317 @@ foreach($days_array as $day){
 
 
 
+<!--
+JSON For semester 2 :/
 
+[{
+    "title": "\n\t\t",
+    "id": 0,
+    "end": "10:00",
+    "start": "9:00",
+    "dow": "[1]"
+}, {
+    "title": "\n\t\tCS402 [JH5]",
+    "id": 1,
+    "end": "11:00",
+    "start": "10:00",
+    "dow": "[1]"
+}, {
+    "title": "\n\t\t",
+    "id": 2,
+    "end": "12:00",
+    "start": "11:00",
+    "dow": "[1]"
+}, {
+    "title": "\n\t\t",
+    "id": 3,
+    "end": "13:00",
+    "start": "12:00",
+    "dow": "[1]"
+}, {
+    "title": "\n\t\t",
+    "id": 4,
+    "end": "14:00",
+    "start": "13:00",
+    "dow": "[1]"
+}, {
+    "title": "\n\t\tCS370 [CB5]",
+    "id": 5,
+    "end": "15:00",
+    "start": "14:00",
+    "dow": "[1]"
+}, {
+    "title": "\n\t\t",
+    "id": 6,
+    "end": "16:00",
+    "start": "15:00",
+    "dow": "[1]"
+}, {
+    "title": "\n\t\t",
+    "id": 7,
+    "end": "17:00",
+    "start": "16:00",
+    "dow": "[1]"
+}, {
+    "title": "\n\t\t",
+    "id": 8,
+    "end": "18:00",
+    "start": "17:00",
+    "dow": "[1]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\tCS426 [CB2]",
+    "id": 9,
+    "end": "10:00",
+    "start": "9:00",
+    "dow": "[2]"
+}, {
+    "allDay": "",
+    "title": "\n\t\t",
+    "id": 10,
+    "end": "11:00",
+    "start": "10:00",
+    "dow": "[2]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\tCS402 [HA]",
+    "id": 11,
+    "end": "12:00",
+    "start": "11:00",
+    "dow": "[2]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 12,
+    "end": "13:00",
+    "start": "12:00",
+    "dow": "[2]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 13,
+    "end": "14:00",
+    "start": "13:00",
+    "dow": "[2]"
+}, {
+    "allDay": "",
+    "title": "\n\t\t",
+    "id": 14,
+    "end": "15:00",
+    "start": "14:00",
+    "dow": "[2]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 15,
+    "end": "16:00",
+    "start": "15:00",
+    "dow": "[2]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 16,
+    "end": "17:00",
+    "start": "16:00",
+    "dow": "[2]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 17,
+    "end": "18:00",
+    "start": "17:00",
+    "dow": "[2]"
+}, {
+    "allDay": "",
+    "title": "\n\t\t",
+    "id": 18,
+    "end": "10:00",
+    "start": "9:00",
+    "dow": "[3]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 19,
+    "end": "11:00",
+    "start": "10:00",
+    "dow": "[3]"
+}, {
+    "allDay": "",
+    "title": "\n\t\t",
+    "id": 20,
+    "end": "12:00",
+    "start": "11:00",
+    "dow": "[3]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 21,
+    "end": "13:00",
+    "start": "12:00",
+    "dow": "[3]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 22,
+    "end": "14:00",
+    "start": "13:00",
+    "dow": "[3]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\tCS426 [CB1]",
+    "id": 23,
+    "end": "15:00",
+    "start": "14:00",
+    "dow": "[3]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 24,
+    "end": "16:00",
+    "start": "15:00",
+    "dow": "[3]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 25,
+    "end": "17:00",
+    "start": "16:00",
+    "dow": "[3]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 26,
+    "end": "18:00",
+    "start": "17:00",
+    "dow": "[3]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 27,
+    "end": "10:00",
+    "start": "9:00",
+    "dow": "[4]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 28,
+    "end": "11:00",
+    "start": "10:00",
+    "dow": "[4]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 29,
+    "end": "12:00",
+    "start": "11:00",
+    "dow": "[4]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 30,
+    "end": "13:00",
+    "start": "12:00",
+    "dow": "[4]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 31,
+    "end": "14:00",
+    "start": "13:00",
+    "dow": "[4]"
+}, {
+    "allDay": "",
+    "title": "\nCS425 [CB3]",
+    "id": 32,
+    "end": "15:00",
+    "start": "14:00",
+    "dow": "[4]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 33,
+    "end": "16:00",
+    "start": "15:00",
+    "dow": "[4]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 34,
+    "end": "17:00",
+    "start": "16:00",
+    "dow": "[4]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 35,
+    "end": "18:00",
+    "start": "17:00",
+    "dow": "[4]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 36,
+    "end": "10:00",
+    "start": "9:00",
+    "dow": "[5]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 37,
+    "end": "11:00",
+    "start": "10:00",
+    "dow": "[5]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 38,
+    "end": "12:00",
+    "start": "11:00",
+    "dow": "[5]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 39,
+    "end": "13:00",
+    "start": "12:00",
+    "dow": "[5]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 40,
+    "end": "14:00",
+    "start": "13:00",
+    "dow": "[5]"
+}, {
+    "allDay": "",
+    "title": "\n\t\tCS370 [TH2]",
+    "id": 41,
+    "end": "15:00",
+    "start": "14:00",
+    "dow": "[5]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\tCS425 [JH5]",
+    "id": 42,
+    "end": "16:00",
+    "start": "15:00",
+    "dow": "[5]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 43,
+    "end": "17:00",
+    "start": "16:00",
+    "dow": "[5]"
+}, {
+    "allDay": "",
+    "title": "\r\n\t\t",
+    "id": 44,
+    "end": "18:00",
+    "start": "17:00",
+    "dow": "[5]"
+}]
+-->
 
 
 <!--

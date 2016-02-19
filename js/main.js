@@ -39,7 +39,17 @@ $(document).ready(function() {
       defaultView: 'agendaWeek',
       editable: true,
       eventLimit: true, // allow "more" link when too many events
-      eventSources:'http://abelhii.com/timeMap/results.json'
+      googleCalendarApiKey: 'AIzaSyBIkPthcMusoSDbqB9gxVWbcS-lYo6mx34',
+      eventSources: [
+            {
+                googleCalendarId: 'p52pqevg7jmba3d8lla6l9afhs@group.calendar.google.com'
+            },
+            {
+                url:'../timeMap/PHP/timetable_json.php',
+                color:'#ffee55',
+                textColor:'#555'
+            }
+      ]
       
       /**[
             // some original fullCalendar examples

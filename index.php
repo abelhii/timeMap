@@ -1,4 +1,4 @@
-<?php header('Access-Control-Allow-Origin: http://abelhii.com'); ?>
+<?php header('Access-Control-Allow-Origin: http://54.229.52.202/*'); ?>
 <?php
 	require_once 'vendor/autoload.php';
 	//require 'Custom_Calendar/Custom_Calendar/custom_calendar.php';
@@ -26,6 +26,7 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js" type="text/javascript"></script>
 	<script src='bower_components/moment/min/moment.min.js' type="text/javascript"></script>
 	<script src="bower_components/fullcalendar/dist/fullcalendar.js" type="text/javascript"></script>
+	<script src="bower_components/fullcalendar/dist/gcal.js" type="text/javascript"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAK; ?>&signed_in=true&callback=initMap&libraries=places" type="text/javascript"></script>
 
 </head>
