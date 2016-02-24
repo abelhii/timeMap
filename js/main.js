@@ -22,10 +22,16 @@ $(document).ready( function() {
     });
 });
 
-var timetable = '../timeMap/PHP/timetable_json_sem1.php';
 
 
-/* Javascript to setup/initialise FullCalendar */
+
+var timetable = '../timeMap/PHP/timetable_json.php?sem=sem1';
+function changeT(time){
+    timetable = '../timeMap/PHP/timetable_json.php?'.time;
+    $('#calendarr').fullCalendar('refetchEvents');
+}
+
+/* Javascript to setup/initialise FullCalendar 
 $(document).ready(function() {
     var date = new Date();
     var d = date.getDate();
@@ -33,7 +39,8 @@ $(document).ready(function() {
     var y = date.getFullYear();
 
     initialise('../timeMap/PHP/timetable_json_sem1.php');
-});
+
+});*/
 
 function initialise(time){
     $('#calendarr').fullCalendar({
@@ -57,11 +64,29 @@ function initialise(time){
                 textColor:'#555'
             }
       ]
-      
-     
     });
 }
 
+
+
+
+function displaySem1(){
+  initialise('../timeMap/PHP/timetable_json_sem1.php');
+  $('#calendarr').fullCalendar('refetchEvents');
+}
+function displaySem2(){
+  initialise('../timeMap/PHP/timetable_json_sem2.php');
+  $('#calendarr').fullCalendar('refetchEvents');
+}
+
+    //$('#calendarr').fullCalendar('refetchEvents');
+
+function initialise2(){
+
+  alert("call 1 semester" );
+  initialise('../timeMap/PHP/timetable_json_sem1.php');
+    
+}
 
 
 

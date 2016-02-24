@@ -109,7 +109,8 @@ body h1{
 #calendarr{
   height:auto;
   width: 100%;
-  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .popover {
     width: 250px;

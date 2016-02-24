@@ -5,6 +5,14 @@
 		$sem2_JSON = $_SESSION['sem2_JSON'];
 	}
 
-	echo $sem1_JSON;
+	if($_GET["sem"] == "sem1"){
+		console.log("tessst");
+		echo $sem1_JSON;		
+	}else if($_GET["semTwo"] == "sem2"){
+		echo $sem2_JSON;
+	}else{
+		console.log("tessst");
+	}
+
 	exit;	
 ?>

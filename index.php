@@ -64,12 +64,19 @@
 			<div id="calendar" class="tab-pane fade">
 				<a class="btn btn-info" href="PHP/GCOAuth.php">connect calendar</a>
 
-				<button id="sbtn" onClick="initialise('../timeMap/PHP/timetable_json_sem1.php')">Sem1</button>
-				<button id="sbtn" onClick="initialise('../timeMap/PHP/timetable_json_sem2.php')">Sem2</button>
+				<!--button id="sbtn" onClick="changeT('../timeMap/PHP/timetable_json_sem1.php')">Sem1</button>
+				<button id="sbtn2" onClick="changeT('../timeMap/PHP/timetable_json_sem2.php')">Sem2</button-->
+				<button id="semBtn" type="submit" name="sem" value="sem1" onClick="changeT('sem=sem1')">Sem1</button>
+				<button id="semBtn" type="submit" name="sem" value="sem2" onClick="changeT('semTwo=sem2')">Sem2</button>
 
 				<br>
 				<br>
-				<div id="calendarr"></div>
+				<div id="calendarr">
+					<script type="text/javascript">
+    					initialise(timetable);
+					</script>
+
+				</div>
 			</div>
 		</div>
 		
