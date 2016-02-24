@@ -22,6 +22,8 @@ $(document).ready( function() {
     });
 });
 
+var timetable = '../timeMap/PHP/timetable_json_sem1.php';
+
 
 /* Javascript to setup/initialise FullCalendar */
 $(document).ready(function() {
@@ -30,6 +32,10 @@ $(document).ready(function() {
     var m = date.getMonth();
     var y = date.getFullYear();
 
+    initialise('../timeMap/PHP/timetable_json_sem1.php');
+});
+
+function initialise(time){
     $('#calendarr').fullCalendar({
       header: {
         left: 'prev,next today',
@@ -39,19 +45,27 @@ $(document).ready(function() {
       defaultView: 'agendaWeek',
       editable: true,
       eventLimit: true, // allow "more" link when too many events
+      minTime:'6:00',
       googleCalendarApiKey: 'AIzaSyBIkPthcMusoSDbqB9gxVWbcS-lYo6mx34',
       eventSources: [
             {
                 googleCalendarId: 'p52pqevg7jmba3d8lla6l9afhs@group.calendar.google.com'
             },
             {
-                url:'../timeMap/PHP/timetable_json.php',
+                url: time,
                 color:'#ffee55',
                 textColor:'#555'
             }
       ]
       
-      /**[
+     
+    });
+}
+
+
+
+
+ /**[
             // some original fullCalendar examples
             {
               "allDay":"",
@@ -83,6 +97,3 @@ $(document).ready(function() {
                 allDay: false
             }
         ]*/
-    });
-    
-  });

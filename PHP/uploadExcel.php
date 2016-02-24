@@ -1,4 +1,3 @@
-<?php header('Access-Control-Allow-Origin: http://54.229.52.202/*'); ?>
 <?php
 /***
 TODO: 
@@ -230,60 +229,46 @@ function FCJson($timetableJ){
                         $fullCalendar[$id]["start"] = $hours.":00";
                         $fullCalendar[$id]["dow"] = "[1]";
                         $id++;
-                    }else{
-                        $hours++;
-                    }   
+                    }
                     break;
                 case 2:
                     if($forFC["Tuesday"][$hours.":00"] != "\n\t\t" && $forFC["Tuesday"][$hours.":00"] != "\r\n\t\t" ){
-                        $fullCalendar[$id]["allDay"] = "";
                         $fullCalendar[$id]["title"] = $forFC["Tuesday"][$hours.":00"];
                         $fullCalendar[$id]["id"] = $id;
                         $fullCalendar[$id]["end"] = ($hours+1).":00";
                         $fullCalendar[$id]["start"] = $hours.":00";
                         $fullCalendar[$id]["dow"] = "[2]";
                         $id++;
-                    }else{
-                        $hours++;
                     }
                     break;
                 case 3:
                     if($forFC["Wednesday"][$hours.":00"] != "\n\t\t" && $forFC["Wednesday"][$hours.":00"] != "\r\n\t\t"){
-                        $fullCalendar[$id]["allDay"] = "";
                         $fullCalendar[$id]["title"] = $forFC["Wednesday"][$hours.":00"];
                         $fullCalendar[$id]["id"] = $id;
                         $fullCalendar[$id]["end"] = ($hours+1).":00";
                         $fullCalendar[$id]["start"] = $hours.":00";
                         $fullCalendar[$id]["dow"] = "[3]";
                         $id++;
-                    }else{
-                        $hours++;
                     }
                     break;
                 case 4:
                     if($forFC["Thursday"][$hours.":00"] != "\n\t\t" && $forFC["Thursday"][$hours.":00"] != "\r\n\t\t"){
-                        $fullCalendar[$id]["allDay"] = "";
                         $fullCalendar[$id]["title"] = $forFC["Thursday"][$hours.":00"];
                         $fullCalendar[$id]["id"] = $id;
                         $fullCalendar[$id]["end"] = ($hours+1).":00";
                         $fullCalendar[$id]["start"] = $hours.":00";
                         $fullCalendar[$id]["dow"] = "[4]";
                         $id++;
-                    }else{
-                        $hours++;
                     }
                     break;
                 case 5:
                     if($forFC["Friday"][$hours.":00"] != "\n\t\t" && $forFC["Friday"][$hours.":00"] != "\r\n\t\t" ){
-                        $fullCalendar[$id]["allDay"] = "";
                         $fullCalendar[$id]["title"] = $forFC["Friday"][$hours.":00"];
                         $fullCalendar[$id]["id"] = $id;
                         $fullCalendar[$id]["end"] = ($hours+1).":00";
                         $fullCalendar[$id]["start"] = $hours.":00";
                         $fullCalendar[$id]["dow"] = "[5]";
                         $id++;
-                    }else{
-                        $hours++;
                     }
                     break;
             }

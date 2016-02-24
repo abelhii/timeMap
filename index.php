@@ -1,4 +1,3 @@
-<?php header('Access-Control-Allow-Origin: http://54.229.52.202/*'); ?>
 <?php
 	require_once 'vendor/autoload.php';
 	//require 'Custom_Calendar/Custom_Calendar/custom_calendar.php';
@@ -64,6 +63,11 @@
 			<!--Calendar-->
 			<div id="calendar" class="tab-pane fade">
 				<a class="btn btn-info" href="PHP/GCOAuth.php">connect calendar</a>
+
+				<button id="sbtn" onClick="initialise('../timeMap/PHP/timetable_json_sem1.php')">Sem1</button>
+				<button id="sbtn" onClick="initialise('../timeMap/PHP/timetable_json_sem2.php')">Sem2</button>
+
+				<br>
 				<br>
 				<div id="calendarr"></div>
 			</div>
