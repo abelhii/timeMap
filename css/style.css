@@ -107,11 +107,31 @@ body h1{
 
 /*--Calendar--*/
 #calendarr{
-  height:auto;
+  height: auto;
   width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 .popover {
     width: 250px;
+}
+
+
+/*--Google Login--*/
+#gLogin{
+  height:auto;
+  width:auto;
+  background-color:#FFF;
+  border-radius:2px;
+  box-shadow:0px 0px 5px 0px #424242;
+  padding:10px;
+  box-sizing:border-box;
+  visibility:hidden;
+  display:none;
+  position: absolute;
+}
+#gLogin #close_login
+{
+  font-style: bold;
+
 }

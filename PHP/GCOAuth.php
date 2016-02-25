@@ -1,8 +1,8 @@
 <!--http://www.daimto.com/accessing-google-calendar-with-php-oauth2/-->
 <?php    
-    require_once '../vendor/autoload.php';
-	require 'config.php';
-    session_start(); 
+    //require_once '../vendor/autoload.php';
+	//require 'config.php';
+    //session_start(); 
 
     // ********************************************************  //
     // Get these values from https://console.developers.google.com
@@ -10,7 +10,7 @@
     // ********************************************************    //
     $client_id = CId;	//'[Your client Id]';
     $client_secret = CS;	//'[Your Client Secret]';
-    $redirect_uri = 'http://127.0.0.1/timeMap/PHP/GCOAuth.php';//'[Your Redirect URI]';
+    $redirect_uri = 'http://127.0.0.1/timeMap/';//'[Your Redirect URI]';
 
     $client = new Google_Client();
     $client->setApplicationName("Client_Library_Examples");
@@ -43,7 +43,7 @@
     // Step 3: We have access we can now create our service
     if (isset($_SESSION['token'])) {
 		$client->setAccessToken($_SESSION['token']);
-		print "<a class='logout' href='http://127.0.0.1/timeMap/PHP/GCOAuth.php?logout=1'>LogOut</a><br>";	
+		print "<a class='logout' href='http://127.0.0.1/timeMap?logout=1'>LogOut</a><br>";	
 		//print "<a class='logout' href='http://127.0.0.1/fyp/'>LogOut</a><br>";	
 		
 		$service = new Google_Service_Calendar($client);    

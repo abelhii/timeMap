@@ -29,7 +29,15 @@ $(document).ready( function() {
 var timetable = '../timeMap/PHP/timetable_json.php?sem=sem1';
 function changeT(time){
     event.preventDefault();
-    initPath = '../timeMap/PHP/timetable_json.php?';
+    if(time == "sem1"){
+      $('#sem2Btn').removeClass('active');
+      $('#sem1Btn').addClass('active');
+    }
+    else if(time == "sem2"){
+      $('#sem1Btn').removeClass('active');
+      $('#sem2Btn').addClass('active');
+    }
+    initPath = '../timeMap/PHP/timetable_json.php?sem=';
     timetable = initPath.concat(time);
     //remove events
     $('#calendarr').fullCalendar('removeEventSource', '../timeMap/PHP/timetable_json.php?sem=sem1');
@@ -54,6 +62,7 @@ function initialise(){
       editable: true,
       eventLimit: true, // allow "more" link when too many events
       minTime:'6:00',
+      maxTime:'22:00',
       googleCalendarApiKey: 'AIzaSyBIkPthcMusoSDbqB9gxVWbcS-lYo6mx34',
       eventSources: [
             {

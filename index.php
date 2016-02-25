@@ -21,6 +21,7 @@
 	<script type="text/javascript" src="js/date.js"></script>
 	<script src="js/map.js" type="text/javascript"></script>
 	<script src="js/main.js" type="text/javascript"></script>
+	<script src="js/popup.js" type="text/javascript"></script>
 	<!--FullCalendar.io-->
 	<link href="bower_components/fullcalendar/dist/fullcalendar.css" rel="stylesheet" />
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js" type="text/javascript"></script>
@@ -64,20 +65,25 @@
 			<!--Calendar-->
 			<div id="calendar" class="tab-pane fade">
 				<br>
-				<a class="btn btn-info" href="PHP/GCOAuth.php">connect calendar</a>
-
-				<!--button id="sbtn" onClick="changeT('../timeMap/PHP/timetable_json_sem1.php')">Sem1</button>
-				<button id="sbtn2" onClick="changeT('../timeMap/PHP/timetable_json_sem2.php')">Sem2</button-->
 				<form method="get" action="">
-					<button id="sem1Btn" type="submit" name="sem" value="sem1" onClick="changeT('sem=sem1')">Sem1</button>
-					<button id="sem2Btn" type="submit" name="sem" value="sem2" onClick="changeT('sem=sem2')">Sem2</button>
+					<button class="btn btn-info btn-sm active" id="sem1Btn" type="submit" name="sem" value="sem1" onClick="changeT('sem1')">Sem1</button>
+					<button class="btn btn-info btn-sm" id="sem2Btn" type="submit" name="sem" value="sem2" onClick="changeT('sem2')">Sem2</button>
 				</form>
 
+				<!--TODO: USE BOOTSTRAP MODAL-->
+				<a id="show_login" class="btn btn-primary btn-sm">connect to google calendar</a>
+				<div id="gLogin" class="ui-content">
+				<a type="image" id="close_login">x</a>
+					<pre>
+						<?php include "php/GCOAuth.php"; ?>
+					</pre>
+				</div>
+				<!--?php readfile("PHP/GCOAuth.php"); ?-->
+								
 				<br>
 				<div id="calendarr">
 					<script type="text/javascript">initialise();</script>
 				</div>
-				<!--?php readfile("testCal.php");?-->
 			</div>
 		</div>
 		
