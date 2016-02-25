@@ -10,6 +10,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Time Map</title>
 	<!--Style-->
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -62,21 +63,21 @@
 			
 			<!--Calendar-->
 			<div id="calendar" class="tab-pane fade">
+				<br>
 				<a class="btn btn-info" href="PHP/GCOAuth.php">connect calendar</a>
 
 				<!--button id="sbtn" onClick="changeT('../timeMap/PHP/timetable_json_sem1.php')">Sem1</button>
 				<button id="sbtn2" onClick="changeT('../timeMap/PHP/timetable_json_sem2.php')">Sem2</button-->
-				<button id="semBtn" type="submit" name="sem" value="sem1" onClick="changeT('sem=sem1')">Sem1</button>
-				<button id="semBtn" type="submit" name="sem" value="sem2" onClick="changeT('semTwo=sem2')">Sem2</button>
+				<form method="get" action="">
+					<button id="sem1Btn" type="submit" name="sem" value="sem1" onClick="changeT('sem=sem1')">Sem1</button>
+					<button id="sem2Btn" type="submit" name="sem" value="sem2" onClick="changeT('sem=sem2')">Sem2</button>
+				</form>
 
-				<br>
 				<br>
 				<div id="calendarr">
-					<script type="text/javascript">
-    					initialise(timetable);
-					</script>
-
+					<script type="text/javascript">initialise();</script>
 				</div>
+				<!--?php readfile("testCal.php");?-->
 			</div>
 		</div>
 		

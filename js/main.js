@@ -25,24 +25,25 @@ $(document).ready( function() {
 
 
 
+/*Javascript to switch between semesters in FullCalendar */
 var timetable = '../timeMap/PHP/timetable_json.php?sem=sem1';
 function changeT(time){
-    timetable = '../timeMap/PHP/timetable_json.php?'.time;
-    $('#calendarr').fullCalendar('refetchEvents');
+    event.preventDefault();
+    initPath = '../timeMap/PHP/timetable_json.php?';
+    timetable = initPath.concat(time);
+    //remove events
+    $('#calendarr').fullCalendar('removeEventSource', '../timeMap/PHP/timetable_json.php?sem=sem1');
+    $('#calendarr').fullCalendar('removeEventSource', '../timeMap/PHP/timetable_json.php?sem=sem2');
+    //add events switch events
+    $('#calendarr').fullCalendar('addEventSource', {
+                url: timetable,
+                color:'#ffee55',
+                textColor:'#555'
+    });
 }
 
-/* Javascript to setup/initialise FullCalendar 
-$(document).ready(function() {
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-
-    initialise('../timeMap/PHP/timetable_json_sem1.php');
-
-});*/
-
-function initialise(time){
+/*Javascript to setup/initialise FullCalendar */
+function initialise(){
     $('#calendarr').fullCalendar({
       header: {
         left: 'prev,next today',
@@ -59,14 +60,15 @@ function initialise(time){
                 googleCalendarId: 'p52pqevg7jmba3d8lla6l9afhs@group.calendar.google.com'
             },
             {
-                url: time,
+                url: timetable,
                 color:'#ffee55',
                 textColor:'#555'
             }
       ]
     });
 }
-
+//for google calendar reference needed to add gcal:
+//var gcal = $.fullCalendar.gcalFeed(source); // the reference
 
 
 

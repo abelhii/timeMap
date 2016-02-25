@@ -6,13 +6,15 @@
 	}
 
 	if($_GET["sem"] == "sem1"){
-		console.log("tessst");
 		echo $sem1_JSON;		
-	}else if($_GET["semTwo"] == "sem2"){
+		//print "<script>console.log('SEMESTER1 LOG');</script>";
+	}else if($_GET["sem"] == "sem2"){
 		echo $sem2_JSON;
+		//print "<script>console.log('SEMESTER TWO');</script>";
 	}else{
-		console.log("tessst");
+		print "<script>console.log('TEST');</script>";
 	}
+	//echo $sem1_JSON;
 
 	exit;	
 ?>
