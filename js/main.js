@@ -72,25 +72,6 @@ function initialise(){
 
 
 
-function displaySem1(){
-  initialise('../timeMap/PHP/timetable_json_sem1.php');
-  $('#calendarr').fullCalendar('refetchEvents');
-}
-function displaySem2(){
-  initialise('../timeMap/PHP/timetable_json_sem2.php');
-  $('#calendarr').fullCalendar('refetchEvents');
-}
-
-    //$('#calendarr').fullCalendar('refetchEvents');
-
-function initialise2(){
-
-  alert("call 1 semester" );
-  initialise('../timeMap/PHP/timetable_json_sem1.php');
-    
-}
-
-
 
  /**[
             // some original fullCalendar examples
