@@ -73,7 +73,23 @@ function initialise(){
                 color:'#ffee55',
                 textColor:'#555'
             }
-      ]
+      ],
+      eventClick: function(calEvent, jsEvent, view) {
+
+        alert('Event: ' + calEvent.title + '\n' +
+          'Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY + '\n' +
+          'View: ' + view.name);
+
+        // change the border color just for fun
+        $(this).css('border-color', 'red');
+
+        //open in a new window
+        if (calEvent.url) {
+            window.open(calEvent.url);
+            return false;
+        }
+
+      }
     });
 }
 //for google calendar reference needed to add gcal:
