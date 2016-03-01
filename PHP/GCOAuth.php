@@ -13,13 +13,13 @@
     $redirect_uri = 'http://127.0.0.1/timeMap/';//'[Your Redirect URI]';
 
     $client = new Google_Client();
-    $client->setApplicationName("Client_Library_Examples");
+    $client->setApplicationName("timeMap");
     $client->setClientId($client_id);
     $client->setClientSecret($client_secret);
     $client->setRedirectUri($redirect_uri);
     $client->setAccessType('offline');   // Gets us our refreshtoken
 
-    $client->setScopes(array('https://www.googleapis.com/auth/calendar.readonly'));
+    $client->setScopes(array('https://www.googleapis.com/auth/calendar'));
     
     //For loging out.
     if (isset($_GET['logout'])) {
@@ -38,6 +38,7 @@
     if (!isset($_SESSION['token'])) {
 		$authUrl = $client->createAuthUrl();
 		print "<a class='login' href='$authUrl'>Connect Me!</a>";
+
     }    
 
     // Step 3: We have access we can now create our service
@@ -45,22 +46,56 @@
 		$client->setAccessToken($_SESSION['token']);
 		print "<a class='logout' href='http://127.0.0.1/timeMap?logout=1'>LogOut</a><br>";	
 		//print "<a class='logout' href='http://127.0.0.1/fyp/'>LogOut</a><br>";	
-		
-		$service = new Google_Service_Calendar($client);    
-		
-		$calendarList  = $service->calendarList->listCalendarList();
 
+		$service = new Google_Service_Calendar($client);    
+
+		$calendarrr = $service->calendars->get('primary');
+
+		echo $calendarrr->getSummary();
+
+		/********************INSERT SINGLE EVENT********************************/
+		$event = new Google_Service_Calendar_Event();
+		$event->setSummary('Appointment');
+		$event->setLocation('Somewhere');
+		$start = new Google_Service_Calendar_EventDateTime();
+		$start->setDateTime('2011-06-03T10:00:00.000-07:00');
+		$event->setStart($start);
+		$end = new Google_Service_Calendar_EventDateTime();
+		$end->setDateTime('2011-06-03T10:25:00.000-07:00');
+		$event->setEnd($end);
+		$attendee1 = new Google_Service_Calendar_EventAttendee();
+		$attendee1->setEmail($calendarrr->getSummary());
+		// ...
+		$attendees = array($attendee1,
+		                   // ...,
+		                  );
+		$event->attendees = $attendees;
+		$organizer = new Google_Service_Calendar_EventOrganizer();
+		$organizer->setEmail($calendarrr->getSummary());
+		$organizer->setDisplayName('organizerDisplayName');
+		$event->setOrganizer($organizer);
+		$event->setICalUID('originalUID');
+		$importedEvent = $service->events->import('primary', $event);
+
+		echo "<br>".$importedEvent->getId();
+		/*************************************************************/
+
+
+
+		$calendarList = $service->calendarList->listCalendarList();		
+		
 		while(true) {
 			foreach ($calendarList->getItems() as $calendarListEntry) {
 
-				echo $calendarListEntry->getSummary()."<br>\n";
+				echo "<br>\n".$calendarListEntry->getSummary()."<br>\n";
+
 
 				// get events 
 				$events = $service->events->listEvents($calendarListEntry->id);
 
-
 				foreach ($events->getItems() as $event) {
-				    echo "-----".$event->getSummary()."<br>";
+				    echo " ".$event->getCreated();
+				    echo " ".$event->getSummary()."<br>";
 				}
 			}
 			$pageToken = $calendarList->getNextPageToken();

@@ -21,7 +21,6 @@
 	<script type="text/javascript" src="js/date.js"></script>
 	<script src="js/map.js" type="text/javascript"></script>
 	<script src="js/main.js" type="text/javascript"></script>
-	<script src="js/popup.js" type="text/javascript"></script>
 	<!--FullCalendar.io-->
 	<link href="bower_components/fullcalendar/dist/fullcalendar.css" rel="stylesheet" />
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js" type="text/javascript"></script>
@@ -29,7 +28,6 @@
 	<script src="bower_components/fullcalendar/dist/fullcalendar.js" type="text/javascript"></script>
 	<script src="bower_components/fullcalendar/dist/gcal.js" type="text/javascript"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAK; ?>&signed_in=true&callback=initMap&libraries=places" type="text/javascript"></script>
-
 </head>
   
 <body>
@@ -64,26 +62,41 @@
 			
 			<!--Calendar-->
 			<div id="calendar" class="tab-pane fade">
-				<br>
 				<form method="get" action="">
-					<button class="btn btn-info btn-sm active" id="sem1Btn" type="submit" name="sem" value="sem1" onClick="changeT('sem1')">Sem1</button>
+					<button class="btn btn-info btn-sm" id="sem1Btn" type="submit" name="sem" value="sem1" onClick="changeT('sem1')">Sem1</button>
 					<button class="btn btn-info btn-sm" id="sem2Btn" type="submit" name="sem" value="sem2" onClick="changeT('sem2')">Sem2</button>
 				</form>
 
 				<!--TODO: USE BOOTSTRAP MODAL-->
-				<a id="show_login" class="btn btn-primary btn-sm">connect to google calendar</a>
-				<div id="gLogin" class="ui-content">
-				<a type="image" id="close_login">x</a>
-					<pre>
-						<?php include "php/GCOAuth.php"; ?>
-					</pre>
-				</div>
-				<!--?php readfile("PHP/GCOAuth.php"); ?-->
-								
 				<br>
+				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#gLogin">connect to google calendar</button>
+				<!-- Modal -->
+				<div class="modal fade" id="gLogin" role="dialog">
+					<div class="modal-dialog">
+
+					  <!-- Modal content-->
+					  <div class="modal-content">
+					    <div class="modal-header">
+					      <button type="button" class="close" data-dismiss="modal">&times;</button>
+					      <h4 class="modal-title">Google Authorisation</h4>
+					    </div>
+					    <div class="modal-body">
+					    	<pre>
+								<?php include "PHP/GCOAuth.php"; ?>
+							</pre>
+					    </div>
+					    <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					  </div>
+					  
+					</div>
+				</div>
+
 				<div id="calendarr">
 					<script type="text/javascript">initialise();</script>
 				</div>
+				<!--?php readfile("PHP/GCOAuth.php"); ?-->
 			</div>
 		</div>
 		
