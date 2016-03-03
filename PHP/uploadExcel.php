@@ -223,7 +223,7 @@ function FCJson($timetableJ){
             switch($days){
                 case 1:
                     if($forFC["Monday"][$hours.":00"] != "\n\t\t" && $forFC["Monday"][$hours.":00"] != "\r\n\t\t"){
-                        $fullCalendar[$id]["title"] = $forFC["Monday"][$hours.":00"];
+                        $fullCalendar[$id]["title"] = preg_replace("/[^A-Za-z0-9\[\]\. ]/", '', $forFC["Monday"][$hours.":00"]);
                         $fullCalendar[$id]["id"] = $id;
                         $fullCalendar[$id]["end"] = ($hours+1).":00";
                         $fullCalendar[$id]["start"] = $hours.":00";
@@ -233,7 +233,7 @@ function FCJson($timetableJ){
                     break;
                 case 2:
                     if($forFC["Tuesday"][$hours.":00"] != "\n\t\t" && $forFC["Tuesday"][$hours.":00"] != "\r\n\t\t" ){
-                        $fullCalendar[$id]["title"] = $forFC["Tuesday"][$hours.":00"];
+                        $fullCalendar[$id]["title"] = preg_replace("/[^A-Za-z0-9\[\]\. ]/", '', $forFC["Tuesday"][$hours.":00"]);
                         $fullCalendar[$id]["id"] = $id;
                         $fullCalendar[$id]["end"] = ($hours+1).":00";
                         $fullCalendar[$id]["start"] = $hours.":00";
@@ -243,7 +243,7 @@ function FCJson($timetableJ){
                     break;
                 case 3:
                     if($forFC["Wednesday"][$hours.":00"] != "\n\t\t" && $forFC["Wednesday"][$hours.":00"] != "\r\n\t\t"){
-                        $fullCalendar[$id]["title"] = $forFC["Wednesday"][$hours.":00"];
+                        $fullCalendar[$id]["title"] = preg_replace("/[^A-Za-z0-9\[\]\. ]/", '', $forFC["Wednesday"][$hours.":00"]);
                         $fullCalendar[$id]["id"] = $id;
                         $fullCalendar[$id]["end"] = ($hours+1).":00";
                         $fullCalendar[$id]["start"] = $hours.":00";
@@ -253,7 +253,7 @@ function FCJson($timetableJ){
                     break;
                 case 4:
                     if($forFC["Thursday"][$hours.":00"] != "\n\t\t" && $forFC["Thursday"][$hours.":00"] != "\r\n\t\t"){
-                        $fullCalendar[$id]["title"] = $forFC["Thursday"][$hours.":00"];
+                        $fullCalendar[$id]["title"] = preg_replace("/[^A-Za-z0-9\[\]\. ]/", '', $forFC["Thursday"][$hours.":00"]);
                         $fullCalendar[$id]["id"] = $id;
                         $fullCalendar[$id]["end"] = ($hours+1).":00";
                         $fullCalendar[$id]["start"] = $hours.":00";
@@ -263,7 +263,7 @@ function FCJson($timetableJ){
                     break;
                 case 5:
                     if($forFC["Friday"][$hours.":00"] != "\n\t\t" && $forFC["Friday"][$hours.":00"] != "\r\n\t\t" ){
-                        $fullCalendar[$id]["title"] = $forFC["Friday"][$hours.":00"];
+                        $fullCalendar[$id]["title"] = preg_replace("/[^A-Za-z0-9\[\]\. ]/", '', $forFC["Friday"][$hours.":00"]);
                         $fullCalendar[$id]["id"] = $id;
                         $fullCalendar[$id]["end"] = ($hours+1).":00";
                         $fullCalendar[$id]["start"] = $hours.":00";

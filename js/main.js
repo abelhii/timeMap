@@ -20,6 +20,18 @@ $(document).ready( function() {
         }
         
     });
+
+
+    /*To make sure input timetable is in correct format and isn't empty*/
+    $("#submitTimetable").on("submit", function(){
+        var fileName = $("#ttFile").val();
+
+        if(fileName.split('.').pop() == "xls" || fileName.split('.').pop() == "xlsx"){
+        }else{
+            alert("Error: not in excel Format (your file name should end with .xls or .xlsx)");
+            return false;
+        }
+    });
 });
 
 
@@ -61,12 +73,12 @@ function initialise(){
       defaultView: 'agendaWeek',
       editable: true,
       eventLimit: true, // allow "more" link when too many events
-      minTime:'6:00',
+      minTime:'7:00',
       maxTime:'22:00',
       googleCalendarApiKey: 'AIzaSyBIkPthcMusoSDbqB9gxVWbcS-lYo6mx34',
       eventSources: [
             {
-                googleCalendarId: 'p52pqevg7jmba3d8lla6l9afhs@group.calendar.google.com'
+                googleCalendarId: 'abelhii@gmail.com'
             },
             {
                 url: timetable,
@@ -74,18 +86,19 @@ function initialise(){
                 textColor:'#555'
             }
       ],
-      eventClick: function(calEvent, jsEvent, view) {
+      eventClick: function(event, jsEvent, view) {
 
-        alert('Event: ' + calEvent.title + '\n' +
+        alert('Event: ' + event.title + '\n' +
           'Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY + '\n' +
           'View: ' + view.name);
 
         // change the border color just for fun
         $(this).css('border-color', 'red');
 
+
         //open in a new window
-        if (calEvent.url) {
-            window.open(calEvent.url);
+        if (event.url) {
+            window.open(event.url);
             return false;
         }
 

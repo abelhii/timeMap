@@ -40,7 +40,7 @@
 			    <div class="input-group">
 				    <span class="input-group-btn">
 					    <span class="btn btn-default btn-file">
-		    				Browse&hellip; <input type="file" name="uploadedfile" multiple>
+		    				Browse&hellip; <input id="ttFile" type="file" name="uploadedfile" multiple>
 						</span>
 					</span>
                 	<input type="text" class="form-control" readonly>
