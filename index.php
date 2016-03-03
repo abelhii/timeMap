@@ -66,7 +66,7 @@
 					<button class="btn btn-info btn-sm" id="sem1Btn" type="submit" name="sem" value="sem1" onClick="changeT('sem1')">Sem1</button>
 					<button class="btn btn-info btn-sm" id="sem2Btn" type="submit" name="sem" value="sem2" onClick="changeT('sem2')">Sem2</button>
 				</form>
-
+				<div id="output"></div>
 				<!--TODO: USE BOOTSTRAP MODAL-->
 				<br>
 				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#gLogin">connect to google calendar</button>

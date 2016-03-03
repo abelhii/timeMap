@@ -92,8 +92,19 @@ function initialise(){
           'Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY + '\n' +
           'View: ' + view.name);
 
+        //ajax to call php function which will show the location of the lecture.
+        $.ajax({
+            url:'js/test.php',
+            complete: function (response) {
+                $('#output').html(response.responseText);
+            },
+            error: function () {
+                $('#output').html('Bummer: there was an error!');
+            }
+        });
+
         // change the border color just for fun
-        $(this).css('border-color', 'red');
+        //$(this).css('border-color', 'red');
 
 
         //open in a new window
