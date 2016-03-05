@@ -17,7 +17,6 @@
 	<!--Script-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="js/date.js"></script>
 	<script src="js/map.js" type="text/javascript"></script>
 	<script src="js/main.js" type="text/javascript"></script>
@@ -50,14 +49,14 @@
 		</form>	
 
 		<!--Tab layout for calendar and map-->
-		<ul class="nav nav-tabs nav-justified nav-size">
-			<li class="active"><a data-toggle="tab" href="#gMap">Map</a></li>
+		<ul id="tabs" class="nav nav-tabs nav-justified nav-size">
+			<li class="active" ><a data-toggle="tab" href="#gMap">Map</a></li>
 			<li><a data-toggle="tab" href="#calendar">Calendar</a></li>
 		</ul>
 		
 		<div class="tab-content">
-			<!--Map
-			<input id="searchMap" class="controls" type="text" placeholder="Search Box">-->
+			<!--Map-->
+			<input id="searchMap" class="controls" type="text" placeholder="Search Box">
 			<div id="gMap" class="tab-pane fade in active"></div>
 			
 			<!--Calendar-->

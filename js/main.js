@@ -37,7 +37,7 @@ $(document).ready( function() {
 
 
 
-/*Javascript to switch between semesters in FullCalendar */
+//*---- switch between semesters in FullCalendar ----*//
 var timetable = '../timeMap/PHP/timetable_json.php?sem=sem1';
 function changeT(time){
     event.preventDefault();
@@ -62,6 +62,14 @@ function changeT(time){
     });
 }
 
+
+
+
+
+
+
+//*---- Main CALENDAR / MAP interaction -----*//
+
 /*Javascript to setup/initialise FullCalendar */
 function initialise(){
     $('#calendarr').fullCalendar({
@@ -78,7 +86,7 @@ function initialise(){
       googleCalendarApiKey: 'AIzaSyBIkPthcMusoSDbqB9gxVWbcS-lYo6mx34',
       eventSources: [
             {
-                googleCalendarId: 'abelhii@gmail.com'
+                googleCalendarId: 'p52pqevg7jmba3d8lla6l9afhs@group.calendar.google.com'
             },
             {
                 url: timetable,
@@ -87,27 +95,38 @@ function initialise(){
             }
       ],
       eventClick: function(event, jsEvent, view) {
+        var point = new Array();
 
-        alert('Event: ' + event.title + '\n' +
+        //On CLick event for when the user clicks an item in the calendar:
+        /*alert('Event: ' + event.title + '\n' +
           'Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY + '\n' +
-          'View: ' + view.name);
+          'View: ' + view.name);*/
 
         //ajax to call php function which will show the location of the lecture.
         $.ajax({
-            url:'js/test.php',
+            url:'php/getPos.php',
+            type: "POST",
+            data: { eventTitle: event.title},
+            success: function(data){
+                console.log(data);
+            },
             complete: function (response) {
-                $('#output').html(response.responseText);
+                //$('#output').html(response.responseText);
+                point = getLatLng(response.responseText);
+
+                //switch to Google Map tab and place location marker:
+                $('#tabs a[href="#gMap"]').tab('show');
+                var pos = {lat: parseFloat(point[1]) , lng: parseFloat(point[0])};
+                placeMarker(pos, event.title, event.start);
+
             },
             error: function () {
-                $('#output').html('Bummer: there was an error!');
+                $('#output').html('there was an error!');
             }
         });
 
-        // change the border color just for fun
-        //$(this).css('border-color', 'red');
 
-
-        //open in a new window
+        //open event in a seperate tab if it has a URL
         if (event.url) {
             window.open(event.url);
             return false;
@@ -116,6 +135,57 @@ function initialise(){
       }
     });
 }
+
+
+//display location on map as a marker:
+var marker;
+//var infowindow;
+
+//John Hume: POINT(-6.60002669999998 53.3840296500001)
+function placeMarker(location, title, time) {
+  if ( marker ) {
+    marker.setPosition(location);
+  } else {
+    marker = new google.maps.Marker({
+      position: location,
+      map: map,
+      title: title
+    });
+  }
+/*
+  var contentString = '<div id="content">'+
+                      '<h1>'+title+'</h1>'+
+                      '<p>'+time+'</p>'+
+                      '</div>';
+
+  infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+
+  //open infor window on click:    
+  marker.addListener('click', function() {
+      infowindow.open(map, marker);
+  });*/
+}
+
+
+//splits the lat and lng
+//NOTE: Lat is [1] and Lng is [0]
+function getLatLng(point){
+  var result;
+  var matches = point.match(/\((.+?)\)/);
+  if (matches) {
+      result = matches[1].split(" ");
+  }
+
+  return result;
+}
+
+
+
+//*---------------------------------------------------*//
+
+
 //for google calendar reference needed to add gcal:
 //var gcal = $.fullCalendar.gcalFeed(source); // the reference
 

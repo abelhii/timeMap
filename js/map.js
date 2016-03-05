@@ -1,5 +1,6 @@
+var map;
 function initMap() {
-	var map = new google.maps.Map(document.getElementById('gMap'), {
+	map = new google.maps.Map(document.getElementById('gMap'), {
 		zoom: 16,
 		center: {lat: 53.382207, lng: -6.598396}
 	});
@@ -11,36 +12,27 @@ function initMap() {
 		map: map
 	};
 	var muLayer = new google.maps.KmlLayer(kmlOptions);
-}
 
-/**var map;
-var infowindow;
-
-function initMap() {
-	//Maynooth University Coordinates
-	var myLatLng = {lat: 53.382207, lng: -6.598396};
-	// Create a map object and specify the DOM element for display.
-	map = new google.maps.Map(document.getElementById('gMap'), {
-		center: myLatLng,
-		zoom: 15,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
+	google.maps.event.addListener(map, 'click', function(event) {
+	  event.title;
+	  //placeMarker(event.latLng);
+	});
+	google.maps.event.addListener(map, 'mouseover', function(event) {
+	  event.title;
 	});
 
 
-	var ctaLayer = new google.maps.KmlLayer({
-    	url: 'https://github.com/abelhii/timeMap/tree/master/map/maynooth_campus.kml',
-    	map: map
-  	});
-
-  	ctaLayer.setMap(map);
+/*
+    var point = {lat: -6.60002669999998, lng: 53.3840296500001};
 	var marker = new google.maps.Marker({
-		position: myLatLng,
+	    position: point,
 	    map: map,
 	    title: 'Hello World!'
-	});
+	  });
+*/
 
-	infowindow = new google.maps.InfoWindow();
 
+/*------------------------SEARCH BAR-----------------------------------*/
 	// This example adds a search box to a map, using the Google Place Autocomplete
 	// feature. People can enter geographical searches. The search box will return a
 	// pick list containing a mix of places and predicted search terms.
@@ -103,7 +95,7 @@ function initMap() {
   // [END region_getplaces]
 }
 
-
+/**
 
 function callback(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
