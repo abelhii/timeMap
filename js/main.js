@@ -96,6 +96,9 @@ function initialise(){
       ],
       eventClick: function(event, jsEvent, view) {
         var point = new Array();
+        //format the time to be readable using 'moment'
+        var start = moment(event.start).format('dddd: hh:mm');
+        var end = moment(event.end).format('hh:mm');
 
         //On CLick event for when the user clicks an item in the calendar:
         /*alert('Event: ' + event.title + '\n' +
@@ -117,7 +120,7 @@ function initialise(){
                 //switch to Google Map tab and place location marker:
                 $('#tabs a[href="#gMap"]').tab('show');
                 var pos = {lat: parseFloat(point[1]) , lng: parseFloat(point[0])};
-                placeMarker(pos, event.title, event.start);
+                placeMarker(pos, event.title, start, end);
 
             },
             error: function () {
@@ -138,11 +141,8 @@ function initialise(){
 
 
 //display location on map as a marker:
-var marker;
-//var infowindow;
-
-//John Hume: POINT(-6.60002669999998 53.3840296500001)
-function placeMarker(location, title, time) {
+var marker, infowindow;
+function placeMarker(location, title, start, end) {
   if ( marker ) {
     marker.setPosition(location);
   } else {
@@ -152,10 +152,13 @@ function placeMarker(location, title, time) {
       title: title
     });
   }
-/*
-  var contentString = '<div id="content">'+
-                      '<h1>'+title+'</h1>'+
-                      '<p>'+time+'</p>'+
+
+  //content for the info window:
+  var contentString = '<div id="infoContent">'+
+                      '<h3 id="firstHeading">'+title+'</h3>'+
+                      '<div id="bodyContent">'+
+                      '<h4>'+start+'-'+end+'</h4>'+
+                      '</div>'
                       '</div>';
 
   infowindow = new google.maps.InfoWindow({
@@ -165,14 +168,14 @@ function placeMarker(location, title, time) {
   //open infor window on click:    
   marker.addListener('click', function() {
       infowindow.open(map, marker);
-  });*/
+  });
 }
 
-
-//splits the lat and lng
+//splits the lat and lng into array
 //NOTE: Lat is [1] and Lng is [0]
 function getLatLng(point){
   var result;
+  //just extracts the coordinates from the parenthesis:
   var matches = point.match(/\((.+?)\)/);
   if (matches) {
       result = matches[1].split(" ");

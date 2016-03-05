@@ -21,11 +21,10 @@
 	<script src="js/map.js" type="text/javascript"></script>
 	<script src="js/main.js" type="text/javascript"></script>
 	<!--FullCalendar.io-->
-	<link href="bower_components/fullcalendar/dist/fullcalendar.css" rel="stylesheet" />
-	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js" type="text/javascript"></script>
-	<script src='bower_components/moment/min/moment.min.js' type="text/javascript"></script>
-	<script src="bower_components/fullcalendar/dist/fullcalendar.js" type="text/javascript"></script>
-	<script src="bower_components/fullcalendar/dist/gcal.js" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js" type="text/javascript"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.js" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/gcal.js" type="text/javascript"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAK; ?>&signed_in=true&callback=initMap&libraries=places" type="text/javascript"></script>
 </head>
   

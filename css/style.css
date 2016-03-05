@@ -104,6 +104,12 @@ body h1{
   font-weight: 300;
 }
 
+/*-- Marker infoWindow style --*/
+#infoContent{
+  margin:3px;
+  padding:1px;
+}
+
 
 /*--Calendar--*/
 #calendarr{

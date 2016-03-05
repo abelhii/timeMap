@@ -13,10 +13,6 @@ function initMap() {
 	};
 	var muLayer = new google.maps.KmlLayer(kmlOptions);
 
-	google.maps.event.addListener(map, 'click', function(event) {
-	  event.title;
-	  //placeMarker(event.latLng);
-	});
 	google.maps.event.addListener(map, 'mouseover', function(event) {
 	  event.title;
 	});
