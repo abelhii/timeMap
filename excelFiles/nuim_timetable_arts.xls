@@ -1,0 +1,1012 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    
+	<meta name="description" content="Maynooth University :: Save to file" />    
+	<meta name="keywords" content="nui,nuim,maynooth,timetable,lecture,venue,deparment,time" />    
+	<meta name="robots" content="index, follow" />    
+	<meta name="distribution" content="global" />    
+	<meta name="generator" content="NetBeans" />    
+	<meta name="language" content="en" />    
+	<meta name="copyright" content="Copyright &copy; 2015 Maynooth University" />
+    <style type="text/css">
+        body {
+	background-color: #FFFFFF;
+
+	margin: 0px;
+	border: 0px;
+	padding: 0px;
+
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	text-align: left;
+}
+
+/* LINK ************************************************************************
+***************************************************************************** */
+
+a {
+	font-family: Arial, sans-serif;
+    color: #024481;
+    font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	cursor:pointer;
+}
+
+a:link, a:visited, a:active, a:hover {
+    /* Override Browser default setting */
+}
+
+a:hover {
+	text-decoration: underline;
+}
+/* TBD
+a.change {
+	font-size: 11px;
+	background-color : #dddddd;
+
+	border-style: solid;
+	border-width: 1px;
+
+	font-weight: normal;
+
+	padding: 0px 3px 0px 3px;
+}
+
+a.change:hover {
+	background-color : #FFFFFF;
+	text-decoration: none;
+}
+*/
+/* DIV *************************************************************************
+***************************************************************************** */
+
+div.wrapper {
+	position: absolute;
+	top: 0px;
+	left: 50%;
+
+	width: 790px;
+	height: 100%;
+
+	margin: 0px;
+	margin-left: -395px;
+
+	padding: 0px;
+	border: 0px;
+}
+
+div.header {
+	background-color: #FFFFFF;
+
+	width: 750px;
+	height: 120px;
+
+	margin: 18px 0px 0px 0px;
+	border: 0px;
+	padding: 5px 35px 5px 5px;
+
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+}
+
+div.body {
+	background-color: #FFFFFF;
+
+	width: 760px;
+
+	border: 0px;
+	margin: 0px;
+	padding: 15px;
+
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+}
+
+div.separe {
+	width: 760px;
+	height: 20px;
+
+	margin: 0px;
+	border: 0px;
+	padding: 0px 15px 0px 15px;
+}
+
+div.copyright {
+	width: 760px;
+	height: 18px;
+
+	margin: 18px 0px 0px 0px;
+	border: 0px;
+	padding: 0px 15px 0px 15px;
+
+    color: #666666;
+}
+
+div.disclaimer {
+	margin: 0px;
+	border: 0px;
+	padding: 10px 0px 0px 0px;
+    
+    color: #666666;
+}
+
+  div.box_lecture
+, div.box_venue
+, div.box_department
+, div.box_student {
+	border-style: solid;
+	border-width: 4px;
+
+    margin: 0px 2px 2px 2px;
+	padding: 10px;
+
+	float:left;
+    width: 728px;
+}
+
+div.box_lecture {
+	border-color: #014582;
+}
+div.box_venue {
+	border-color: #eead13;
+}
+div.box_department {
+	border-color: #933631;
+}
+div.box_student {
+	border-color: #01818e;
+}
+
+/* IMG *************************************************************************
+***************************************************************************** */
+
+img {
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+img.img_frame {
+	background-color: #EDF7FD;
+
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+
+	padding: 3px;
+}
+
+/* FONT ************************************************************************
+***************************************************************************** */
+.font_title {
+    color: #000066;
+}
+
+.font_sub_title {
+    color: #899abb;
+}
+
+ .font_error
+,.font_mandatory
+,.font_tip
+,.font_exam_length
+	{
+	color: #C00000;
+	}
+
+.font_logout
+	{
+	color: #eead13;
+	}
+
+.font_arrow
+	{
+	color: #000000;
+	}
+
+ .font_disabled
+	{
+	color: #888888;
+	}
+
+ .font_larger
+	{
+	font-size: larger;
+	}
+
+ .font_smaller
+	{
+	font-size: smaller;
+	}
+
+/* HR **************************************************************************
+***************************************************************************** */
+    
+hr {
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+	height: 0px;
+}
+
+/* TABLE ***********************************************************************
+***************************************************************************** */
+
+table {
+	border: 0px;
+	border-spacing: 0px;
+	margin: 0px;
+	padding: 0px;
+
+	width: 100%;
+}
+
+table.table_form {
+	border-spacing: 4px;
+	vertical-align: top;
+}
+
+table.table_listing {
+	border-spacing: 1px;
+	vertical-align: top;
+}
+
+table.table_cubes {
+	border-spacing: 1px;
+	vertical-align: top;
+    
+	width: 600px;
+}
+/* TD **************************************************************************
+***************************************************************************** */
+
+td {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	font-size: 12px;
+}
+
+td.td_section {
+	background-color: #889AC2;
+    
+	border-color: #889AC2;
+	border-style: solid;
+	border-width: 1px;
+
+	font-size: 14px;
+    color: #FFFFFF;
+    font-weight: bold;
+
+	padding: 5px 10px 5px 10px;
+}
+
+td.td_security {
+	background-color: #EDF7FD;
+
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+
+	padding: 5px 10px 5px 10px;
+}
+
+  td.td_section_lecture
+, td.td_section_venue
+, td.td_section_department
+, td.td_section_student {
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+
+	font-size: 14px;
+    color: #FFFFFF;
+    font-weight: bold;
+
+    margin: 0px;
+	padding: 5px 10px 5px 10px;
+}
+td.td_section_lecture {
+	background-color: #014582;
+}
+td.td_section_venue {
+	background-color: #eead13;
+}
+td.td_section_department {
+	background-color: #933631;
+}
+td.td_section_student {
+	background-color: #01818e;
+}
+
+td.td_header {
+	background-color: #e3e3e3;
+
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+
+	padding: 5px;
+
+    font-weight: bold;
+}
+
+  td.td_odd
+, td.td_even {
+	padding: 0px 2px 0px 2px;
+	margin: 0px;
+	border: 0px;
+}
+td.td_odd {
+	background-color: #FFFFFF;
+}
+td.td_even {
+	background-color: #F0F0F0;
+}
+
+  td.td_odd_timetable
+, td.td_even_timetable {
+	padding: 0px 5px 0px 2px;
+	margin: 0px;
+	border: 0px;
+}
+
+td.td_odd_timetable {
+	background-color: #FFFFFF;
+}
+
+td.td_even_timetable {
+	background-color: #F0F0F0;
+}
+
+td.td_success {
+	background-color: #01818e;
+
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+
+    color: #ffffff;
+	padding: 5px;
+
+    font-weight: bold;
+}
+
+/* TH **************************************************************************
+***************************************************************************** */
+
+th {
+	padding: 0px 2px 0px 2px;
+	margin: 0px;
+
+	background-color: #EDF7FD;
+
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+
+	color: #024481;
+	font-size: 12px;
+    font-weight: bold;
+}
+
+/* INPUT ***********************************************************************
+***************************************************************************** */
+
+form {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+}
+
+input, textarea, select, radio, checkbox, input:hover, textarea:hover, select:hover, radio:hover, checkbox:hover {
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	color : #000000;
+	text-align: left;
+	text-decoration: none;
+	
+	background-color : #FFFFFF;
+	
+	border-style: solid;
+	border-width: 1px;
+	
+	padding: 2px;
+	margin: 0px;
+}
+
+input, textarea, select, radio, checkbox {
+	border-color: #999999;
+}
+
+input:hover, textarea:hover, select:hover, radio:hover, checkbox:hover {
+	border-color: #024481;
+}
+
+input.input_button {
+	text-align: center;
+	background-color : #dddddd;
+	margin: 0px;
+	font-weight: bold;
+}
+
+input.input_button:hover {
+	background-color : #FFFFFF;
+}
+
+/* TABS ************************************************************************
+***************************************************************************** */
+
+ul#tab_disability {
+	list-style-type: none;
+	float:right;
+
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+	border: 0px;
+}
+
+ul#tab_nav {
+	list-style-type: none;
+	float:left;
+
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+	border: 0px;
+}
+
+ul#tab_disability li {
+	border: 0px;
+
+    margin: 2px 2px 0px 2px;
+	padding: 5px 20px 5px 20px;
+	text-align: center;
+	float: right;
+}
+
+ul#tab_nav li {
+	border: 0px;
+
+    margin: 2px 2px 0px 2px;
+	padding: 5px 20px 5px 20px;
+	text-align: center;
+	float: left;
+}
+
+ul#tab_disability li.li_icon {
+	border: 0px;
+    margin: -2px 0px 0px 0px;
+	padding: 0px 5px 0px 5px;
+	text-align: center;
+}
+ul#tab_disability li.li_printme {
+	background-color: #FFFFFF;
+}
+ul#tab_disability li.li_disability {
+	background-color: #808080;
+}
+ul#tab_nav li.li_lecture {
+	background-color: #7086b7;
+}
+ul#tab_nav li.li_venue {
+	background-color: #f7d18a;
+}
+ul#tab_nav li.li_department {
+	background-color: #c38a7f;
+}
+ul#tab_nav li.li_student {
+	background-color: #6ab3bc;
+}
+
+  ul#tab_disability li.li_disability:hover
+, ul#tab_disability li.li_disability_selected {
+	background-color: #000000;
+}
+  ul#tab_nav li.li_lecture:hover
+, ul#tab_nav li.li_lecture_selected {
+	background-color: #014582;
+}
+  ul#tab_nav li.li_venue:hover
+, ul#tab_nav li.li_venue_selected {
+	background-color: #eead13;
+}
+  ul#tab_nav li.li_department:hover
+, ul#tab_nav li.li_department_selected {
+	background-color: #933631;
+}
+  ul#tab_nav li.li_student:hover
+, ul#tab_nav li.li_student_selected {
+	background-color: #01818e;
+}
+
+  ul#tab_nav a
+, ul#tab_disability a {
+	white-space: nowrap;
+
+	font-size: 18px;
+    color: #FFFFFF;
+}
+
+  ul#tab_nav a:hover
+, ul#tab_disability a:hover {
+	text-decoration: none;
+}
+
+ul#tab_disability a.printme {
+    white-space: nowrap;
+
+	font-size: 18px;
+    color: #024481;
+}
+ul#tab_disability a.printme:hover {
+	text-decoration: underline;
+}
+
+/* MISCELLANEOUS ***************************************************************
+***************************************************************************** */
+
+.pagebreak {
+    page-break-before: auto;
+}
+    </style>
+
+    <title>Academic and Exam Timetable :: Timetable - Academic - Save to file</title>
+</head>
+
+<body><h1 class="font_title">Academic and Exam Timetable</h1><h2 class="font_sub_title">Maynooth University</h2><h3>Timetable at 06 March 2016 00:32:37 <span class="font_disabled">(24h)</span></h3><br />
+<span class="font_disabled">Step 1 - Select Course</span> :: 1-BA ANTHROPOLOGY(MH111) [Change]<br />
+<span class="font_disabled">Step 2 - Select Programme</span> :: 1ANT [Change]<br />
+<span class="font_disabled">Step 3 - Select Semester</span> :: All [Change]<br />
+<span class="font_disabled">Step 4 - Select Module</span> :: AC101, AC102, AC103, AN111, AN113A, AN114A, AN122, CN110, CN111, CN120, CN122, CS130, CS141, CS142, CS143, EN150, EN152, EN153, EN154, FR102, FR103, FR122, FR123, GC103, GC105, GC106, GC107, GN110, GN111, GN120, GN121, GR101, GR102, GY111, GY114, GY123, GY124, HY111, HY112, HY114, HY118, KD101, KD102, KD103, KD104, LW101, LW102, LW110, MN101, MN102, MN103, MN172, MP110, MP112, MP201, MT103A, MT104A, MT112A, MT121A, MU104, MU105, MU126, MU145, PH101, PH102, PH103, PH104, PO101, PO102, PO103, PO104, SG102, SG109, SG110, SG113, SO101, SO102, SO103, SO104, SPA101, SPA102, SPA103, SPA104, SPA105, SPA106 [Change]<br />
+
+<br /><span class="font_error">Please see degree structures for further information. All optional modules may not be available to you. Note that practical sessions, small group work and some modules are not timetabled, contact relevant department for details.</span><h3 class="font_title pagebreak">Semester 1</h3>
+
+<table class="table_listing">
+		<tr>
+		<td>&nbsp;</td>
+		<th align="center">Monday</th>
+		<th align="center">Tuesday</th>
+		<th align="center">Wednesday</th>
+		<th align="center">Thursday</th>
+		<th align="center">Friday</th>
+	</tr>
+		<tr>
+		<th align="center" valign="top">09:00</th>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">MU105 [<span style="color: red;"><b>A</b></span>] [NMR]<br />
+MU105 [<span style="color: red;"><b>A</b></span>] [OCR]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">AN111 [JH1]<br />
+AN122 [JH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">LW102 [IONTH]<br />
+PH102 [JH2]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">AC101 [IONTH]<br />
+MP110 [JH3]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">10:00</th>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">LW101 [JH1]<br />
+MU105 [<span style="color: red;"><b>A</b></span>] [NMR]<br />
+MU105 [<span style="color: red;"><b>A</b></span>] [OCR]<br />
+PH101 [TH2]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">AC101 [AULA]<br />
+SG102 [CB6]<br />
+CN110 [ESR]<br />
+GC105 [JH7]<br />
+MP201 [SLT]<br />
+FR103 [TH2]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">PH101 [CH]<br />
+LW102 [JH1]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">11:00</th>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">AC101 [AULA]<br />
+SG113 [AX1]<br />
+GC103 [CB5]<br />
+MP110 [JH2]<br />
+CN110 [JH7]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">GN110 [HA]<br />
+GN110 [HH]<br />
+GY114 [JH1]<br />
+GN110 [T3]<br />
+GN110 [T4]<br />
+GN110 [T9]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">AN111 [JH1]<br />
+AN122 [JH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">MN101 [<span style="color: red;"><b>B</b></span>] [CH]<br />
+HY118 [IONTH]<br />
+MN103 [<span style="color: red;"><b>B</b></span>] [JH3]<br />
+GR101 [T1]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">12:00</th>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">PO103 [HF]<br />
+EN150 [JH1]<br />
+KD101 [TH1]<br />
+MT103A [TH2]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">GN110 [IONSEM]<br />
+GY123 [JH1]<br />
+GN110 [T1]<br />
+GN110 [T10]<br />
+GN110 [T2]<br />
+GN110 [T6]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">GY123 [JH1]<br />
+GN111 [TH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">MU104 [CH]<br />
+SPA103 [HD]<br />
+CS130 [IONTH]<br />
+SO101 [JH1]<br />
+SPA101 [T1]<br />
+SPA103 [T4]<br />
+SPA101 [T5]<br />
+SPA101 [T7]<br />
+SPA101 [T8]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">AC101 [IONTH]<br />
+MP201 [JH3]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">13:00</th>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">HY111 [AULA]<br />
+MN103 [<span style="color: red;"><b>A</b></span>] [CH]<br />
+MN101 [<span style="color: red;"><b>A</b></span>] [JH1]<br />
+GR101 [T3]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">AN111 [JH1]<br />
+AN122 [JH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">MN103 [<span style="color: red;"><b>C</b></span>] [JH1]<br />
+MN101 [<span style="color: red;"><b>C</b></span>] [JH3]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">14:00</th>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">LW101 [AULA]<br />
+PH102 [TH2]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS141 [CH]<br />
+SPA101 [HF]<br />
+SO101 [JH1]<br />
+MU145 [RVH]<br />
+SPA101 [T1]<br />
+SPA103 [T4]<br />
+SPA103 [T5]<br />
+SPA101 [T8]<br />
+SPA101 [T9]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">SG113 [CB1]<br />
+GC105 [CH]<br />
+MP110 [HF]<br />
+CN110 [HH]<br />
+FR102 [JH2]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">MT121A [CH]<br />
+KD102 [HF]<br />
+EN152 [JH1]<br />
+PO101 [JH6]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">GN110 [T5]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">15:00</th>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">GY114 [JH1]<br />
+GN110 [JH7]<br />
+GN110 [T1]<br />
+GN110 [T10]<br />
+GN110 [T3]<br />
+GN110 [T7]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">SPA101 [HF]<br />
+SO102 [JH1]<br />
+MU105 [<span style="color: red;"><b>A</b></span>] [JH3]<br />
+MU105 [<span style="color: red;"><b>B</b></span>] [JH3]<br />
+SPA101 [T1]<br />
+SPA103 [T4]<br />
+SPA103 [T5]<br />
+SPA101 [T8]<br />
+SPA101 [T9]<br />
+CS143 [TH2]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">GN110 [T5]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">16:00</th>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS141 [CH]<br />
+SPA101 [HE]<br />
+SO102 [JH1]<br />
+SPA101 [T10]<br />
+SPA101 [T2]<br />
+SPA101 [T8]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">MT103A [CH]<br />
+EN152 [JH1]<br />
+KD101 [JH7]<br />
+PO103 [SLT]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">HY118 [AULA]<br />
+MN103 [<span style="color: red;"><b>C</b></span>] [JH1]<br />
+GR101 [T7]<br />
+MN101 [<span style="color: red;"><b>C</b></span>] [TH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">PO101 [AX1]<br />
+MT103A [CH]<br />
+KD102 [HF]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">17:00</th>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">MN101 [<span style="color: red;"><b>B</b></span>] [CH]<br />
+GR101 [HA]<br />
+MN103 [<span style="color: red;"><b>B</b></span>] [JH1]<br />
+SPA101 [T10]<br />
+SPA101 [T2]<br />
+SPA101 [T8]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CN111 [JH5]<br />
+SG102 [JH6]<br />
+GC103 [TH2]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">MN101 [<span style="color: red;"><b>A</b></span>] [JH1]<br />
+GR101 [T8]<br />
+MN103 [<span style="color: red;"><b>A</b></span>] [TH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">MU104 [CH]<br />
+SPA105 [HF]<br />
+CS130 [JH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+	</tr>
+</table><h3 class="font_title pagebreak">Semester 2</h3>
+
+<table class="table_listing">
+		<tr>
+		<td>&nbsp;</td>
+		<th align="center">Monday</th>
+		<th align="center">Tuesday</th>
+		<th align="center">Wednesday</th>
+		<th align="center">Thursday</th>
+		<th align="center">Friday</th>
+	</tr>
+		<tr>
+		<th align="center" valign="top">09:00</th>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">AN113A [JH1]<br />
+AN114A [JH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">LW110 [IONTH]<br />
+PH103 [TH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">AC102 [IONTH]<br />
+MP112 [JH3]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">10:00</th>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">LW110 [JH1]<br />
+PH104 [TH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CN120 [CB4]<br />
+GC107 [JH4]<br />
+SG109 [JH5]<br />
+FR123 [TH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">SPA102 [T5]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">PH103 [JH2]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">11:00</th>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">GC106 [CB5]<br />
+MP112 [HF]<br />
+CN120 [HH]<br />
+AC103 [IONTH]<br />
+SG110 [JH5]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">GN120 [HB]<br />
+GY111 [JH1]<br />
+GN120 [T3]<br />
+GN120 [T4]<br />
+GN120 [T5]<br />
+GN120 [T9]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">AN113A [JH1]<br />
+AN114A [JH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">HY112 [AULA]<br />
+MN172 [<span style="color: red;"><b>B</b></span>] [JH1]<br />
+GR102 [T1]<br />
+MN102 [<span style="color: red;"><b>B</b></span>] [TH1]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">12:00</th>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">PO102 [CB7]<br />
+KD104 [CB8]<br />
+EN154 [JH1]<br />
+MT104A [TH2]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">GY124 [JH1]<br />
+GN120 [T1]<br />
+GN120 [T10]<br />
+GN120 [T2]<br />
+GN120 [T3]<br />
+GN120 [T7]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">GY124 [JH1]<br />
+GN121 [TH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">SPA102 [CB2]<br />
+SPA104 [CB2]<br />
+SPA104 [HH]<br />
+SO104 [JH1]<br />
+SPA102 [T1]<br />
+SPA104 [T4]<br />
+SPA102 [T7]<br />
+SPA102 [T8]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">AC102 [IONTH]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">13:00</th>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">HY114 [AULA]<br />
+MN102 [<span style="color: red;"><b>A</b></span>] [JH1]<br />
+MN172 [<span style="color: red;"><b>A</b></span>] [JH3]<br />
+GR102 [T7]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">AN113A [JH1]<br />
+AN114A [JH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">MN102 [<span style="color: red;"><b>C</b></span>] [JH2]<br />
+MN172 [<span style="color: red;"><b>C</b></span>] [JH3]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">14:00</th>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">LW110 [AULA]<br />
+PH104 [JH2]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS142 [CH]<br />
+SPA104 [HH]<br />
+SO103 [JH1]<br />
+SPA102 [JH6]<br />
+MU145 [RVH]<br />
+SPA104 [T4]<br />
+SPA102 [T5]<br />
+SPA102 [T8]<br />
+SPA104 [T9]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">SG110 [AX1]<br />
+GC107 [CH]<br />
+FR122 [ELT]<br />
+CN120 [HA]<br />
+MP112 [JH4]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">MT104A [CH]<br />
+PO104 [HF]<br />
+KD103 [IONTH]<br />
+EN154 [JH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">GN120 [T5]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">15:00</th>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">GY111 [JH1]<br />
+GN120 [T1]<br />
+GN120 [T10]<br />
+GN120 [T3]<br />
+GN120 [T4]<br />
+GN120 [T7]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">SPA104 [HH]<br />
+CS143 [IONTH]<br />
+SO103 [JH1]<br />
+SPA102 [JH6]<br />
+SPA104 [T4]<br />
+SPA102 [T5]<br />
+SPA102 [T8]<br />
+SPA104 [T9]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">GN120 [T5]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">16:00</th>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS142 [CH]<br />
+SO104 [JH1]<br />
+MU126 [JH2]<br />
+SPA102 [T10]<br />
+SPA102 [T4]<br />
+SPA102 [T6]<br />
+SPA102 [T8]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">PO102 [CB1]<br />
+MT104A [CH]<br />
+EN153 [JH1]<br />
+KD104 [TH2]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">MN172 [<span style="color: red;"><b>C</b></span>] [CH]<br />
+HY114 [JH1]<br />
+GR102 [T5]<br />
+MN102 [<span style="color: red;"><b>C</b></span>] [TH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">KD103 [CB9]<br />
+MT112A [CH]<br />
+PO104 [HF]<br />
+EN153 [JH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">17:00</th>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">MN172 [<span style="color: red;"><b>B</b></span>] [JH1]<br />
+SPA102 [T10]<br />
+GR102 [T3]<br />
+SPA102 [T6]<br />
+SPA102 [T8]<br />
+MN102 [<span style="color: red;"><b>B</b></span>] [TH2]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">SG109 [CB1]<br />
+AC102 [IONTH]<br />
+CN122 [JH5]<br />
+GC106 [TH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">MN102 [<span style="color: red;"><b>A</b></span>] [JH1]<br />
+GR102 [T7]<br />
+MN172 [<span style="color: red;"><b>A</b></span>] [TH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">MU126 [CH]<br />
+SPA106 [HF]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+	</tr>
+</table>
+<br />
+<b>Disclaimer:</b> While every care has been taken in compiling this timetable, the University is not bound by any errors or omissions. The University reserves the right at any time to cancel, revise, amend or alter timetabling information.<br />
+
+<br />
+V4.0.1 - Copyright &copy; 2015 Maynooth University<br />
+Powered by MDAL Framework &copy; 2015
+</body>
+
+</html>

@@ -10,9 +10,9 @@
 	echo $eventName[1] . " :: ";
 	//take out lecture room number to just get the building code:
 	$ec = preg_replace("/[^a-zA-Z]+/", "", $eventName[1]);
-	echo $ec[0].",";
-	echo $ec[1]." : ";
-
+	echo $ec." : ";
+	//To prevent mixing up the same tag names in column tagName
+	$first = substr($ec, 0, 2);
 
 
 	$link = mysqli_connect('localhost', 'root', '', 'timemap');
@@ -21,7 +21,9 @@
 	}
 
 	//This is just querying anythhing with the two letters in the name for now:
-	$query = "SELECT location FROM mu_campus WHERE name LIKE '%$ec[0]%$ec[1]%'";
+	$query = "SELECT location FROM mu_campus 
+				WHERE tagName LIKE '%$ec%'
+				OR tagName LIKE '$first%'";
 	$result = mysqli_query($link,$query);
 	if(!$result){
 		echo "false";

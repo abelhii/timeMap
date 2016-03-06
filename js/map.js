@@ -13,9 +13,6 @@ function initMap() {
 	};
 	var muLayer = new google.maps.KmlLayer(kmlOptions);
 
-	google.maps.event.addListener(map, 'mouseover', function(event) {
-	  event.title;
-	});
 
 
 /*
