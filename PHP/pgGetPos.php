@@ -1,4 +1,5 @@
 <?php
+	require 'config.php';
 	//retrieve event title and such from ajax:
 	if(isset($_POST['eventTitle']))
 	{
@@ -17,23 +18,23 @@
 
 	//st_geomFromtext
 
-
-	$link = mysqli_connect('localhost', 'root', '', 'timemap');
+	$dbp = DBP;
+	$link = pg_connect("host=webcourse.cs.nuim.ie port=5432 dbname=se415003 user=se415003 password=$dbp");
 	if (!$link) {
-	    die('Could not connect: ' . mysqli_error());
+	    die('Could not connect: ' . pg_last_error());
 	}
 
 	//This is just querying anythhing with the two letters in the name for now:
 	$query = "SELECT location FROM mu_campus 
 				WHERE tagName LIKE '%$ec%'
 				OR tagName LIKE '$first%'";
-	$result = mysqli_query($link,$query);
+	$result = pg_query($link,$query);
 	if(!$result){
 		echo "false";
 	}else{
-		$location= mysqli_fetch_row($result);
+		$location= pg_fetch_row($result);
 		echo $location[0];	
 	}
 
-	mysqli_close($link);
+	pg_close($link);
 ?>
