@@ -1,4 +1,4 @@
-/*--For every page--*/
+/*--Universal--*/
 html{
 	overflow: auto;
 }
@@ -13,10 +13,28 @@ body h1{
   font-weight: bold ;
   font-size: 55px; 
 }
-
-/*--container--*/
 .container{
 	margin:30px;
+}
+/*--Tab--*/
+.nav-size{
+  font-size: 20px;
+}
+
+/* INFO */
+#howTo p{font-size: 15px;}
+#howTo img{
+  height:30vh;
+  width:60vh;
+}
+
+/* Modal Scrollbar */
+#gLogin .modal-dialog{
+    overflow-y: initial !important
+}
+#gLogin .modal-body{
+    height: 300px;
+    overflow-y: auto;
 }
 
 
@@ -26,6 +44,7 @@ body h1{
   margin-bottom:10px;
   font-size: 23px;
 }
+#submitTimetable {font-size: 20px}
 .btn-file {
     position: relative;
     overflow: hidden;
@@ -46,10 +65,6 @@ body h1{
     display: block;
 }
 
-/*--Tab--*/
-.nav-size{
-  font-size: 20px;
-}
 
 
 /*--Map--*/
@@ -104,7 +119,7 @@ body h1{
   font-weight: 300;
 }
 
-/*-- Marker infoWindow style --*/
+/*-- Marker gmaps infoWindow style --*/
 #infoContent{
   margin:3px;
   padding:1px;
@@ -123,13 +138,3 @@ body h1{
     width: 250px;
 }
  
-
-
-/* Modal Scrollbar */
-.modal-dialog{
-    overflow-y: initial !important
-}
-.modal-body{
-    height: 250px;
-    overflow-y: auto;
-}

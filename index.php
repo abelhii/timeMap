@@ -13,10 +13,10 @@
 	<title>Time Map</title>
 	<!--Style-->
 	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<!--Script-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/date.js"></script>
 	<script src="js/map.js" type="text/javascript"></script>
 	<script src="js/main.js" type="text/javascript"></script>
@@ -31,10 +31,14 @@
 <body>
 	<h1 class="text-center">Time Map</h1>
 	<div class="container">	
+
 		<!--To upload the excel file-->
 		<form class="form-inline" id="submitTimetable" action="PHP/uploadExcel.php" method="post" enctype="multipart/form-data" role="form">
 			<div class="form-group">
+			<div id="submitExcel">
+			    <img id="info" src="imgs/info.png" class="btn" data-toggle="modal" data-target="#howTo">
 			    Upload your timetable as an excel file:
+				<!-- Upload Timetable -->
 			    <div class="input-group">
 				    <span class="input-group-btn">
 					    <span class="btn btn-default btn-file">
@@ -44,6 +48,38 @@
                 	<input type="text" class="form-control" readonly>
 				</div>
 			    <input id="sbtn" class="btn btn-success form-control" type="submit" value="Upload File" name="submit">
+		    </div>
+
+			    <!-- Info Modal -->
+				<div class="modal fade" id="howTo" role="dialog">
+					<div class="modal-dialog">
+
+					  <!-- Modal content-->
+					  <div class="modal-content">
+					    <div class="modal-header">
+					      <button type="button" class="close" data-dismiss="modal">&times;</button>
+					      <h4 class="modal-title">FAQ:</h4>
+					    </div>
+					    <div class="modal-body">
+					    	<p>
+					    		1. To find your timetable go to: 
+					    		<a href="https://apps.maynoothuniversity.ie/timetable/">https://apps.maynoothuniversity.ie/timetable/</a>
+					    		and fill in your student details. <br>
+					    		2. Once you're logged in, you can download your timetable in Excel format as shown below.
+					    	</p>
+					    	<p>
+					    		Or try it with a sample timetable: <a href='excelFiles/nuim_student.xls' target="_blank">nuim_student.xls</a>
+				    		</p>
+					    	<img src="imgs/excelFormat.PNG">
+					    </div>
+					    <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					  </div>
+					  
+					</div>
+				</div>
+			    
 			</div>
 		</form>	
 
@@ -68,7 +104,7 @@
 				<!--TODO: USE BOOTSTRAP MODAL-->
 				<br>
 				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#gLogin">connect to google calendar</button>
-				<!-- Modal -->
+				<!-- Connect to Calendar Modal -->
 				<div class="modal fade" id="gLogin" role="dialog">
 					<div class="modal-dialog">
 

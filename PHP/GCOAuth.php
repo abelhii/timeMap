@@ -53,7 +53,7 @@
 
 		echo $calendarrr->getSummary();
 
-		/********************INSERT SINGLE EVENT********************************/
+		/********************INSERT SINGLE EVENT********************************
 		$event = new Google_Service_Calendar_Event();
 		$event->setSummary('Appointment');
 		$event->setLocation('Somewhere');
