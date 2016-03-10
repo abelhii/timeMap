@@ -14,6 +14,7 @@
 	<!--Style-->
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<!--Script-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -36,7 +37,7 @@
 		<form class="form-inline" id="submitTimetable" action="PHP/uploadExcel.php" method="post" enctype="multipart/form-data" role="form">
 			<div class="form-group">
 			<div id="submitExcel">
-			    <img id="info" src="imgs/info.png" class="btn" data-toggle="modal" data-target="#howTo">
+			    <i class="btn fa fa-info-circle" data-toggle="modal" data-target="#howTo"></i>
 			    Upload your timetable as an excel file:
 				<!-- Upload Timetable -->
 			    <div class="input-group">
@@ -116,7 +117,9 @@
 					    </div>
 					    <div class="modal-body">
 					    	<pre>
-								<?php include "PHP/GCOAuth.php"; ?>
+								<?php 
+									include "PHP/GCOAuth.php"; 
+								?>
 							</pre>
 					    </div>
 					    <div class="modal-footer">

@@ -38,14 +38,13 @@
     if (!isset($_SESSION['token'])) {
 		$authUrl = $client->createAuthUrl();
 		print "<a class='login' href='$authUrl'>Connect Me!</a>";
-
+		echo header('Location: http://127.0.0.1/timeMap/');
     }    
 
     // Step 3: We have access we can now create our service
     if (isset($_SESSION['token'])) {
 		$client->setAccessToken($_SESSION['token']);
 		print "<a class='logout' href='http://127.0.0.1/timeMap?logout=1'>LogOut</a><br>";	
-		//print "<a class='logout' href='http://127.0.0.1/fyp/'>LogOut</a><br>";	
 
 		$service = new Google_Service_Calendar($client);    
 
@@ -107,4 +106,3 @@
 			}
 		}
     }
-?>
