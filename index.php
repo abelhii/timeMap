@@ -104,9 +104,9 @@
 				<div id="output"></div>
 				<!--TODO: USE BOOTSTRAP MODAL-->
 				<br>
-				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#gLogin">connect to google calendar</button>
+				<a href="https://google.com" class="btn btn-primary btn-sm bootpopup" data-toggle="modal" data-target="#gLogin">connect to google calendar</a>
 				<!-- Connect to Calendar Modal -->
-				<div class="modal fade" id="gLogin" role="dialog">
+				<div class="modal fade" id="gLogin" tabindex="-1" role="dialog">
 					<div class="modal-dialog">
 
 					  <!-- Modal content-->
@@ -116,11 +116,10 @@
 					      <h4 class="modal-title">Google Authorisation</h4>
 					    </div>
 					    <div class="modal-body">
-					    	<pre>
-								<?php 
-									include "PHP/GCOAuth.php"; 
-								?>
-							</pre>
+					    	<iframe src="" style="zoom:0.60" frameborder="0" height="250" width="99.6%"></iframe>
+					    	<!--pre>
+								<?php //include('/PHP/GCOAuth.php'); ?>
+							</pre-->
 					    </div>
 					    <div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

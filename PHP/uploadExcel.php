@@ -112,11 +112,12 @@ echo '<pre>';
 print_r(json_decode($sem1_JSON));
 echo '</pre>'; 
 //<!--Go back to the previous page after its done uploading-->
+
 echo
 "<script>
-    window.history.go(-1);
+    window.location = '../';
 </script>";
-
+//window.history.go(-1);
 /*******************************************************************************/
 
 

@@ -31,14 +31,14 @@
 		$client->authenticate($_GET['code']);  
 		$_SESSION['token'] = $client->getAccessToken();
 		$redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-		header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));    	
+		//header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));    	
     }
 
     // Step 1:  The user has not authenticated we give them a link to login    
     if (!isset($_SESSION['token'])) {
 		$authUrl = $client->createAuthUrl();
-		print "<a class='login' href='$authUrl'>Connect Me!</a>";
-		echo header('Location: http://127.0.0.1/timeMap/');
+		//print "<a class='login' href='$authUrl'>Connect Me!</a>";
+		echo "<script> window.location.href = '$authUrl';  </script>";
     }    
 
     // Step 3: We have access we can now create our service
