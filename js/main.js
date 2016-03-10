@@ -107,7 +107,7 @@ function initialise(){
 
         //ajax to call php function which will show the location of the lecture.
         $.ajax({
-            url:'php/getPos.php',
+            url:'PHP/getPos.php',
             type: "POST",
             data: { eventTitle: event.title},
             success: function(data){
