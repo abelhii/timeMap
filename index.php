@@ -13,6 +13,7 @@
 	<title>Time Map</title>
 	<!--Style-->
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="icon" href="https://2016.moodle.maynoothuniversity.ie/theme/image.php/nuim/theme/1456143310/favicon">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<!--Script-->
@@ -30,7 +31,11 @@
 </head>
   
 <body>
-	<h1 class="text-center">Time Map</h1>
+	<div id="heading">
+		<img src="imgs/mu_logo1.png" align="left|top">
+		<h1>Time Map<br>
+		<small>Maynooth University</small></h1>
+	</div>
 	<div class="container">	
 
 		<!--To upload the excel file-->
@@ -65,7 +70,7 @@
 					    	<p>
 					    		1. To find your timetable go to: 
 					    		<a href="https://apps.maynoothuniversity.ie/timetable/">https://apps.maynoothuniversity.ie/timetable/</a>
-					    		and fill in your student details. <br>
+					    		and login using your student details. <br>
 					    		2. Once you're logged in, you can download your timetable in Excel format as shown below.
 					    	</p>
 					    	<p>
@@ -97,14 +102,15 @@
 			
 			<!--Calendar-->
 			<div id="calendar" class="tab-pane fade">
-				<form method="get" action="">
+				<form id="switchSem" method="get" action="">
 					<button class="btn btn-info btn-sm" id="sem1Btn" type="submit" name="sem" value="sem1" onClick="changeT('sem1')">Sem1</button>
 					<button class="btn btn-info btn-sm" id="sem2Btn" type="submit" name="sem" value="sem2" onClick="changeT('sem2')">Sem2</button>
+					<!--BOOTSTRAP MODAL-->
+					<a id="gLoginBtn" href="https://google.com" class="btn btn-primary btn-sm bootpopup" data-toggle="modal" data-target="#gLogin">connect to google calendar</a>
 				</form>
 				<div id="output"></div>
-				<!--TODO: USE BOOTSTRAP MODAL-->
-				<br>
-				<a href="https://google.com" class="btn btn-primary btn-sm bootpopup" data-toggle="modal" data-target="#gLogin">connect to google calendar</a>
+
+			
 				<!-- Connect to Calendar Modal -->
 				<div class="modal fade" id="gLogin" tabindex="-1" role="dialog">
 					<div class="modal-dialog">

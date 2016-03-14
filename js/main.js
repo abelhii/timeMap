@@ -91,7 +91,7 @@ $('.bootpopup').click(function(){
 
 
 
-//*---- Main CALENDAR / MAP interaction -----*//
+//*************** Main CALENDAR / MAP interaction *****************//
 
 /*Javascript to setup/initialise FullCalendar */
 function initialise(){
@@ -209,7 +209,7 @@ function getLatLng(point){
 
 
 
-//*---------------------------------------------------*//
+//*******************************************************************//
 
 
 //for google calendar reference needed to add gcal:
