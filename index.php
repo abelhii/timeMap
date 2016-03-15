@@ -133,7 +133,7 @@
 					    <div class="modal-body">
 					    	<p>To connect to Google Calendar you need to set your primary calendar to public as shown above:</p>
 					    	<pre>
-								<?php include('/PHP/GCOAuth.php'); ?>
+								<?php include 'PHP/GCOAuth.php'; ?>
 							</pre>
 					    </div>
 					    <div class="modal-footer">

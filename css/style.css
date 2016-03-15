@@ -50,12 +50,16 @@ body{
   height:25vh; 
   width:auto;
 }
-.modal-dialog{
-    overflow-y: initial !important
-}
 #howTo .modal-body{
     height: 600px;
     overflow-y: auto;
+}
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-open{
+  overflow: inherit;
+  padding-right: 0 !important;
 }
 
 
