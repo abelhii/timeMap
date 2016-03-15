@@ -12,5 +12,3 @@ define('CAK', 'AIzaSyD1JxlR86LiHAEd_h4zBcAVROocoN83c4o');
 define('CId', '281391249721-msahpvaiu7s8r2s9elvik1iuh7dsh51n.apps.googleusercontent.com');
 //Client Secret
 define('CS', '5cPuo-NVNIB0VbvsGH5JQDLq');
-
-define('DBP', 'pepsi-cola');

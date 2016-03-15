@@ -67,6 +67,7 @@
 					      <h4 class="modal-title">FAQ:</h4>
 					    </div>
 					    <div class="modal-body">
+					    	<h4>How to find your MU student timetable:</h4>
 					    	<p>
 					    		1. To find your timetable go to: 
 					    		<a href="https://apps.maynoothuniversity.ie/timetable/">https://apps.maynoothuniversity.ie/timetable/</a>
@@ -76,7 +77,15 @@
 					    	<p>
 					    		Or try it with a sample timetable: <a href='excelFiles/nuim_student.xls' target="_blank">nuim_student.xls</a>
 				    		</p>
-					    	<img src="imgs/excelFormat.PNG">
+					    	<img id="excelImg" src="imgs/excelFormat.PNG">
+
+					    	<h4>How to make your google calendar public:</h4>
+					    	<p>
+								1. Go into the calendar settings for your primary calendar.<br>
+								2. Click the "Share this Calendar" tab.<br>
+								3. Tick the "Make this Calendar Public" box and save
+							</p>
+							<img id="gcHowTo" src="imgs/gcHowTo.PNG">
 					    </div>
 					    <div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -106,7 +115,7 @@
 					<button class="btn btn-info btn-sm" id="sem1Btn" type="submit" name="sem" value="sem1" onClick="changeT('sem1')">Sem1</button>
 					<button class="btn btn-info btn-sm" id="sem2Btn" type="submit" name="sem" value="sem2" onClick="changeT('sem2')">Sem2</button>
 					<!--BOOTSTRAP MODAL-->
-					<a id="gLoginBtn" href="https://google.com" class="btn btn-primary btn-sm bootpopup" data-toggle="modal" data-target="#gLogin">connect to google calendar</a>
+					<a id="gLoginBtn" class="btn btn-primary btn-sm bootpopup" data-toggle="modal" data-target="#gLogin">connect to google calendar</a>
 				</form>
 				<div id="output"></div>
 
@@ -122,10 +131,10 @@
 					      <h4 class="modal-title">Google Authorisation</h4>
 					    </div>
 					    <div class="modal-body">
-					    	<iframe src="" style="zoom:0.60" frameborder="0" height="250" width="99.6%"></iframe>
-					    	<!--pre>
-								<?php //include('/PHP/GCOAuth.php'); ?>
-							</pre-->
+					    	<p>To connect to Google Calendar you need to set your primary calendar to public as shown above:</p>
+					    	<pre>
+								<?php include('/PHP/GCOAuth.php'); ?>
+							</pre>
 					    </div>
 					    <div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -136,7 +145,16 @@
 				</div>
 
 				<div id="calendarr">
-					<script type="text/javascript">initialise();</script>
+					<script type="text/javascript">
+						//users google calendar id
+						var calendarId = '<?php 
+											if(isset($calendarId)){
+												echo $calendarId->getSummary(); 
+											}else
+												echo " ";
+											?>';
+						initialiseCal();
+					</script>
 				</div>
 				<!--?php readfile("PHP/GCOAuth.php"); ?-->
 			</div>
@@ -144,8 +162,8 @@
 		
 
 
-
-		<?php
+		<!--For Testing:-->
+		<!--?php
 			//Initialising variables for use with uploadExcel.php
 			$timetable_path = "";
 			$sem1_JSON = "";
@@ -179,8 +197,8 @@
 			//echo $dom->saveHTML();
 		?>
 		<script type="text/javascript">
-			var timetable_path = '<?php echo $timetable_path; ?>'
-		</script>
+			var timetable_path = '<?php //echo $timetable_path; ?>'
+		</script-->
 	</div>
 
 </body>

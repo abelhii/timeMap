@@ -37,8 +37,8 @@
     // Step 1:  The user has not authenticated we give them a link to login    
     if (!isset($_SESSION['token'])) {
 		$authUrl = $client->createAuthUrl();
-		//print "<a class='login' href='$authUrl'>Connect Me!</a>";
-		echo "<script> window.location.href = '$authUrl';  </script>";
+		print "<a class='login' href='$authUrl'>Connect Me!</a>";
+		//echo "<script> window.location.href = '$authUrl';  </script>";
     }    
 
     // Step 3: We have access we can now create our service
@@ -48,9 +48,11 @@
 
 		$service = new Google_Service_Calendar($client);    
 
-		$calendarrr = $service->calendars->get('primary');
-
-		echo $calendarrr->getSummary();
+		$calendarId = $service->calendars->get('primary');
+		/*echo "<script> var calendarId = <?php echo $calendarId->getSummary(); ?></script>";*/
+		echo "This is your primary google calendar ID: ";
+		echo json_encode($calendarId->getSummary());
+		echo "<br>In order to import your google calendar into this apps calendar <br>you have to set your calendar to public as shown above.";
 
 		/********************INSERT SINGLE EVENT********************************
 		$event = new Google_Service_Calendar_Event();

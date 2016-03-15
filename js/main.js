@@ -32,8 +32,26 @@ $(document).ready( function() {
             return false;
         }
     });
+
+
 });
 
+
+/*window.onbeforeunload = myFunction;
+function myFunction(){
+  var currentURL = document.location.href;
+    var index = currentURL.indexOf("?code=");
+    if(index > -1) 
+        document.location.href = currentURL.substring(0, index); 
+}*/
+
+//change the url to prevent reuse of token on refresh
+$(window).unload(function() {
+    var currentURL = document.location.href;
+    var index = currentURL.indexOf("?code=");
+    if(index > -1) 
+        document.location.href = currentURL.substring(0, index); 
+});
 
 
 
@@ -63,38 +81,11 @@ function changeT(time){
 }
 
 
-//function to change url after connecting to google calendar to avoid reuse of token error
-$('.bootpopup').click(function(){
-    var frametarget = $(this).attr('href');
-  var targetmodal = $(this).attr('target');
-  if (targetmodal == undefined) {
-    targetmodal = '#popupModal';
-  } else { 
-    targetmodal = '#'+targetmodal;
-  }
-  if ($(this).attr('title') != undefined) {
-    $(targetmodal+ ' .modal-header h3').html($(this).attr('title'));
-    $(targetmodal+' .modal-header').show();
-  } else {
-     $(targetmodal+' .modal-header h3').html('');
-    $(targetmodal+' .modal-header').hide();
-  }  
-    $(targetmodal).on('show', function () {
-        $('iframe').attr("src", frametarget );   
-  });
-    $(targetmodal).modal({show:true});
-  return false;
-    
-});
-
-
-
 
 
 //*************** Main CALENDAR / MAP interaction *****************//
-
 /*Javascript to setup/initialise FullCalendar */
-function initialise(){
+function initialiseCal(){
     $('#calendarr').fullCalendar({
       header: {
         left: 'prev,next today',
@@ -109,7 +100,7 @@ function initialise(){
       googleCalendarApiKey: 'AIzaSyBIkPthcMusoSDbqB9gxVWbcS-lYo6mx34',
       eventSources: [
             {
-                googleCalendarId: 'p52pqevg7jmba3d8lla6l9afhs@group.calendar.google.com'
+                googleCalendarId: calendarId//'p52pqevg7jmba3d8lla6l9afhs@group.calendar.google.com'
             },
             {
                 url: timetable,
@@ -128,7 +119,7 @@ function initialise(){
           'Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY + '\n' +
           'View: ' + view.name);*/
 
-        //ajax to call php function which will show the location of the lecture.
+        //ajax to call php function to query sql which will show the location of the lecture.
         $.ajax({
             url:'PHP/getPos.php',
             type: "POST",
@@ -152,7 +143,7 @@ function initialise(){
         });
 
 
-        //open event in a seperate tab if it has a URL
+        //open event in a seperate tab if it has a URL (google calendar)
         if (event.url) {
             window.open(event.url);
             return false;

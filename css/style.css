@@ -15,7 +15,6 @@ body{
 .nav-size{
   font-size: 20px;
 }
-
 /*Heading*/
 #heading {
   padding-top:20px;
@@ -26,7 +25,7 @@ body{
   display:inline-block;
   vertical-align:middle;
 }
-#heading img{height: 12vh;}
+#heading img{height: 115px;}
 #heading h1{
   text-align: left;
   font-weight: bold;
@@ -40,21 +39,31 @@ body{
 
 
 
+
 /* INFO */
 #howTo p{font-size: 15px;}
-#howTo img{
+#excelImg{
   height:25vh;
   width:55vh;
 }
+#gcHowTo{
+  height:25vh; 
+  width:auto;
+}
+.modal-dialog{
+    overflow-y: initial !important
+}
+#howTo .modal-body{
+    height: 600px;
+    overflow-y: auto;
+}
+
 
 /* Calendar options */
 #switchSem{padding-top: 5px;}
 #gLoginBtn{float:right;}
-#gLogin .modal-dialog{
-    overflow-y: initial !important
-}
 #gLogin .modal-body{
-    height: 300px;
+    height: 400px;
     overflow-y: auto;
 }
 
