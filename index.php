@@ -19,7 +19,6 @@
 	<!--Script-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/date.js"></script>
 	<script src="js/map.js" type="text/javascript"></script>
 	<script src="js/main.js" type="text/javascript"></script>
 	<!--FullCalendar.io-->
@@ -38,7 +37,7 @@
 	</div>
 	<div class="container">	
 
-		<!--To upload the excel file-->
+		<!--*** To upload the excel file ***-->
 		<form class="form-inline" id="submitTimetable" action="PHP/uploadExcel.php" method="post" enctype="multipart/form-data" role="form">
 			<div class="form-group">
 			<div id="submitExcel">
@@ -54,6 +53,7 @@
                 	<input type="text" class="form-control" readonly>
 				</div>
 			    <input id="sbtn" class="btn btn-success form-control" type="submit" value="Upload File" name="submit">
+				<input id="allLectures" class="btn btn-info" type="button" value="Display All Lectures" onclick="displayAllLectures();"></input>
 		    </div>
 
 			    <!-- Info Modal -->
@@ -64,10 +64,10 @@
 					  <div class="modal-content">
 					    <div class="modal-header">
 					      <button type="button" class="close" data-dismiss="modal">&times;</button>
-					      <h4 class="modal-title">FAQ:</h4>
+					      <h3 class="modal-title">FAQ:</h3>
 					    </div>
 					    <div class="modal-body">
-					    	<h4>How to find your MU student timetable:</h4>
+					    	<h4><b>How to find your MU student timetable:</b></h4>
 					    	<p>
 					    		1. To find your timetable go to: 
 					    		<a href="https://apps.maynoothuniversity.ie/timetable/">https://apps.maynoothuniversity.ie/timetable/</a>
@@ -78,8 +78,8 @@
 					    		Or try it with a sample timetable: <a href='excelFiles/nuim_student.xls' target="_blank">nuim_student.xls</a>
 				    		</p>
 					    	<img id="excelImg" src="imgs/excelFormat.PNG">
-
-					    	<h4>How to make your google calendar public:</h4>
+				    		<br><br>
+					    	<h4><b>How to make your google calendar public:</b></h4>
 					    	<p>
 								1. Go into the calendar settings for your primary calendar.<br>
 								2. Click the "Share this Calendar" tab.<br>
@@ -98,7 +98,8 @@
 			</div>
 		</form>	
 
-		<!--Tab layout for calendar and map-->
+
+		<!---*** Tab layout for calendar and map ***-->
 		<ul id="tabs" class="nav nav-tabs nav-justified nav-size">
 			<li class="active" ><a data-toggle="tab" href="#gMap">Map</a></li>
 			<li><a data-toggle="tab" href="#calendar">Calendar</a></li>
@@ -112,8 +113,8 @@
 			<!--Calendar-->
 			<div id="calendar" class="tab-pane fade">
 				<form id="switchSem" method="get" action="">
-					<button class="btn btn-info btn-sm" id="sem1Btn" type="submit" name="sem" value="sem1" onClick="changeT('sem1')">Sem1</button>
-					<button class="btn btn-info btn-sm" id="sem2Btn" type="submit" name="sem" value="sem2" onClick="changeT('sem2')">Sem2</button>
+					<button class="btn btn-info btn-sm" id="sem1Btn" type="submit" name="sem" value="sem1" onClick="changeT('sem1');">Sem1</button>
+					<button class="btn btn-info btn-sm" id="sem2Btn" type="submit" name="sem" value="sem2" onClick="changeT('sem2');">Sem2</button>
 					<!--BOOTSTRAP MODAL-->
 					<a id="gLoginBtn" class="btn btn-primary btn-sm bootpopup" data-toggle="modal" data-target="#gLogin">connect to google calendar</a>
 				</form>

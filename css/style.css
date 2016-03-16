@@ -47,15 +47,15 @@ body{
   width:55vh;
 }
 #gcHowTo{
-  height:25vh; 
+  height:30vh; 
   width:auto;
 }
 #howTo .modal-body{
-    height: 600px;
-    overflow-y: auto;
+  height: 60vh;
+  overflow-y: auto;
 }
 .modal-dialog{
-    overflow-y: initial !important
+  overflow-y: initial !important
 }
 .modal-open{
   overflow: inherit;
@@ -67,7 +67,7 @@ body{
 #switchSem{padding-top: 5px;}
 #gLoginBtn{float:right;}
 #gLogin .modal-body{
-    height: 400px;
+    height: 40vh;
     overflow-y: auto;
 }
 
@@ -97,7 +97,6 @@ body{
     cursor: inherit;
     display: block;
 }
-
 
 
 /*--Map--*/

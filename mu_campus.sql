@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2016 at 02:01 AM
+-- Generation Time: Mar 16, 2016 at 03:33 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -123,7 +123,8 @@ INSERT INTO `mu_campus` (`gid`, `tagName`, `name`, `location`) VALUES
 (125, '', 'Hamilton Institute', 'POINT(-6.59863964999994 53.3847408500001)'),
 (129, 'PE', 'Phoenix Sport Centre', 'POINT(-6.59620480000001 53.3852518500001)'),
 (130, '', 'Post primary school Maynooth', 'POINT(-6.59620729999995 53.3846200500001)'),
-(132, '', 'Parish Hall', 'POINT(-6.59553184999999 53.38310745)');
+(132, '', 'Parish Hall', 'POINT(-6.59553184999999 53.38310745)'),
+(133, 'PH', 'Physics Hall', 'POINT(-6.595761 53.380012)');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

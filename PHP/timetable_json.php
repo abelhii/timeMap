@@ -12,7 +12,7 @@
 		echo $sem2_JSON;
 		//print "<script>console.log('SEMESTER TWO');</script>";
 	}else{
-		print "<script>console.log('TEST');</script>";
+		print "<script>console.log('Something went wrong');</script>";
 	}
 	//echo $sem1_JSON;
 
