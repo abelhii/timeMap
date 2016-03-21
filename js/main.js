@@ -342,9 +342,12 @@ function addTimeToGCal(){
   var start, end;
   var event = getAllLectures('source');
   for(var i=0; i<event.length; i++){
-    start = event[i].start.format();
-    end = event[i].end.format();
-    sendEvents(event[i].title, start, end, '', '');
+    //if its a timetable event add it, otherwise it will add duplicates to gcal!
+    if(event[i].source.color == '#ffee55'){
+      start = event[i].start.format();
+      end = event[i].end.format();
+      sendEvents(event[i].title, start, end, '', '');
+    }
   }
   $('#addEvent-modal').modal('hide'); //close modal on click
 }
