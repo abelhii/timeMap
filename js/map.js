@@ -133,7 +133,7 @@ function placeMarker(location, title, start, end) {
     marker.setAnimation(google.maps.Animation.BOUNCE);
     setTimeout(function(){ marker.setAnimation(null); }, 1400);
   });
-  marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+  marker.setIcon('https://maps.google.com/mapfiles/ms/icons/red-dot.png')
   //push onto markers array in map.js
   markers.push(marker);
 }
@@ -186,7 +186,7 @@ function newMarker(location, title, start, end){
       infowindow.setContent(contentString);
       infowindow.open(map, this);
     });
-    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+    marker.setIcon('https://maps.google.com/mapfiles/ms/icons/blue-dot.png');
     //push onto markers array in map.js
     markers.push(marker);
 }

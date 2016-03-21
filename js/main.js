@@ -20,16 +20,14 @@ $(document).ready( function() {
       
   });
 
-
-
   /*To make sure input timetable is in correct format and isn't empty*/
   $("#submitTimetable").on("submit", function(){
       var fileName = $("#ttFile").val();
 
       if(fileName.split('.').pop() == "xls" || fileName.split('.').pop() == "xlsx"){
       }else{
-          alert("Error: not in excel Format (your file name should end with .xls or .xlsx)");
-          return false;
+        alert("Error: not in excel Format (your file name should end with .xls or .xlsx)");
+        return false;
       }
   });
 
@@ -43,7 +41,7 @@ $(document).ready( function() {
   });
 });
 
-//For bootstrap tabs to work with hashes, so I can switch tabs with the URL:
+//For bootstrap tabs to work with hashes, to enable switching tabs with the URL:
 //http://stackoverflow.com/questions/12131273/twitter-bootstrap-tabs-url-doesnt-change
 $(function(){
   var hash = window.location.hash;
@@ -57,18 +55,15 @@ $(function(){
   });
 });  
 
-
-/*
-window.onbeforeunload = myFunction;
+/*window.onbeforeunload = myFunction;
 function myFunction(event){
     var currentURL = document.location.href;
     var index = currentURL.indexOf("?code=");
-
     if(index > -1){
-        //setTimeout(function(){document.location.href = currentURL.substring(0, index);},500);
         document.location.href = currentURL.substring(0, index); 
     }
     return console.log(false);
+    //return false;
 }*/
 
 //****DOESNT WORK IN CHROME FOR SOME REASON :/
@@ -83,11 +78,53 @@ $(window).unload(function() {
 });
 
 
+//*******COOKIES*******//
+//http://stackoverflow.com/questions/2257631/how-create-a-session-using-javascript
+function writeCookie(name,value,days) {
+    var date, expires;
+    if (days) {
+        date = new Date();
+        date.setTime(date.getTime()+(days*24*60*60*1000));
+        expires = "; expires=" + date.toGMTString();
+            }else{
+        expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function readCookie(name) {
+    var i, c, ca, nameEQ = name + "=";
+    ca = document.cookie.split(';');
+    for(i=0;i < ca.length;i++) {
+        c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1,c.length);
+        }
+        if (c.indexOf(nameEQ) == 0) {
+            return c.substring(nameEQ.length,c.length);
+        }
+    }
+    return '';
+}
+
+//check if user is logged in to their google calendar 
+window.onload = function() {
+    $("a.login").click(function() {
+      writeCookie('gLoggedin', 'true', 1);
+    });
+    $("a.logout").click(function() {
+      writeCookie('gLoggedin', 'false', 1);
+    });
+}
+console.log(readCookie('gLoggedin'));
+//*********************//
+
+
 
 //*---- switch between semesters in FullCalendar ----*//
 var timetable = '../timeMap/PHP/timetable_json.php?sem=sem1';
-function changeT(time){
-    event.preventDefault();
+function changeT(time, e){
+    e.preventDefault();
     if(time == "sem1"){
       $('#sem2Btn').removeClass('active');
       $('#sem1Btn').addClass('active');
@@ -138,9 +175,16 @@ function initialiseCal(){
                 textColor:'#555'
             }
       ],
+      //set all options : options,
+      selectable: true,
+      selectHelper: true,
+      //FOR ADD EVENT TO GOOGLE CALENDAR:
+      select: function(start, end) {
+        if(readCookie('gLoggedin') == 'true')
+          addEvent(start.format(), end.format());//moment(start).format('dddd hh:mm a'),moment(end).format('dddd hh:mm a'));
+      },
       eventClick: function(event, jsEvent, view) {
         //On CLick event for when the user clicks an item in the calendar:
-
         var point = new Array();
         //format the time to be readable using 'moment'
         var start = moment(event.start).format('dddd: hh:mm');
@@ -156,12 +200,73 @@ function initialiseCal(){
             window.open(event.url);
             return false;
         }
-
+      },
+      eventRender: function (event, element) {
+        //Right Click to delete single event:
+        element.bind('mousedown', function (e) {
+            if (e.which == 3) {
+                if(confirm('Are you sure you want to delete this event?')){
+                  $('#calendarr').fullCalendar('removeEvents', event.id);
+                  if(event.url != null)//check to see if its a gcal event:
+                    deleteGCalEvent();
+                }else{
+                  return false;
+                }
+            }
+        });
       }
     });
-    var event={id:1 , title: 'New event', start:  new Date()};
-    $('#calendar').fullCalendar( 'renderEvent', event, true);
 }
+
+
+
+/****Insert Google Event****/
+var newID = 100;
+function addEvent(start, end){
+  $('#addEvent-modal').modal('show');
+  $('#start').attr('value', start);
+  $('#end').attr('value', end);
+}
+
+/*********** We get the form data ****************/ 
+$(function(){
+  $('#addEvent-modal').submit(function(event) {
+      event.preventDefault(); // on submit prevent page from refreshing on submit
+      //get the data from modal
+      var title = $('#title').val();
+      var start = $('#start').val();
+      var end = $('#end').val();
+      var where_event = $('#where_event').val();
+      var description = $('#content_event').val();
+
+      // because we want immediate reaction of FullCalendar, we render the created event on the FullCalendar, even if it's only temporarily
+      if (title) {
+        $('#calendarr').fullCalendar('renderEvent',
+            {
+              title: title,
+              id: newID,
+              start: start,
+              end: end,
+              color:'#CF5656'
+            },
+            true // make the event "stick"
+        );
+
+        // Now we push it to Google:
+        var gLoggedin = readCookie('gLoggedin');
+        if(gLoggedin == 'true'){
+          sendEvents(title, start, end, where_event, description); 
+        }
+      }
+
+      // Wether we had the form fulfilled or not, we clean FullCalendar and close the popup  
+      newID++; 
+      $('#calendarr').fullCalendar('unselect');
+      $('#addEvent-modal').modal('hide');
+  });
+
+});
+
 
 
 //ajax for sql query to get the locations of lectures:
@@ -199,8 +304,6 @@ function getLatLng(point){
 
   return result;
 }
-
-
 //displays whole week on Google Map:
 function displayAllLectures(){
     //remove previous markers:
@@ -210,9 +313,7 @@ function displayAllLectures(){
 
     var start, end;
     var pointArr = new Array;
-    var event = $('#calendarr').fullCalendar('clientEvents', function(evt) {
-        return evt.source;
-    });
+    var event = getAllLectures('source');
     console.log(event[0].source.color);
     for(var i = 0; i<event.length; i++){
       start = moment(event[i].start).format('dddd: hh:mm');
@@ -222,10 +323,56 @@ function displayAllLectures(){
       //else
         //TODO: GET GOOGLE CALENDAR LOCATION
     }
-
+}
+//gets filtered events in fullcalendar 
+function getAllLectures(filter){
+  var events = $('#calendarr').fullCalendar('clientEvents', function(evt) {
+      if(filter == 'source')
+        return evt.source;
+  });
+  return events;
 }
 
 
+
+
+/******************************* GOOGLE CALENDAR FUNCTIONS*****************************************/
+//adds timetable to users google calendar
+function addTimeToGCal(){
+  var start, end;
+  var event = getAllLectures('source');
+  for(var i=0; i<event.length; i++){
+    start = event[i].start.format();
+    end = event[i].end.format();
+    sendEvents(event[i].title, start, end, '', '');
+  }
+  $('#addEvent-modal').modal('hide'); //close modal on click
+}
+
+//Send Events to insertEvent.php to add an event to google calendar
+function sendEvents(title, start, end, location, description){
+  $.ajax({
+    url:'PHP/insertEvent.php',
+    type: "POST",
+    data: { title: title,
+            start: start,
+            end: end,
+            location: location,
+            description: description
+          },
+    success: function(data){
+        console.log(data);
+        console.log(event);
+    },
+    error: function () {
+        $('#output').html('there was an error adding this event to your Google Calendar');
+    }
+  });
+}
+
+function deleteGCalEvent(){
+  console.log("test DELETE");
+}
 //****************************************************************************************//
 
 

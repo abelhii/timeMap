@@ -1,0 +1,679 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    
+	<meta name="description" content="Maynooth University :: Save to file" />    
+	<meta name="keywords" content="nui,nuim,maynooth,timetable,lecture,venue,deparment,time" />    
+	<meta name="robots" content="index, follow" />    
+	<meta name="distribution" content="global" />    
+	<meta name="generator" content="NetBeans" />    
+	<meta name="language" content="en" />    
+	<meta name="copyright" content="Copyright &copy; 2015 Maynooth University" />
+    <style type="text/css">
+        body {
+	background-color: #FFFFFF;
+
+	margin: 0px;
+	border: 0px;
+	padding: 0px;
+
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	text-align: left;
+}
+
+/* LINK ************************************************************************
+***************************************************************************** */
+
+a {
+	font-family: Arial, sans-serif;
+    color: #024481;
+    font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	cursor:pointer;
+}
+
+a:link, a:visited, a:active, a:hover {
+    /* Override Browser default setting */
+}
+
+a:hover {
+	text-decoration: underline;
+}
+/* TBD
+a.change {
+	font-size: 11px;
+	background-color : #dddddd;
+
+	border-style: solid;
+	border-width: 1px;
+
+	font-weight: normal;
+
+	padding: 0px 3px 0px 3px;
+}
+
+a.change:hover {
+	background-color : #FFFFFF;
+	text-decoration: none;
+}
+*/
+/* DIV *************************************************************************
+***************************************************************************** */
+
+div.wrapper {
+	position: absolute;
+	top: 0px;
+	left: 50%;
+
+	width: 790px;
+	height: 100%;
+
+	margin: 0px;
+	margin-left: -395px;
+
+	padding: 0px;
+	border: 0px;
+}
+
+div.header {
+	background-color: #FFFFFF;
+
+	width: 750px;
+	height: 120px;
+
+	margin: 18px 0px 0px 0px;
+	border: 0px;
+	padding: 5px 35px 5px 5px;
+
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+}
+
+div.body {
+	background-color: #FFFFFF;
+
+	width: 760px;
+
+	border: 0px;
+	margin: 0px;
+	padding: 15px;
+
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+}
+
+div.separe {
+	width: 760px;
+	height: 20px;
+
+	margin: 0px;
+	border: 0px;
+	padding: 0px 15px 0px 15px;
+}
+
+div.copyright {
+	width: 760px;
+	height: 18px;
+
+	margin: 18px 0px 0px 0px;
+	border: 0px;
+	padding: 0px 15px 0px 15px;
+
+    color: #666666;
+}
+
+div.disclaimer {
+	margin: 0px;
+	border: 0px;
+	padding: 10px 0px 0px 0px;
+    
+    color: #666666;
+}
+
+  div.box_lecture
+, div.box_venue
+, div.box_department
+, div.box_student {
+	border-style: solid;
+	border-width: 4px;
+
+    margin: 0px 2px 2px 2px;
+	padding: 10px;
+
+	float:left;
+    width: 728px;
+}
+
+div.box_lecture {
+	border-color: #014582;
+}
+div.box_venue {
+	border-color: #eead13;
+}
+div.box_department {
+	border-color: #933631;
+}
+div.box_student {
+	border-color: #01818e;
+}
+
+/* IMG *************************************************************************
+***************************************************************************** */
+
+img {
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+img.img_frame {
+	background-color: #EDF7FD;
+
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+
+	padding: 3px;
+}
+
+/* FONT ************************************************************************
+***************************************************************************** */
+.font_title {
+    color: #000066;
+}
+
+.font_sub_title {
+    color: #899abb;
+}
+
+ .font_error
+,.font_mandatory
+,.font_tip
+,.font_exam_length
+	{
+	color: #C00000;
+	}
+
+.font_logout
+	{
+	color: #eead13;
+	}
+
+.font_arrow
+	{
+	color: #000000;
+	}
+
+ .font_disabled
+	{
+	color: #888888;
+	}
+
+ .font_larger
+	{
+	font-size: larger;
+	}
+
+ .font_smaller
+	{
+	font-size: smaller;
+	}
+
+/* HR **************************************************************************
+***************************************************************************** */
+    
+hr {
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+	height: 0px;
+}
+
+/* TABLE ***********************************************************************
+***************************************************************************** */
+
+table {
+	border: 0px;
+	border-spacing: 0px;
+	margin: 0px;
+	padding: 0px;
+
+	width: 100%;
+}
+
+table.table_form {
+	border-spacing: 4px;
+	vertical-align: top;
+}
+
+table.table_listing {
+	border-spacing: 1px;
+	vertical-align: top;
+}
+
+table.table_cubes {
+	border-spacing: 1px;
+	vertical-align: top;
+    
+	width: 600px;
+}
+/* TD **************************************************************************
+***************************************************************************** */
+
+td {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	font-size: 12px;
+}
+
+td.td_section {
+	background-color: #889AC2;
+    
+	border-color: #889AC2;
+	border-style: solid;
+	border-width: 1px;
+
+	font-size: 14px;
+    color: #FFFFFF;
+    font-weight: bold;
+
+	padding: 5px 10px 5px 10px;
+}
+
+td.td_security {
+	background-color: #EDF7FD;
+
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+
+	padding: 5px 10px 5px 10px;
+}
+
+  td.td_section_lecture
+, td.td_section_venue
+, td.td_section_department
+, td.td_section_student {
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+
+	font-size: 14px;
+    color: #FFFFFF;
+    font-weight: bold;
+
+    margin: 0px;
+	padding: 5px 10px 5px 10px;
+}
+td.td_section_lecture {
+	background-color: #014582;
+}
+td.td_section_venue {
+	background-color: #eead13;
+}
+td.td_section_department {
+	background-color: #933631;
+}
+td.td_section_student {
+	background-color: #01818e;
+}
+
+td.td_header {
+	background-color: #e3e3e3;
+
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+
+	padding: 5px;
+
+    font-weight: bold;
+}
+
+  td.td_odd
+, td.td_even {
+	padding: 0px 2px 0px 2px;
+	margin: 0px;
+	border: 0px;
+}
+td.td_odd {
+	background-color: #FFFFFF;
+}
+td.td_even {
+	background-color: #F0F0F0;
+}
+
+  td.td_odd_timetable
+, td.td_even_timetable {
+	padding: 0px 5px 0px 2px;
+	margin: 0px;
+	border: 0px;
+}
+
+td.td_odd_timetable {
+	background-color: #FFFFFF;
+}
+
+td.td_even_timetable {
+	background-color: #F0F0F0;
+}
+
+td.td_success {
+	background-color: #01818e;
+
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+
+    color: #ffffff;
+	padding: 5px;
+
+    font-weight: bold;
+}
+
+/* TH **************************************************************************
+***************************************************************************** */
+
+th {
+	padding: 0px 2px 0px 2px;
+	margin: 0px;
+
+	background-color: #EDF7FD;
+
+	border-color: #999999;
+	border-style: solid;
+	border-width: 1px;
+
+	color: #024481;
+	font-size: 12px;
+    font-weight: bold;
+}
+
+/* INPUT ***********************************************************************
+***************************************************************************** */
+
+form {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+}
+
+input, textarea, select, radio, checkbox, input:hover, textarea:hover, select:hover, radio:hover, checkbox:hover {
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	color : #000000;
+	text-align: left;
+	text-decoration: none;
+	
+	background-color : #FFFFFF;
+	
+	border-style: solid;
+	border-width: 1px;
+	
+	padding: 2px;
+	margin: 0px;
+}
+
+input, textarea, select, radio, checkbox {
+	border-color: #999999;
+}
+
+input:hover, textarea:hover, select:hover, radio:hover, checkbox:hover {
+	border-color: #024481;
+}
+
+input.input_button {
+	text-align: center;
+	background-color : #dddddd;
+	margin: 0px;
+	font-weight: bold;
+}
+
+input.input_button:hover {
+	background-color : #FFFFFF;
+}
+
+/* TABS ************************************************************************
+***************************************************************************** */
+
+ul#tab_disability {
+	list-style-type: none;
+	float:right;
+
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+	border: 0px;
+}
+
+ul#tab_nav {
+	list-style-type: none;
+	float:left;
+
+	margin: 10px 0px 0px 0px;
+	padding: 0px;
+	border: 0px;
+}
+
+ul#tab_disability li {
+	border: 0px;
+
+    margin: 2px 2px 0px 2px;
+	padding: 5px 20px 5px 20px;
+	text-align: center;
+	float: right;
+}
+
+ul#tab_nav li {
+	border: 0px;
+
+    margin: 2px 2px 0px 2px;
+	padding: 5px 20px 5px 20px;
+	text-align: center;
+	float: left;
+}
+
+ul#tab_disability li.li_icon {
+	border: 0px;
+    margin: -2px 0px 0px 0px;
+	padding: 0px 5px 0px 5px;
+	text-align: center;
+}
+ul#tab_disability li.li_printme {
+	background-color: #FFFFFF;
+}
+ul#tab_disability li.li_disability {
+	background-color: #808080;
+}
+ul#tab_nav li.li_lecture {
+	background-color: #7086b7;
+}
+ul#tab_nav li.li_venue {
+	background-color: #f7d18a;
+}
+ul#tab_nav li.li_department {
+	background-color: #c38a7f;
+}
+ul#tab_nav li.li_student {
+	background-color: #6ab3bc;
+}
+
+  ul#tab_disability li.li_disability:hover
+, ul#tab_disability li.li_disability_selected {
+	background-color: #000000;
+}
+  ul#tab_nav li.li_lecture:hover
+, ul#tab_nav li.li_lecture_selected {
+	background-color: #014582;
+}
+  ul#tab_nav li.li_venue:hover
+, ul#tab_nav li.li_venue_selected {
+	background-color: #eead13;
+}
+  ul#tab_nav li.li_department:hover
+, ul#tab_nav li.li_department_selected {
+	background-color: #933631;
+}
+  ul#tab_nav li.li_student:hover
+, ul#tab_nav li.li_student_selected {
+	background-color: #01818e;
+}
+
+  ul#tab_nav a
+, ul#tab_disability a {
+	white-space: nowrap;
+
+	font-size: 18px;
+    color: #FFFFFF;
+}
+
+  ul#tab_nav a:hover
+, ul#tab_disability a:hover {
+	text-decoration: none;
+}
+
+ul#tab_disability a.printme {
+    white-space: nowrap;
+
+	font-size: 18px;
+    color: #024481;
+}
+ul#tab_disability a.printme:hover {
+	text-decoration: underline;
+}
+
+/* MISCELLANEOUS ***************************************************************
+***************************************************************************** */
+
+.pagebreak {
+    page-break-before: auto;
+}
+    </style>
+
+    <title>Academic and Exam Timetable :: Timetable - Academic - Save to file</title>
+</head>
+
+<body><h1 class="font_title">Academic and Exam Timetable</h1><h2 class="font_sub_title">Maynooth University</h2><h3>Timetable at 18 March 2016 17:03:56 <span class="font_disabled">(24h)</span></h3><br />
+<span class="font_disabled">Step 1 - Select Course</span> :: 4-BSC COMPUTER SCIENCE &amp; SOFTWARE ENG (ARTS) [Change]<br />
+<span class="font_disabled">Step 2 - Select Programme</span> :: 4CSEA [Change]<br />
+<span class="font_disabled">Step 3 - Select Semester</span> :: Semester 1 [Change]<br />
+<span class="font_disabled">Step 4 - Select Module</span> :: CS322, CS355, CS356, CS401, CS404, CS410, CS416, CS422, CS424 [Change]<br />
+
+<br /><span class="font_error">Please see degree structures for further information. All optional modules may not be available to you. Note that practical sessions, small group work and some modules are not timetabled, contact relevant department for details.</span><h3 class="font_title pagebreak">Semester 1</h3>
+
+<table class="table_listing">
+		<tr>
+		<td>&nbsp;</td>
+		<th align="center">Monday</th>
+		<th align="center">Tuesday</th>
+		<th align="center">Wednesday</th>
+		<th align="center">Thursday</th>
+		<th align="center">Friday</th>
+	</tr>
+		<tr>
+		<th align="center" valign="top">09:00</th>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS355 [ELT]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS424 [CB1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS322 [RH2.21]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS322 [PH]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS356 [CB3]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">10:00</th>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS401 [HB]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS410 [APT]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">11:00</th>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS401 [HC]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS356 [CB3]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">12:00</th>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">13:00</th>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS404 [CB4]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS416 [JH5]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">14:00</th>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS355 [TH1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS416 [CB4]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS424 [CB1]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">15:00</th>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS410 [CB1]<br />
+</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">16:00</th>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS422 [PH]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS422 [CB3]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_even" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+	</tr>
+		<tr>
+		<th align="center" valign="top">17:00</th>
+		<td align="right" valign="top" class="td_odd_timetable" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">CS404 [CB4]<br />
+</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+		<td align="right" valign="top" class="td_odd" nowrap="nowrap"><table class="table_listing"><tr><td align="right" valign="top" nowrap="nowrap">&nbsp;</td></tr></table></td>
+	</tr>
+</table>
+<br />
+<b>Disclaimer:</b> While every care has been taken in compiling this timetable, the University is not bound by any errors or omissions. The University reserves the right at any time to cancel, revise, amend or alter timetabling information.<br />
+
+<br />
+V4.0.1 - Copyright &copy; 2015 Maynooth University<br />
+Powered by MDAL Framework &copy; 2015
+</body>
+
+</html>

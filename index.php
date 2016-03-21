@@ -1,6 +1,5 @@
 <?php
 	require_once 'vendor/autoload.php';
-	//require 'Custom_Calendar/Custom_Calendar/custom_calendar.php';
 	require 'PHP/config.php';
 	session_start();
 ?>
@@ -113,8 +112,8 @@
 			<!--Calendar-->
 			<div id="calendar" class="tab-pane fade">
 				<form id="switchSem" method="get" action="">
-					<button class="btn btn-info btn-sm" id="sem1Btn" type="submit" name="sem" value="sem1" onClick="changeT('sem1');">Sem1</button>
-					<button class="btn btn-info btn-sm" id="sem2Btn" type="submit" name="sem" value="sem2" onClick="changeT('sem2');">Sem2</button>
+					<button class="btn btn-info btn-sm" id="sem1Btn" type="submit" name="sem" value="sem1" onClick="changeT('sem1', event);">Sem1</button>
+					<button class="btn btn-info btn-sm" id="sem2Btn" type="submit" name="sem" value="sem2" onClick="changeT('sem2', event);">Sem2</button>
 					<!--BOOTSTRAP MODAL-->
 					<a id="gLoginBtn" class="btn btn-primary btn-sm bootpopup" data-toggle="modal" data-target="#gLogin">connect to google calendar</a>
 				</form>
@@ -124,7 +123,6 @@
 				<!-- Connect to Calendar Modal -->
 				<div class="modal fade" id="gLogin" tabindex="-1" role="dialog">
 					<div class="modal-dialog">
-
 					  <!-- Modal content-->
 					  <div class="modal-content">
 					    <div class="modal-header">
@@ -134,14 +132,56 @@
 					    <div class="modal-body">
 					    	<p>To connect to Google Calendar you need to set your primary calendar to public as shown above:</p>
 					    	<pre>
-								<?php include 'PHP/GCOAuth.php'; ?>
+								<?php 
+									include 'PHP/GCOAuth.php'; 
+								?>
 							</pre>
 					    </div>
 					    <div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						</div>
 					  </div>
-					  
+					</div>
+				</div>
+
+				<!--Add Google Event-->
+				<div class="modal fade" id="addEvent-modal" tabindex="-1" role="dialog">
+					<div class="modal-dialog">
+					  <!-- Modal content-->
+					  <div class="modal-content">
+					    <div class="modal-header">
+					      <button type="button" class="close" data-dismiss="modal">&times;</button>
+					      <h4 class="modal-title">Add Event to your Google Calendar:</h4>
+					    </div>
+					    <div class="modal-body">
+					    	<form class="form-horizontal">
+					    		<div class="form-group">
+								  <label class="control-label col-sm-2" for="email">Title:</label>
+								  <div class="col-sm-10">
+								  	<input type="text" id="title" name="title">
+								  </div>
+								</div>
+								<div class="form-group">
+								  <label class="control-label col-sm-2" for="email">Location:</label>
+								  <div class="col-sm-10">
+								  	<input type="text" id="where_event" name="where_event">
+								  </div>
+								</div>
+								<div class="form-group">
+								  <label class="control-label col-sm-2" for="email">Description:</label>
+								  <div class="col-sm-10">
+								  	<textarea id="content_event" name="content_event"></textarea>
+								  </div>
+								</div>
+							    <input type="hidden" id="start" name="start" value="">
+							    <input type="hidden" id="end" name="end" value="">
+							    <div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal" style="float:left">Cancel</button>
+									<input type="submit" class="btn btn-default" value="Save">
+								</div>
+							</form>
+					    </div>
+					  </div>					  
 					</div>
 				</div>
 
@@ -158,6 +198,7 @@
 					</script>
 				</div>
 				<!--?php readfile("PHP/GCOAuth.php"); ?-->
+				<div id="gcal_loader"></div>
 			</div>
 		</div>
 		

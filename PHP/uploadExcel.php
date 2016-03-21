@@ -1,12 +1,6 @@
 <?php
-/***
-TODO: 
-LocalStroage of the timetable file!
-
-*/
-//error_reporting(E_ALL ^ E_NOTICE);
-//require 'excel_reader2.php';
-
+//***EXTRACTS DATA FROM STUDENT TIMETABLE***// 
+//***ONLY WORKS WITH MAYNOOTH UNIVERSITY TIMETABLE***//
 /*******************SET UP**************************/
 session_start();
 
@@ -61,17 +55,16 @@ foreach ($lectures as $tag) {
 
 
 
+/*** MAIN PART TO SORT/SPLIT THE TIMETABLE: ***/
 //Â == chr(194)
 //chr(160) == &nbsp;        chr(93) == ]
-//$timetable_arr[0] = str_replace(chr(194), "..", $timetable_arr[0]);
-//echo $timetable_arr[0]."</br>";
 //replacing 't' with &nbsp, ']' with ']t' and :00 with :00t to split the string evenly
-// so i can get position 1 - 5 to match mon - fri
+// so i can get position 1 - 5 when i preg_split to match mon - fri
 //remove Â symbols and to seperate the lectures and the times:
 for($x = 0; $x < sizeof($timetable_arr); $x++){
-    if(strpos($timetable_arr[$x], chr(194)) !== false){
-        $timetable_arr[$x] = str_replace(chr(194), "", $timetable_arr[$x]);
+    if(strpos($timetable_arr[$x], chr(194)) !== false || strpos($timetable_arr[$x], ']') !== false){
         $timetable_arr[$x] = html_entity_decode($timetable_arr[$x]);
+        $timetable_arr[$x] = str_replace(chr(194), "", $timetable_arr[$x]);
         $timetable_arr[$x] = str_replace(chr(160),'t ',$timetable_arr[$x]);
         $timetable_arr[$x] = str_replace(array(']'),']t',$timetable_arr[$x]);
         $timetable_arr[$x] = str_replace(':00',':00t',$timetable_arr[$x]); 
@@ -79,40 +72,45 @@ for($x = 0; $x < sizeof($timetable_arr); $x++){
     }
     //echo' | '.$timetable_arr[$x]."</br>";
 }
-
-//splits the timetable into semester 1 and semester 2
+/*splits the timetable into semester 1 and semester 2*/
+// 55 because there are 55 cells in each semester
 $sem1 = array_slice($timetable_arr, 0, 55);
 $sem2 = array_slice($timetable_arr, 55);
 
 
+/****FOR TESTING****/
+echo '<pre>'; 
+print_r($sem1);
+echo '</pre>'; 
 
-/****TEST TEST TEST****/
 //25
 //chr(160) == &nbsp;    chr(93) == ]
-//echo "</br>"."</br>"."<b>"."nine o'clock semester 1: "."</b></br>";
-//echo $sem1[1]." ".str_word_count($sem1[1],0,chr(160))."</br>";
-//print_r (preg_split("/t\s/",$sem1[1]));
+echo "</br>"."</br>"."<b>"."nine o'clock semester 1: "."</b></br>";
+echo $sem1[1]." ".str_word_count($sem1[1],0,chr(160))."</br>";
+print_r (preg_split("/t\s/",$sem1[1]));
 //=> Array ( [0] => 09:00 [1] => CS355 ELT [2] => CS424 CB1 [3] => CS322 RH2.21 [4] => CS322 PH [5] => [6] => ) 
 
 
 
+//Stores it as a session object for timetable_json.php to retrieve:
+if($sem1 != null){
+    $sem1_JSON = JSONEncoder($sem1);
+    $_SESSION['sem1_JSON']  = $sem1_JSON;
+}
+if($sem2 != null){
+    $sem2_JSON = JSONEncoder($sem2);
+    $_SESSION['sem2_JSON']  = $sem2_JSON;
+}
 
-$sem1_JSON = JSONEncoder($sem1);
-$sem2_JSON = JSONEncoder($sem2);
-
+/*** TEST: ***
+/* this exports the JSON to a seperate file to check if its in the correct format:
 $fp = fopen('results.json', 'w');
-fwrite($fp, $sem1_JSON);
+fwrite($fp, $sem2_JSON);
 fclose($fp);
+*/
 
-//Stores it as a session object for index to retrieve:
-$_SESSION['sem1_JSON']  = $sem1_JSON;
-$_SESSION['sem2_JSON']  = $sem2_JSON;
-/*** TEST: ***/
-echo '<pre>'; 
-print_r(json_decode($sem1_JSON));
-echo '</pre>'; 
-//<!--Go back to the previous page after its done uploading-->
 
+/* Go back to the previous page after its done uploading*/
 echo
 "<script>
     window.location = '../#calendar';
@@ -194,17 +192,9 @@ function JSONEncoder($semester){
         "id": "821",
         "end": "2011-06-06 14:00:00",
         "start": "2011-06-06 06:00:00"
-    },
-    "1",
-    {
-        "allDay": "",
-        "title": "Test event 2",
-        "id": "822",
-        "end": "2011-06-10 21:00:00",
-        "start": "2011-06-10 16:00:00"
+        "dow": [ 1, 5 ]     //to show which days to repeat on
     }
 ]
-dow: [ 1, 5 ]
 */
 //Function to convert JSON for FullCalendar.io
 function FCJson($timetableJ){
