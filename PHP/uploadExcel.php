@@ -11,18 +11,16 @@ if (isset ($_FILES['uploadedfile']['tmp_name'])){
 	echo "Successfully uploaded " . $timetable_name ."<br>";
 }
 
-
-//using excel reader
-//$data = new Spreadsheet_Excel_Reader($timetable_name);
-
-
 //if its a broken excel file try it as html:
 $data = false;
 if(!$data && !strpos($timetable_name, 'html')){
 	$timetable_name = basename($timetable_name, "xls") . "html";
 	echo "<br>" . trim($timetable_name, " ") . "<br>";
 }
+//access tmp
+$timetable_tmp = "../../../tmp/".basename($timetable_tmp, $timetable_name);
 
+/** If you want to store the file somewhere on the server:
 //stores the file somewhere and sets the target path of the timetable
 $target_path  = "../../timeMap/excelFiles/" . trim($timetable_name, " "); 
 
@@ -31,12 +29,13 @@ if(move_uploaded_file($timetable_tmp, $target_path))
     echo "The file ". $timetable_name . " has been uploaded to " . $target_path;
     $_SESSION['timetable']  = $target_path;
 }
-
+**/
 
 //initiialise variables:
 $timetable = new DOMDocument;
 $timetable->preserveWhiteSpace = FALSE;
-$timetable->loadHTMLFile($target_path);
+//$timetable->loadHTMLFile($target_path);
+$timetable->loadHTMLFile($timetable_tmp);
 
 $lectures = $timetable->getElementsByTagname('tr');
 $lecture = array();
@@ -113,6 +112,8 @@ fclose($fp);
 /* Go back to the previous page after its done uploading*/
 echo
 "<script>
+    localStorage.setItem('timeMap_sem1', JSON.stringify($sem1_JSON));
+    localStorage.setItem('timeMap_sem2', JSON.stringify($sem2_JSON));
     window.location = '../#calendar';
 </script>";
 //window.history.go(-1);

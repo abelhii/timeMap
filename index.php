@@ -2,6 +2,14 @@
 	require_once 'vendor/autoload.php';
 	require 'PHP/config.php';
 	session_start();
+
+	//if theres a timetable already in local storage use the same timetable
+	if(isset($_POST["sem1_JSON"]))
+		$_SESSION['sem1_JSON'] = $_POST["sem1_JSON"];
+	if(isset($_POST["sem2_JSON"]))
+		$_SESSION['sem2_JSON'] = $_POST["sem2_JSON"];
+
+	//print_r($_SESSION['sem1_JSON']);
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +27,20 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="js/map.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		//checks local storage for if the user uploaded a timetable before from this browser
+		//typeof equivalent to isset in php
+		if(typeof localStorage.getItem('timeMap_sem1') != undefined){
+			sem1_JSON = JSON.parse(localStorage.getItem('timeMap_sem1'));
+			console.log(sem1_JSON);
+			$.post("index.php", {sem1_JSON: sem1_JSON}); //ajax post to php session
+		}
+		if(typeof localStorage.getItem('timeMap_sem2') != undefined){
+			sem2_JSON = JSON.parse(localStorage.getItem('timeMap_sem2'));
+			console.log(sem2_JSON);
+			$.post("index.php", {sem2_JSON: sem2_JSON}); //ajax post to php session
+		}
+	</script>
 	<script src="js/main.js" type="text/javascript"></script>
 	<!--FullCalendar.io-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js" type="text/javascript"></script>
@@ -26,6 +48,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.js" type="text/javascript"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/gcal.js" type="text/javascript"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAK; ?>&signed_in=true&callback=initMap&libraries=places" type="text/javascript"></script>
+
 </head>
   
 <body>
