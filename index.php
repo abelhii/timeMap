@@ -29,7 +29,7 @@
 	<script src="js/map.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		//checks local storage for if the user uploaded a timetable before from this browser
-		//typeof equivalent to isset in php
+		//typeof object != undefined equivalent to isset(object) in php
 		if(typeof localStorage.getItem('timeMap_sem1') != undefined){
 			sem1_JSON = JSON.parse(localStorage.getItem('timeMap_sem1'));
 			console.log(sem1_JSON);

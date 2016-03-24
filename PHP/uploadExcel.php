@@ -69,7 +69,6 @@ for($x = 0; $x < sizeof($timetable_arr); $x++){
         $timetable_arr[$x] = str_replace(':00',':00t',$timetable_arr[$x]); 
         htmlentities($timetable_arr[$x]);
     }
-    //echo' | '.$timetable_arr[$x]."</br>";
 }
 /*splits the timetable into semester 1 and semester 2*/
 // 55 because there are 55 cells in each semester
@@ -77,28 +76,30 @@ $sem1 = array_slice($timetable_arr, 0, 55);
 $sem2 = array_slice($timetable_arr, 55);
 
 
-/****FOR TESTING****/
+/**********FOR TESTING**************/
 echo '<pre>'; 
 print_r($sem1);
 echo '</pre>'; 
-
-//25
-//chr(160) == &nbsp;    chr(93) == ]
-echo "</br>"."</br>"."<b>"."nine o'clock semester 1: "."</b></br>";
-echo $sem1[1]." ".str_word_count($sem1[1],0,chr(160))."</br>";
-print_r (preg_split("/t\s/",$sem1[1]));
+//chr(160) == &nbsp;    chr(93) == ] 25
+//echo "</br>"."</br>"."<b>"."nine o'clock semester 1: "."</b></br>";
+//echo $sem1[1]." ".str_word_count($sem1[1],0,chr(160))."</br>";
+//print_r (preg_split("/t\s/",$sem1[1]));
 //=> Array ( [0] => 09:00 [1] => CS355 ELT [2] => CS424 CB1 [3] => CS322 RH2.21 [4] => CS322 PH [5] => [6] => ) 
-
+/************************************/
 
 
 //Stores it as a session object for timetable_json.php to retrieve:
 if($sem1 != null){
     $sem1_JSON = JSONEncoder($sem1);
-    $_SESSION['sem1_JSON']  = $sem1_JSON;
+    $_SESSION['sem1_JSON'] = $sem1_JSON;
+}else{
+    $_SESSION['sem1_JSON'] = null;
 }
 if($sem2 != null){
     $sem2_JSON = JSONEncoder($sem2);
-    $_SESSION['sem2_JSON']  = $sem2_JSON;
+    $_SESSION['sem2_JSON'] = $sem2_JSON;
+}else{
+    $_SESSION['sem2_JSON'] = null;
 }
 
 /*** TEST: ***
@@ -110,12 +111,11 @@ fclose($fp);
 
 
 /* Go back to the previous page after its done uploading*/
-echo
-"<script>
-    localStorage.setItem('timeMap_sem1', JSON.stringify($sem1_JSON));
-    localStorage.setItem('timeMap_sem2', JSON.stringify($sem2_JSON));
-    window.location = '../#calendar';
-</script>";
+echo "<script>
+        localStorage.setItem('timeMap_sem1', JSON.stringify($sem1_JSON));
+        localStorage.setItem('timeMap_sem2', JSON.stringify($sem2_JSON));
+        window.location = '../#calendar';
+    </script>";
 //window.history.go(-1);
 /*******************************************************************************/
 
