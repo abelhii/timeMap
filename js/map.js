@@ -8,7 +8,7 @@ function initMap() {
 	});
 
 	var kmlOptions = {
-		url: 'http://abelhii.com/timeMap/maynooth_campus.kml',
+		url: 'https://webcourse.cs.nuim.ie/~se415003/timeMap/map/maynooth_campus.kml',//'http://abelhii.com/timeMap/maynooth_campus.kml',
 		suppressInfoWindows: false,
 		preserveViewport: false,
 		map: map

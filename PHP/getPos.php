@@ -8,7 +8,7 @@
 	//get lecture room from square brackets:
 	preg_match('/\[(.*?)\]/', $eventTitle, $eventName);
 	echo $eventName[1] . " :: ";
-	//take out lecture room number to just get the building code:
+	//removes lecture room number to just get the building code:
 	$ec = preg_replace("/[^a-zA-Z]+/", "", $eventName[1]);
 	echo $ec." : ";
 	//To prevent mixing up the same tag names in column tagName
@@ -29,7 +29,7 @@
 				OR tagName LIKE '$first%'";
 	$result = mysqli_query($link,$query);
 	if(!$result){
-		echo "false";
+		echo "couldn't find that building";
 	}else{
 		$location= mysqli_fetch_row($result);
 		echo $location[0];	
