@@ -17,8 +17,14 @@ if(!$data && !strpos($timetable_name, 'html')){
 	$timetable_name = basename($timetable_name, "xls") . "html";
 	echo "<br>" . trim($timetable_name, " ") . "<br>";
 }
+
+/**To see where the tmp folder is located**
+echo $_FILES['uploadedfile']['tmp_name'];
+Path for webcourse.cs.nuim.ie: "/tmp/".basename($timetable_tmp, $timetable_name); */
+
 //access tmp
-$timetable_tmp = "../../../tmp/".basename($timetable_tmp, $timetable_name);
+$timetable_tmp_dir = "../../../tmp/".basename($timetable_tmp, $timetable_name);
+
 
 /** If you want to store the file somewhere on the server:
 //stores the file somewhere and sets the target path of the timetable
@@ -35,7 +41,7 @@ if(move_uploaded_file($timetable_tmp, $target_path))
 $timetable = new DOMDocument;
 $timetable->preserveWhiteSpace = FALSE;
 //$timetable->loadHTMLFile($target_path);
-$timetable->loadHTMLFile($timetable_tmp);
+$timetable->loadHTMLFile($timetable_tmp_dir);
 
 $lectures = $timetable->getElementsByTagname('tr');
 $lecture = array();

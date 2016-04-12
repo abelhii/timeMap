@@ -92,7 +92,7 @@
 					    	<h4><b>How to find your MU student timetable:</b></h4>
 					    	<p>
 					    		1. To find your timetable go to: 
-					    		<a href="https://apps.maynoothuniversity.ie/timetable/">https://apps.maynoothuniversity.ie/timetable/</a>
+					    		<a href="https://apps.maynoothuniversity.ie/timetable/" target="_blank">https://apps.maynoothuniversity.ie/timetable/</a>
 					    		and login using your student details. <br>
 					    		2. Once you're logged in, you can download your timetable in Excel format as shown below.
 					    	</p>
@@ -224,8 +224,6 @@
 				<div id="gcal_loader"></div>
 			</div>
 		</div>
-		
-
 
 		<!--For Testing:-->
 		<!--?php
