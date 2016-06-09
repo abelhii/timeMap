@@ -118,12 +118,9 @@ function placeMarker(location, title, start, end) {
                           '</div>'
                       '</div>';
 
-  infowindow = new google.maps.InfoWindow({
-    content: contentString
-  });
-
   //open info window on click:    
   marker.addListener('click', function() {
+      infowindow.setContent(contentString);
       infowindow.open(map, marker);
       map.setCenter(marker.getPosition());
       map.setZoom(18);

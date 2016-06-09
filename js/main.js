@@ -38,6 +38,7 @@ $(document).ready( function() {
       var mu = new google.maps.LatLng({lat: 53.382207, lng: -6.598396});
       map.setCenter(mu);
       map.setZoom(16);
+      infowindow.close(); //close info window when switching tabs so that the right infowindow appears for each marker
   });
 });
 
@@ -189,8 +190,12 @@ function initialiseCal(){
         //format the time to be readable using 'moment'
         var start = moment(event.start).format('dddd: hh:mm');
         var end = moment(event.end).format('hh:mm');
+
+        //javascript to read json of locations
+        getLocation(event.title, point, start, end, false);
+
         //ajax to call php function to query sql which will show the location of the lecture.
-        getPos(event.title, point, start, end, false);
+        //getPos(event.title, point, start, end, false);
         //switch to Google Map tab and place location marker:
         if(getPos)
           $('#tabs a[href="#gMap"]').tab('show');
@@ -216,6 +221,33 @@ function initialiseCal(){
         });
       }
     });
+}
+
+//gets the building locations by querying a JSON file, without querying an SQL database.
+function getLocation(event, pointArr, start, end, nMark){
+  //get building locations in a variable
+  var xhReq = new XMLHttpRequest();
+  xhReq.open("GET", "mu_campus.json", false);
+  xhReq.send(null);
+  var locations = JSON.parse(xhReq.responseText);
+
+  //takes out the venue code from square brackets in the timetable event title
+  var tag = event.match(/\[(.*?)\]/)[1].match(/[^1-9]+/);
+  
+  for(var i = 0; i< locations.length; i++){
+    if(locations[i].tagName.indexOf(tag) > -1){
+      pointArr = getLatLng(locations[i].location);
+    }
+  } 
+
+  //var pos = {lat:  , lng: };
+  var pos = new google.maps.LatLng(parseFloat(pointArr[1]),parseFloat(pointArr[0]));
+  if(pos != null){
+    if(nMark)
+      newMarker(pos, event, start, end);
+    else
+      placeMarker(pos, event, start, end);
+  }
 }
 
 
@@ -247,7 +279,7 @@ $(function(){
               id: newID,
               start: start,
               end: end,
-              color:'#CF5656'
+              color:'#CF5656' //shade of red
             },
             true // make the event "stick"
         );
@@ -304,6 +336,7 @@ function getLatLng(point){
 
   return result;
 }
+
 //displays whole week on Google Map:
 function displayAllLectures(){
     //remove previous markers:
@@ -319,9 +352,10 @@ function displayAllLectures(){
       start = moment(event[i].start).format('dddd: hh:mm');
       end = moment(event[i].end).format('hh:mm');
       if(event[i].source.color == '#ffee55')//if it isn't a google calendar event I can query my SQL
-        getPos(event[i].title, pointArr, start, end, true);
+        getLocation(event[i].title, pointArr, start, end, true);
+        //getPos(event[i].title, pointArr, start, end, true);
       //else
-        //TODO: GET GOOGLE CALENDAR LOCATION
+        //TODO: GET AND DISPLAY GOOGLE CALENDAR EVENT LOCATION
     }
 }
 //gets filtered events in fullcalendar 
