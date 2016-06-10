@@ -1,4 +1,7 @@
 <?php
+	/***
+	SQL
+	***/
 	//retrieve event title and such from ajax:
 	if(isset($_POST['eventTitle']))
 	{

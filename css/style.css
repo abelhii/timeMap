@@ -150,6 +150,11 @@ body{
   font-size: 13px;
   font-weight: 300;
 }
+.pac-container{
+  z-index: 4000 !important;
+}
+
+
 
 /*-- Marker gmaps infoWindow style --*/
 #infoContent{

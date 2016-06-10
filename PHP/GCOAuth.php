@@ -52,7 +52,7 @@
 
 		//import timetable from FullCalendar to GoogleCalendar
 		echo "<br> warning press this only once to avoid adding duplicate events<br>";
-		print "<button class='login btn btn-warning btn-sm' onclick='addTimeToGCal()'>Save student timetable to your Google Calendar</button><br><br>";	
+		print "<button name='workworkwork' id='addEventsToGCAL' class='login btn btn-warning btn-sm' onclick='this.disabled=true; addTimeToGCal();'>Save student timetable to your Google Calendar</button><br><br>";	
 
 		$service = new Google_Service_Calendar($client);    
 

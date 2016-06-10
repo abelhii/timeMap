@@ -38,8 +38,12 @@ $(document).ready( function() {
       var mu = new google.maps.LatLng({lat: 53.382207, lng: -6.598396});
       map.setCenter(mu);
       map.setZoom(16);
-      infowindow.close(); //close info window when switching tabs so that the right infowindow appears for each marker
+      //close info window when switching tabs so that the right infowindow appears for each marker
+      if(infowindow != null)
+        infowindow.close(); 
   });
+
+  $('#inputGeo').geocomplete(); //autocompletes location field like in Google Maps *************************************************************
 });
 
 //For bootstrap tabs to work with hashes, to enable switching tabs with the URL:
@@ -159,6 +163,9 @@ function initialiseCal(){
         center: 'title',
         right: 'agendaWeek,agendaDay'
       },
+      prev: function(){
+        alert("test");
+      },
       defaultView: 'agendaWeek',
       editable: true,
       eventLimit: true, // allow "more" link when too many events
@@ -196,6 +203,7 @@ function initialiseCal(){
 
         //ajax to call php function to query sql which will show the location of the lecture.
         //getPos(event.title, point, start, end, false);
+
         //switch to Google Map tab and place location marker:
         if(getPos)
           $('#tabs a[href="#gMap"]').tab('show');
@@ -221,6 +229,16 @@ function initialiseCal(){
         });
       }
     });
+
+    //re-enables import calendar events to Google Calendar for other weeks/days.
+    if($('#addEventsToGCAL')[0] != null){
+      $('.fc-next-button').click(function() {
+        $('#addEventsToGCAL')[0].disabled = false;
+      });     
+      $('.fc-prev-button').click(function() {
+        $('#addEventsToGCAL')[0].disabled = false;
+      });
+    }
 }
 
 //gets the building locations by querying a JSON file, without querying an SQL database.
@@ -347,11 +365,11 @@ function displayAllLectures(){
     var start, end;
     var pointArr = new Array;
     var event = getAllLectures('source');
-    console.log(event[0].source.color);
+    //console.log(event[0].source.color);
     for(var i = 0; i<event.length; i++){
       start = moment(event[i].start).format('dddd: hh:mm');
       end = moment(event[i].end).format('hh:mm');
-      if(event[i].source.color == '#ffee55')//if it isn't a google calendar event I can query my SQL
+      if(event[i].source.color == '#ffee55')//if it isn't a google calendar event I can query the location
         getLocation(event[i].title, pointArr, start, end, true);
         //getPos(event[i].title, pointArr, start, end, true);
       //else

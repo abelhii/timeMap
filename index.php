@@ -48,6 +48,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.js" type="text/javascript"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/gcal.js" type="text/javascript"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAK; ?>&signed_in=true&callback=initMap&libraries=places" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.min.js"></script>
 
 </head>
   
@@ -187,7 +188,7 @@
 								<div class="form-group">
 								  <label class="control-label col-sm-2" for="email">Location:</label>
 								  <div class="col-sm-10">
-								  	<input type="text" id="where_event" name="where_event">
+								  	<input id="inputGeo" type="text" id="where_event" name="where_event">
 								  </div>
 								</div>
 								<div class="form-group">

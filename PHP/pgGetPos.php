@@ -1,4 +1,8 @@
 <?php
+	/***
+	Post Gres SQL
+	***/
+
 	require 'config.php';
 	//retrieve event title and such from ajax:
 	if(isset($_POST['eventTitle']))
