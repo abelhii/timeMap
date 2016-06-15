@@ -49,7 +49,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/gcal.js" type="text/javascript"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAK; ?>&signed_in=true&callback=initMap&libraries=places" type="text/javascript"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.min.js"></script>
-
 </head>
   
 <body>
@@ -65,6 +64,7 @@
 			<div class="form-group">
 			<div id="submitExcel">
 			    <i class="btn fa fa-info-circle" data-toggle="modal" data-target="#howTo"></i>
+			    <i class="btn fa fa-location-arrow" data-toggle="modal" data-target="#getDir"></i>
 			    Upload your timetable as an excel file:
 				<!-- Upload Timetable -->
 			    <div class="input-group">
@@ -117,9 +117,52 @@
 					  
 					</div>
 				</div>
-			    
+
 			</div>
 		</form>	
+
+		<!-- Get Directions -->
+		<div class="modal fade" id="getDir" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+			  <!-- Modal content-->
+			  <div class="modal-content">
+			    <div class="modal-header">
+			      <button type="button" class="close" data-dismiss="modal">&times;</button>
+			      <h4 class="modal-title">Get Directions</h4>
+			    </div>
+			    <div class="modal-body">
+			    	<form class="form-horizontal">
+			    		<div class="form-group">
+							<label class="control-label col-sm-4">Origin:</label>
+							<div class="col-sm-6">
+								<input class="form-control" type="text" id="origin" name="origin">
+							</div>
+							<i class="col-sm-2 btn fa fa-location-arrow" onclick="findLocation();"></i>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-4">Destination:</label>
+							<div class="col-sm-8">
+								<input class="form-control" type="text" id="destination" name="destination">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-8">Mode of Transport:</label>
+							<select class="form-control" id="mode">
+								<option value="DRIVING">Driving</option>
+								<option value="WALKING">Walking</option>
+								<option value="BICYCLING">Cycling</option>
+								<option value="TRANSIT">Transit</option>
+							</select>
+						</div>
+					    <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal" style="float:left">Cancel</button>
+							<input type="submit" class="btn btn-default" value="Go">
+						</div>
+					</form>
+			    </div>
+			  </div>					  
+			</div>
+		</div>
 
 
 		<!---*** Tab layout for calendar and map ***-->
@@ -180,21 +223,21 @@
 					    <div class="modal-body">
 					    	<form class="form-horizontal">
 					    		<div class="form-group">
-								  <label class="control-label col-sm-2" for="email">Title:</label>
+								  <label class="control-label col-sm-2">Title:</label>
 								  <div class="col-sm-10">
-								  	<input type="text" id="title" name="title">
+								  	<input class="form-control" type="text" id="title" name="title">
 								  </div>
 								</div>
 								<div class="form-group">
-								  <label class="control-label col-sm-2" for="email">Location:</label>
+								  <label class="control-label col-sm-2">Location:</label>
 								  <div class="col-sm-10">
-								  	<input id="inputGeo" type="text" id="where_event" name="where_event">
+								  	<input class="form-control" type="text" id="where_event" name="where_event">
 								  </div>
 								</div>
 								<div class="form-group">
-								  <label class="control-label col-sm-2" for="email">Description:</label>
+								  <label class="control-label col-sm-2">Description:</label>
 								  <div class="col-sm-10">
-								  	<textarea id="content_event" name="content_event"></textarea>
+								  	<textarea class="form-control" id="content_event" name="content_event"></textarea>
 								  </div>
 								</div>
 							    <input type="hidden" id="start" name="start" value="">

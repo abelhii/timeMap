@@ -43,7 +43,9 @@ $(document).ready( function() {
         infowindow.close(); 
   });
 
-  $('#inputGeo').geocomplete(); //autocompletes location field like in Google Maps *************************************************************
+  $('#origin').geocomplete();
+  $('#destination').geocomplete();
+  $('#where_event').geocomplete(); //autocompletes location field like in Google Maps *************************************************************
 });
 
 //For bootstrap tabs to work with hashes, to enable switching tabs with the URL:
@@ -170,7 +172,7 @@ function initialiseCal(){
       editable: true,
       eventLimit: true, // allow "more" link when too many events
       minTime:'7:00',
-      maxTime:'22:00',
+      maxTime:'23:00',
       googleCalendarApiKey: 'AIzaSyBIkPthcMusoSDbqB9gxVWbcS-lYo6mx34',
       eventSources: [
             {
@@ -186,6 +188,12 @@ function initialiseCal(){
       //set all options : options,
       selectable: true,
       selectHelper: true,
+      eventOverlap: function(stillEvent, movingEvent) {
+        var allEvents = getAllLectures('source'); 
+        for(var i = 0; i<allEvents.length; i++)
+          if(allEvents[i].color != "#ffee55")
+            return stillEvent.allDay && movingEvent.allDay;
+      },
       //FOR ADD EVENT TO GOOGLE CALENDAR:
       select: function(start, end) {
         if(readCookie('gLoggedin') == 'true')

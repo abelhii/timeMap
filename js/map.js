@@ -1,11 +1,15 @@
-var map, marker, infowindow;
+var map, marker, userPos, infowindow, userFlag = false;
+var directionsDisplay, directionsService, gcd;
 var markers = [];
 //initialise google map:
 function initMap() {
+  directionsDisplay = new google.maps.DirectionsRenderer;
+  directionsService = new google.maps.DirectionsService;
 	map = new google.maps.Map(document.getElementById('gMap'), {
 		zoom: 16,
 		center: {lat: 53.382207, lng: -6.598396}
 	});
+  directionsDisplay.setMap(map);
 
 	var kmlOptions = {
 		url: 'https://webcourse.cs.nuim.ie/~se415003/timeMap/map/maynooth_campus.kml',//'http://abelhii.com/timeMap/maynooth_campus.kml',
@@ -14,6 +18,25 @@ function initMap() {
 		map: map
 	};
 	var muLayer = new google.maps.KmlLayer(kmlOptions);
+
+  //turns on scroll to zoom when map is clicked
+  //turns off scroll to zoom when mouse is outside of the map
+  google.maps.event.addListener(map, 'click', function(event){
+    this.setOptions({scrollwheel:true});
+  });
+  google.maps.event.addListener(map, 'mouseout', function(event){
+   this.setOptions({scrollwheel:false});  
+  });
+
+  //geocoder, used to get the city name from coordinates in a function below.
+  gcd = new google.maps.Geocoder();
+
+
+//calculateAndDisplayRoute(directionsService, directionsDisplay, userLocation, null);
+  /*document.getElementById('mode').addEventListener('change', function() {
+    calculateAndDisplayRoute(directionsService, directionsDisplay);
+  });*/
+
 
 
 	/*------------------------SEARCH BAR-----------------------------------*/
@@ -91,17 +114,116 @@ function setMapOnAll(map) {
 function clearMarkers() {
   setMapOnAll(null);
   markers = [];
+  userFlag = false;
 }
 
 
 
 //******************************************CREATE MARKERS******************************************************//
 
+// Get PC position - HTML5 geolocation.
+function findLocation(){
+  if (navigator.geolocation) {
+    //switch to Maps tab:
+    $('#tabs a[href="#gMap"]').tab('show');
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      if (userFlag) {
+        userPos.setPosition(pos);
+        userPos.setAnimation(google.maps.Animation.DROP);
+        map.setCenter(pos);
+      } else {
+        userPos = new google.maps.Marker({
+          position: pos,
+          map: map,
+          animation: google.maps.Animation.DROP
+        });
+
+        map.setCenter(pos);
+        infowindow = new google.maps.InfoWindow({});
+        userFlag = true;
+      }
+
+      //open info window on click:    
+      userPos.addListener('click', function() {
+          infowindow.setContent('<h4>You are around here</h4>');
+          infowindow.open(map, userPos);
+          map.setCenter(userPos.getPosition());
+          map.setZoom(18);
+      });
+      
+      userPos.setIcon('https://maps.google.com/mapfiles/ms/icons/arrow.png');
+      markers.push(userPos);
+
+      
+      //Reverse Geocode: Get the city name from lng and lat
+      gcd.geocode({
+        'latLng': pos
+      }, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+          if (results[1]) {
+            //console.log(results[1]);
+            document.getElementById("origin").value = results[0].formatted_address;
+          } else {
+            alert('No results found');
+          }
+        } else {
+          alert('Geocoder failed due to: ' + status);
+        }
+      });
+
+
+    }, function() {
+      handleLocationError(true, userPos, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, userPos, map.getCenter());
+  }
+}
+
+//gets the direction to a location based on the lat and lng of the points
+function calculateAndDisplayRoute(directionsService, directionsDisplay, origin, destination, transport) {
+  directionsService.route({
+    origin: origin,  
+    destination: destination,  
+    // Note that Javascript allows us to access the constant
+    // using square brackets and a string value as its
+    // "property."
+    travelMode: google.maps.TravelMode[transport]
+  }, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
+  });
+}
+$(function(){
+  $('#getDir').submit(function(event) {
+      event.preventDefault(); // on submit prevent page from refreshing on submit
+      //get the data from modal
+      var origin = $('#origin').val();
+      var destination = $('#destination').val();
+      var transport = $('#mode').val();
+
+      //calculate route:
+      calculateAndDisplayRoute(directionsService, directionsDisplay, origin, destination, transport);
+  });
+});
+
+
+
+
 //for when user clicks on a specific lecture:
 function placeMarker(location, title, start, end) {
   //if marker already exists, reuse it:
   if ( marker ) {
-    if(markers.length > 2){
+    if(markers.length > 1){
       clearMarkers();
       newMarker(location, title, start, end);
     }
@@ -150,7 +272,7 @@ function newMarker(location, title, start, end){
 
             //if a marker already exists in the same position as this marker
             if (location.equals(pos)) {
-                //update the position of the coincident marker by applying a small multipler to its coordinates
+                //update the position of the coincident marker by applying a small multiplier to its coordinates
                 var newLat = location.lat() + (Math.random() -.5) / 1500;// * (Math.random() * (max - min) + min);
                 var newLng = location.lng() + (Math.random() -.5) / 1500;// * (Math.random() * (max - min) + min);
                 finalLatLng = new google.maps.LatLng(newLat,newLng);

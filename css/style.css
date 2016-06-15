@@ -62,6 +62,11 @@ body{
   padding-right: 0 !important;
 }
 
+/* get Direction */
+#getDir{
+  float:left;
+}
+
 
 /* Calendar options */
 #switchSem{padding-top: 5px;}

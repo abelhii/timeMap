@@ -21,7 +21,7 @@
 
     $client->setScopes(array('https://www.googleapis.com/auth/calendar'));
     
-    //For loging out.
+    //For logging out.
     if (isset($_GET['logout'])) {
 		unset($_SESSION['token']);
     }
@@ -52,16 +52,40 @@
 
 		//import timetable from FullCalendar to GoogleCalendar
 		echo "<br> warning press this only once to avoid adding duplicate events<br>";
-		print "<button name='workworkwork' id='addEventsToGCAL' class='login btn btn-warning btn-sm' onclick='this.disabled=true; addTimeToGCal();'>Save student timetable to your Google Calendar</button><br><br>";	
+		print "<button id='addEventsToGCAL' class='login btn btn-warning btn-sm' onclick='this.disabled=true; addTimeToGCal();'>Save student timetable to your Google Calendar</button><br><br>";	
 
 		$service = new Google_Service_Calendar($client);    
 
-		$calendarId = $service->calendars->get('primary');
-		/*echo "<script> var calendarId = <?php echo $calendarId->getSummary(); ?></script>";*/
+		$calendarId = $service->calendarList->get('primary');
+		echo("<script>console.log('".$calendarId->getSummary()."');</script>");
 		echo "This is your primary google calendar ID: ";
 		echo json_encode($calendarId->getSummary());
 
 		$_SESSION['client'] = $client;
+		$calendarList = $service->calendarList->listCalendarList();		
+		
+		while(true) {
+			foreach ($calendarList->getItems() as $calendarListEntry) {
+
+				echo "<br>\n".$calendarListEntry->getSummary()."<br>\n";
+
+
+				// get events 
+				$events = $service->events->listEvents($calendarListEntry->id);
+
+				foreach ($events->getItems() as $event) {
+				    echo " ".$event->getCreated();
+				    echo " ".$event->getSummary()."<br>";
+				}
+			}
+			$pageToken = $calendarList->getNextPageToken();
+			if ($pageToken) {
+				$optParams = array('pageToken' => $pageToken);
+				$calendarList = $service->calendarList->listCalendarList($optParams);
+			} else {
+				break;
+			}	
+		}
     }
 
 		/****** This returns all the events in the clients google calendar ***********
