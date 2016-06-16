@@ -32,7 +32,7 @@ function initMap() {
   gcd = new google.maps.Geocoder();
 
 
-//calculateAndDisplayRoute(directionsService, directionsDisplay, userLocation, null);
+  //calculateAndDisplayRoute(directionsService, directionsDisplay, userLocation, null);
   /*document.getElementById('mode').addEventListener('change', function() {
     calculateAndDisplayRoute(directionsService, directionsDisplay);
   });*/
@@ -159,14 +159,14 @@ function findLocation(){
       userPos.setIcon('https://maps.google.com/mapfiles/ms/icons/arrow.png');
       markers.push(userPos);
 
-      
+      //var directions = new GDirections();
       //Reverse Geocode: Get the city name from lng and lat
       gcd.geocode({
         'latLng': pos
       }, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
-          if (results[1]) {
-            //console.log(results[1]);
+          if (results[0]) {
+            //console.log(results[0]);
             document.getElementById("origin").value = results[0].formatted_address;
           } else {
             alert('No results found');
@@ -198,10 +198,16 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, origin, 
   }, function(response, status) {
     if (status == google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
+      //http://stackoverflow.com/questions/16773671/google-maps-api-getting-drive-time-and-road
+      var duration = directionsDisplay.directions.routes[0].legs[0].duration.text;
+      var distance = directionsDisplay.directions.routes[0].legs[0].distance.text;
+      document.getElementById("duration").innerHTML = "<b>Duration:</b> "+duration;
+      document.getElementById("distance").innerHTML = "<b>Distance:</b> "+distance;
     } else {
       window.alert('Directions request failed due to ' + status);
     }
   });
+  
 }
 $(function(){
   $('#getDir').submit(function(event) {

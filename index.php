@@ -79,6 +79,9 @@
 				<input id="allLectures" class="btn btn-info" type="button" value="Display All Lectures" onclick="displayAllLectures();"></input>
 		    </div>
 
+			</div>
+		</form>	
+
 			    <!-- Info Modal -->
 				<div class="modal fade" id="howTo" role="dialog">
 					<div class="modal-dialog">
@@ -118,51 +121,53 @@
 					</div>
 				</div>
 
-			</div>
-		</form>	
+				<!-- Get Directions -->
+				<div class="modal fade" id="getDir" tabindex="-1" role="dialog">
+					<div class="modal-dialog">
+					  <!-- Modal content-->
+					  <div class="modal-content">
+					    <div class="modal-header">
+					      <button type="button" class="close" data-dismiss="modal">&times;</button>
+					      <h4 class="modal-title">Get Directions</h4>
+					    </div>
+					    <div class="modal-body">
+					    	<form class="form-horizontal">
+					    		<div class="form-group">
+									<label class="control-label col-xs-2 col-sm-2">Origin:</label>
+									<div class="col-xs-8 col-sm-8">
+										<input class="form-control" type="text" id="origin" name="origin">
+									</div>
+									<i class="btn fa fa-location-arrow" onclick="findLocation();"></i>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-xs-2 col-sm-2">Destination:</label>
+									<div class="col-xs-8 col-sm-8">
+										<input class="form-control" type="text" id="destination" name="destination">
+									</div>
+								</div>
+								<div class="form-group">
+									<label id="mode_lbl" class="control-label col-xs-2 col-sm-2">Mode of Transport:</label>
+									<select id="mode" class="col-xs-6 col-sm-6">
+										<option value="DRIVING">Driving</option>
+										<option value="WALKING">Walking</option>
+										<option value="BICYCLING">Cycling</option>
+										<option value="TRANSIT">Transit</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<p id="duration" class="col-xs-6 col-sm-6"><b></b></p>
+									<p id="distance" class="col-xs-6 col-sm-6"><b></b></p>
+								</div>
+							    <div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal" style="float:left">Close</button>
+									<input type="submit" class="btn btn-default" value="Go">
+								</div>
+							</form>
+					    </div>
+					  </div>					  
+					</div>
+				</div>
 
-		<!-- Get Directions -->
-		<div class="modal fade" id="getDir" tabindex="-1" role="dialog">
-			<div class="modal-dialog">
-			  <!-- Modal content-->
-			  <div class="modal-content">
-			    <div class="modal-header">
-			      <button type="button" class="close" data-dismiss="modal">&times;</button>
-			      <h4 class="modal-title">Get Directions</h4>
-			    </div>
-			    <div class="modal-body">
-			    	<form class="form-horizontal">
-			    		<div class="form-group">
-							<label class="control-label col-sm-4">Origin:</label>
-							<div class="col-sm-6">
-								<input class="form-control" type="text" id="origin" name="origin">
-							</div>
-							<i class="col-sm-2 btn fa fa-location-arrow" onclick="findLocation();"></i>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-4">Destination:</label>
-							<div class="col-sm-8">
-								<input class="form-control" type="text" id="destination" name="destination">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-8">Mode of Transport:</label>
-							<select class="form-control" id="mode">
-								<option value="DRIVING">Driving</option>
-								<option value="WALKING">Walking</option>
-								<option value="BICYCLING">Cycling</option>
-								<option value="TRANSIT">Transit</option>
-							</select>
-						</div>
-					    <div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal" style="float:left">Cancel</button>
-							<input type="submit" class="btn btn-default" value="Go">
-						</div>
-					</form>
-			    </div>
-			  </div>					  
-			</div>
-		</div>
 
 
 		<!---*** Tab layout for calendar and map ***-->
@@ -223,20 +228,20 @@
 					    <div class="modal-body">
 					    	<form class="form-horizontal">
 					    		<div class="form-group">
-								  <label class="control-label col-sm-2">Title:</label>
-								  <div class="col-sm-10">
+								  <label class="control-label col-xs-2 col-sm-2">Title:</label>
+								  <div class="col-xs-10 col-sm-10">
 								  	<input class="form-control" type="text" id="title" name="title">
 								  </div>
 								</div>
 								<div class="form-group">
-								  <label class="control-label col-sm-2">Location:</label>
-								  <div class="col-sm-10">
+								  <label class="control-label col-xs-2 col-sm-2">Location:</label>
+								  <div class="col-xs-10 col-sm-10">
 								  	<input class="form-control" type="text" id="where_event" name="where_event">
 								  </div>
 								</div>
 								<div class="form-group">
-								  <label class="control-label col-sm-2">Description:</label>
-								  <div class="col-sm-10">
+								  <label class="control-label col-xs-2 col-sm-2">Description:</label>
+								  <div class="col-xs-10 col-sm-10">
 								  	<textarea class="form-control" id="content_event" name="content_event"></textarea>
 								  </div>
 								</div>
