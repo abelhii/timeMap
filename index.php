@@ -23,6 +23,7 @@
 	<link rel="icon" href="https://2016.moodle.maynoothuniversity.ie/theme/image.php/nuim/theme/1456143310/favicon">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<!--Script-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -42,6 +43,9 @@
 		}
 	</script>
 	<script src="js/main.js" type="text/javascript"></script>
+	<script src="js/oauth.js" type="text/javascript"></script>
+	<script src="js/gcoauth2.js" type="text/javascript"></script>
+	<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 	<!--FullCalendar.io-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js" type="text/javascript"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.css" rel="stylesheet" />
@@ -137,7 +141,8 @@
 									<div class="col-xs-8 col-sm-8">
 										<input class="form-control" type="text" id="origin" name="origin">
 									</div>
-									<i class="btn fa fa-location-arrow" onclick="findLocation();"></i>
+									<i class="btn col-xs-1 col-sm-1 material-icons" onclick="findLocation();">my_location</i>
+									<div class="col-sm-1"></div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-xs-2 col-sm-2">Destination:</label>
@@ -204,9 +209,23 @@
 					    <div class="modal-body">
 					    	<p>To connect to Google Calendar you need to set your primary calendar to public as shown above:</p>
 					    	<pre>
-								<?php 
+					    		<a href='#' class="btn btn-primary" onClick='login();' id="loginText"'> Click here to login </a>
+							    <a href="#" class="btn btn-primary" style="display:none" id="logoutText" target='myIFrame' onclick="myIFrame.location='https://www.google.com/accounts/Logout'; 
+							    startLogoutPolling();return false;"> Click here to logout </a>
+							    <iframe name='myIFrame' id="myIFrame" style='display:none'></iframe>
+							    <div id='uName'></div>
+							    <img src='' id='imgHolder'/>
+								<!--?php 
+							    
+							    <div id='content'>
+							      <h1>Events</h1>
+							      <ul id='events'></ul>
+							    </div>
+							    <a href='#' id='authorize-button' onclick='handleAuthClick(event);'>Login</a>
+							    <pre id="output"></pre>
+
 									include 'PHP/GCOAuth.php'; 
-								?>
+								?-->
 							</pre>
 					    </div>
 					    <div class="modal-footer">
@@ -312,7 +331,6 @@
 			var timetable_path = '<?php //echo $timetable_path; ?>'
 		</script-->
 	</div>
-
 </body>
 
 </html>

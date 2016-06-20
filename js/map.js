@@ -32,11 +32,31 @@ function initMap() {
   gcd = new google.maps.Geocoder();
 
 
-  //calculateAndDisplayRoute(directionsService, directionsDisplay, userLocation, null);
-  /*document.getElementById('mode').addEventListener('change', function() {
-    calculateAndDisplayRoute(directionsService, directionsDisplay);
-  });*/
 
+var overlay;
+overlay = new google.maps.OverlayView();
+overlay.draw = function() {};
+overlay.setMap(map);
+
+$('#map-canvas').click(function(event){
+    var point = new google.maps.Point(event.pageX,event.pageY);
+    var location = overlay.getProjection().fromContainerPixelToLatLng(point); //get map coordinates by click
+
+    var request = {
+      location: location,
+      types: ['bus_station','subway_station'], //get bus stops and metro stations
+      radius: 10,
+    };
+    placesService = new google.maps.places.PlacesService(map);
+    placesService.search(request, function(result, status, pagination){
+      station = result[0];
+      if(typeof station != 'undefined'){
+        pos = station.geometry['location']; //position
+        bus_no = station.name.match(/\[([0-9]+)\]/i)[1]; //get ID by name
+        alert(bus_no); // ID
+      }
+    });
+  });
 
 
 	/*------------------------SEARCH BAR-----------------------------------*/
@@ -119,7 +139,7 @@ function clearMarkers() {
 
 
 
-//******************************************CREATE MARKERS******************************************************//
+//******************************************Get Directions******************************************************//
 
 // Get PC position - HTML5 geolocation.
 function findLocation(){
@@ -207,8 +227,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, origin, 
       window.alert('Directions request failed due to ' + status);
     }
   });
-  
 }
+
 $(function(){
   $('#getDir').submit(function(event) {
       event.preventDefault(); // on submit prevent page from refreshing on submit
@@ -222,8 +242,11 @@ $(function(){
   });
 });
 
+//****************************************************************************************************//
 
 
+
+//******************************************CREATE MARKERS******************************************************//
 
 //for when user clicks on a specific lecture:
 function placeMarker(location, title, start, end) {

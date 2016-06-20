@@ -197,3 +197,14 @@ body{
     width: 250px;
 }
  
+
+
+/*--GCOAuth--*/
+#loginText, #logoutText, #uName, #myIFrame{
+  float:left;
+}
+#imgHolder{
+  float:left;
+  height: 30%;
+  width: 30%;
+}
