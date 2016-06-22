@@ -1,14 +1,16 @@
 var map, marker, userPos, infowindow, userFlag = false;
 var directionsDisplay, directionsService, gcd;
+var bus, train, transit_options;
 var markers = [];
 //initialise google map:
 function initMap() {
-  directionsDisplay = new google.maps.DirectionsRenderer;
   directionsService = new google.maps.DirectionsService;
-	map = new google.maps.Map(document.getElementById('gMap'), {
-		zoom: 16,
-		center: {lat: 53.382207, lng: -6.598396}
-	});
+  directionsDisplay = new google.maps.DirectionsRenderer;
+
+  map = new google.maps.Map(document.getElementById('gMap'), {
+    zoom: 16,
+    center: {lat: 53.382207, lng: -6.598396}
+   });
   directionsDisplay.setMap(map);
 
 	var kmlOptions = {
@@ -25,101 +27,93 @@ function initMap() {
     this.setOptions({scrollwheel:true});
   });
   google.maps.event.addListener(map, 'mouseout', function(event){
-   this.setOptions({scrollwheel:false});  
+    this.setOptions({scrollwheel:false});  
   });
 
   //geocoder, used to get the city name from coordinates in a function below.
   gcd = new google.maps.Geocoder();
 
 
-
-var overlay;
-overlay = new google.maps.OverlayView();
-overlay.draw = function() {};
-overlay.setMap(map);
-
-$('#map-canvas').click(function(event){
-    var point = new google.maps.Point(event.pageX,event.pageY);
-    var location = overlay.getProjection().fromContainerPixelToLatLng(point); //get map coordinates by click
-
-    var request = {
-      location: location,
-      types: ['bus_station','subway_station'], //get bus stops and metro stations
-      radius: 10,
-    };
-    placesService = new google.maps.places.PlacesService(map);
-    placesService.search(request, function(result, status, pagination){
-      station = result[0];
-      if(typeof station != 'undefined'){
-        pos = station.geometry['location']; //position
-        bus_no = station.name.match(/\[([0-9]+)\]/i)[1]; //get ID by name
-        alert(bus_no); // ID
-      }
-    });
+  bus = document.getElementById("bus");
+  train = document.getElementById("train");
+  transit_options;
+  bus.addEventListener("click", function(){
+    if(train.classList.contains("active"))
+      train.classList.remove("active");
+    bus.classList.add("active");
+    transit_options = [google.maps.TransitMode.BUS];
+  });
+  train.addEventListener("click", function(){
+    if(bus.classList.contains("active"))
+      bus.classList.remove("active");
+    train.classList.add("active");
+    transit_options = [google.maps.TransitMode.TRAIN];
   });
 
 
-	/*------------------------SEARCH BAR-----------------------------------*/
-	// This example adds a search box to a map, using the Google Place Autocomplete
-	// feature. People can enter geographical searches. The search box will return a
-	// pick list containing a mix of places and predicted search terms.
+   /*-----SEARCH MAYNOOTH UNIVERSITY-----*/
+  var inputC = document.getElementById('searchCampus');
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputC);
 
-	// Create the search box and link it to the UI element.
-	var input = document.getElementById('searchMap');
-	var searchBox = new google.maps.places.SearchBox(input);
-	map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  /*------------------------SEARCH BAR-----------------------------------*/
+  // This example adds a search box to a map, using the Google Place Autocomplete
+  // feature. People can enter geographical searches. The search box will return a
+  // pick list containing a mix of places and predicted search terms.
+
+  // Create the search box and link it to the UI element.
+  var input = document.getElementById('searchMap');
+  var searchBox = new google.maps.places.SearchBox(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
 	// Bias the SearchBox results towards current map's viewport.
 	map.addListener('bounds_changed', function() {
 		searchBox.setBounds(map.getBounds());
 	});
 
-
 	// [START region_getplaces]
 	// Listen for the event fired when the user selects a prediction and retrieve
 	// more details for that place.
 	searchBox.addListener('places_changed', function() {
-	var places = searchBox.getPlaces();
+  	var places = searchBox.getPlaces();
+  	if (places.length == 0) {
+  	  return;
+  	}
+  	// Clear out the old markers.
+  	markers.forEach(function(marker) {
+  	  marker.setMap(null);
+  	});
+  	markers = [];
 
-	if (places.length == 0) {
-	  return;
-	}
+  	// For each place, get the icon, name and location.
+  	var bounds = new google.maps.LatLngBounds();
+  	places.forEach(function(place) {
+  	  var icon = {
+  	    url: place.icon,
+  	    size: new google.maps.Size(71, 71),
+  	    origin: new google.maps.Point(0, 0),
+  	    anchor: new google.maps.Point(17, 34),
+  	    scaledSize: new google.maps.Size(25, 25)
+  	  };
 
-	// Clear out the old markers.
-	markers.forEach(function(marker) {
-	  marker.setMap(null);
-	});
-	markers = [];
+  	  // Create a marker for each place.
+  	  markers.push(new google.maps.Marker({
+  	    map: map,
+  	    icon: icon,
+  	    title: place.name,
+  	    position: place.geometry.location
+  	  }));
 
-	// For each place, get the icon, name and location.
-	var bounds = new google.maps.LatLngBounds();
-	places.forEach(function(place) {
-	  var icon = {
-	    url: place.icon,
-	    size: new google.maps.Size(71, 71),
-	    origin: new google.maps.Point(0, 0),
-	    anchor: new google.maps.Point(17, 34),
-	    scaledSize: new google.maps.Size(25, 25)
-	  };
-
-	  // Create a marker for each place.
-	  markers.push(new google.maps.Marker({
-	    map: map,
-	    icon: icon,
-	    title: place.name,
-	    position: place.geometry.location
-	  }));
-
-	  if (place.geometry.viewport) {
-	    // Only geocodes have viewport.
-	    bounds.union(place.geometry.viewport);
-	  } else {
-	    bounds.extend(place.geometry.location);
-	  }
-	});
-	map.fitBounds(bounds);
+  	  if (place.geometry.viewport) {
+  	    // Only geocodes have viewport.
+  	    bounds.union(place.geometry.viewport);
+  	  } else {
+  	    bounds.extend(place.geometry.location);
+  	  }
+  	});
+  	map.fitBounds(bounds);
 	});
   // [END region_getplaces]
+
 }
 
 
@@ -140,7 +134,6 @@ function clearMarkers() {
 
 
 //******************************************Get Directions******************************************************//
-
 // Get PC position - HTML5 geolocation.
 function findLocation(){
   if (navigator.geolocation) {
@@ -207,38 +200,57 @@ function findLocation(){
 }
 
 //gets the direction to a location based on the lat and lng of the points
-function calculateAndDisplayRoute(directionsService, directionsDisplay, origin, destination, transport) {
+function calculateAndDisplayRoute(directionsService, directionsDisplay, origin, destination, transport, transit_options) {
   directionsService.route({
     origin: origin,  
     destination: destination,  
     // Note that Javascript allows us to access the constant
     // using square brackets and a string value as its
     // "property."
-    travelMode: google.maps.TravelMode[transport]
+    travelMode: google.maps.TravelMode[transport],
+    transitOptions: {
+      modes: transit_options
+    },
+    provideRouteAlternatives: true
   }, function(response, status) {
     if (status == google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
+
       //http://stackoverflow.com/questions/16773671/google-maps-api-getting-drive-time-and-road
       var duration = directionsDisplay.directions.routes[0].legs[0].duration.text;
       var distance = directionsDisplay.directions.routes[0].legs[0].distance.text;
+
       document.getElementById("duration").innerHTML = "<b>Duration:</b> "+duration;
       document.getElementById("distance").innerHTML = "<b>Distance:</b> "+distance;
+      document.getElementById("departure").innerHTML = "";
+      document.getElementById("arrival").innerHTML = "";
+      document.getElementById("transit_btn").style.visibility = "hidden";
+      if(transport == "TRANSIT"){
+        document.getElementById("transit_btn").style.visibility = "visible";
+        var departure = directionsDisplay.directions.routes[0].legs[0].departure_time.text;
+        var arrival = directionsDisplay.directions.routes[0].legs[0].arrival_time.text;
+        document.getElementById("departure").innerHTML = "<b>Departure Time:</b> "+departure;
+        document.getElementById("arrival").innerHTML = "<b>Arrival Time:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b> "+arrival;          
+      }
+
     } else {
       window.alert('Directions request failed due to ' + status);
     }
   });
 }
 
+//When user presses go
 $(function(){
   $('#getDir').submit(function(event) {
-      event.preventDefault(); // on submit prevent page from refreshing on submit
+      event.preventDefault(); // on submit prevent page from refreshing on submits
+
       //get the data from modal
       var origin = $('#origin').val();
       var destination = $('#destination').val();
       var transport = $('#mode').val();
 
       //calculate route:
-      calculateAndDisplayRoute(directionsService, directionsDisplay, origin, destination, transport);
+      calculateAndDisplayRoute(directionsService, directionsDisplay, origin, destination, transport, transit_options);
   });
 });
 
@@ -247,7 +259,6 @@ $(function(){
 
 
 //******************************************CREATE MARKERS******************************************************//
-
 //for when user clicks on a specific lecture:
 function placeMarker(location, title, start, end) {
   //if marker already exists, reuse it:

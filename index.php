@@ -158,10 +158,20 @@
 										<option value="BICYCLING">Cycling</option>
 										<option value="TRANSIT">Transit</option>
 									</select>
+									<div class="btn-group col-xs-4 col-sm-4" id="transit_btn" style="visibility: hidden;">
+									  <button id="bus" type="button" class="btn" >Bus</button>
+									  <button id="train" type="button" class="btn" >Train</button>
+									</div>
 								</div>
 								<div class="form-group">
-									<p id="duration" class="col-xs-6 col-sm-6"><b></b></p>
-									<p id="distance" class="col-xs-6 col-sm-6"><b></b></p>
+									<p id="duration" class="col-xs-4 col-sm-4"><b></b></p>
+									<p id="distance" class="col-xs-4 col-sm-4"><b></b></p>
+									<p id="departure" class="col-xs-4 col-sm-4"><b></b></p>
+								</div>
+								<div class="form-group">
+									<p class="col-xs-4 col-sm-4"><b></b></p>
+									<p class="col-xs-4 col-sm-4"><b></b></p>
+									<p id="arrival" class="col-xs-4 col-sm-4"><b></b></p>
 								</div>
 							    <div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal" style="float:left">Close</button>
@@ -184,6 +194,7 @@
 		<div class="tab-content">
 			<!--Map-->
 			<input id="searchMap" class="controls" type="text" placeholder="Search Box">
+			<input id="searchCampus" class="controls" type="text" placeholder="Search Box">
 			<div id="gMap" class="tab-pane fade in active"></div>
 			
 			<!--Calendar-->

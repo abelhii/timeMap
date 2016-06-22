@@ -373,6 +373,9 @@ function displayAllLectures(){
     var start, end;
     var pointArr = new Array;
     var event = getAllLectures('source');
+    var center= {lat: 53.382207, lng: -6.598396} //coordinates for maynooth university
+    map.setCenter(center);
+    map.setZoom(16);
     //console.log(event[0].source.color);
     for(var i = 0; i<event.length; i++){
       start = moment(event[i].start).format('dddd: hh:mm');
