@@ -43,6 +43,32 @@ $(document).ready( function() {
         infowindow.close(); 
   });
 
+  //search option for Maynooth Campus
+  var options = {
+    url: "mu_campus.json",
+
+    getValue: "name",
+
+    list: {
+      match: {
+        enabled: true
+      }
+    }
+  }
+  $("#searchCampus").easyAutocomplete(options);
+
+  var point = new Array;
+  document.getElementById("searchCampus")
+      .addEventListener("keyup", function(event) {
+      event.preventDefault();
+      if (event.keyCode == 13) {
+        var building_name = document.getElementById("searchCampus").value;
+        getLocation(building_name, point, "", "", false);
+        //document.getElementById("searchCampus").click();
+      }
+  });
+
+
   $('#origin').geocomplete();
   $('#destination').geocomplete();
   $('#where_event').geocomplete(); //autocompletes location field like in Google Maps *************************************************************
@@ -83,6 +109,7 @@ $(window).unload(function() {
 
     return false;
 });
+
 
 
 //*******COOKIES*******//
@@ -249,7 +276,8 @@ function initialiseCal(){
     }
 }
 
-//gets the building locations by querying a JSON file, without querying an SQL database.
+
+//gets the building locations by querying a JSON file, **without querying an SQL database.**
 function getLocation(event, pointArr, start, end, nMark){
   //get building locations in a variable
   var xhReq = new XMLHttpRequest();
@@ -258,13 +286,20 @@ function getLocation(event, pointArr, start, end, nMark){
   var locations = JSON.parse(xhReq.responseText);
 
   //takes out the venue code from square brackets in the timetable event title
-  var tag = event.match(/\[(.*?)\]/)[1].match(/[^1-9]+/);
-  
-  for(var i = 0; i< locations.length; i++){
-    if(locations[i].tagName.indexOf(tag) > -1){
-      pointArr = getLatLng(locations[i].location);
+  if(event.indexOf('[') > -1){
+    var tag = event.match(/\[(.*?)\]/)[1].match(/[^1-9]+/);
+    for(var i = 0; i< locations.length; i++){
+      if(locations[i].tagName.indexOf(tag) > -1){
+        pointArr = getLatLng(locations[i].location);
+      }
+    } 
+  }else{
+    for(var i = 0; i< locations.length; i++){
+      if(locations[i].name.toLowerCase().indexOf(event.toLowerCase()) > -1 || locations[i].tagName.indexOf(event.toUpperCase()) > -1){
+        pointArr = getLatLng(locations[i].location);
+      }
     }
-  } 
+  }
 
   //var pos = {lat:  , lng: };
   var pos = new google.maps.LatLng(parseFloat(pointArr[1]),parseFloat(pointArr[0]));

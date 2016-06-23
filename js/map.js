@@ -51,9 +51,6 @@ function initMap() {
   });
 
 
-   /*-----SEARCH MAYNOOTH UNIVERSITY-----*/
-  var inputC = document.getElementById('searchCampus');
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputC);
 
   /*------------------------SEARCH BAR-----------------------------------*/
   // This example adds a search box to a map, using the Google Place Autocomplete
@@ -64,6 +61,10 @@ function initMap() {
   var input = document.getElementById('searchMap');
   var searchBox = new google.maps.places.SearchBox(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+   /*-----SEARCH MAYNOOTH UNIVERSITY-----*/
+  var inputC = document.getElementById('searchCampus');
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputC);
 
 	// Bias the SearchBox results towards current map's viewport.
 	map.addListener('bounds_changed', function() {
@@ -113,7 +114,6 @@ function initMap() {
   	map.fitBounds(bounds);
 	});
   // [END region_getplaces]
-
 }
 
 
@@ -130,7 +130,6 @@ function clearMarkers() {
   markers = [];
   userFlag = false;
 }
-
 
 
 //******************************************Get Directions******************************************************//
@@ -272,11 +271,17 @@ function placeMarker(location, title, start, end) {
   } else {
     newMarker(location, title, start, end);
   }
+
+  var time;
+  if(start == "" || end == "")
+    time = '';
+  else
+    time = '<h4>'+start+'-'+end+'</h4>';
   //content for the info window; need to reuse code because it ovewrites the selected lecture:
   var contentString = '<div id="infoContent">'+
                         '<h3 id="firstHeading">'+title+'</h3>'+
                           '<div id="bodyContent">'+
-                          '<h4>'+start+'-'+end+'</h4>'+
+                          time+
                           '</div>'
                       '</div>';
 
@@ -328,11 +333,16 @@ function newMarker(location, title, start, end){
       animation: google.maps.Animation.DROP
     });
 
+    var time;
+    if(start == "" || end == "")
+      time = '';
+    else
+      time = '<h4>'+start+'-'+end+'</h4>';
     //content for the info window:
     var contentString = '<div id="infoContent">'+
                           '<h3 id="firstHeading">'+title+'</h3>'+
                             '<div id="bodyContent">'+
-                            '<h4>'+start+'-'+end+'</h4>'+
+                            time+
                             '</div>'
                         '</div>';
 

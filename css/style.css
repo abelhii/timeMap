@@ -135,17 +135,17 @@ body{
   margin:0px;
 }
 
-#searchMap{
-	background-color: #fff;
-	font-family: Arial;
-	font-size: 15px;
-	font-weight: 300;
-	margin-left: 12px;
-	padding: 0 11px 0 13px;
-	text-overflow: ellipsis;
-	width: 300px;
+#searchMap, #searchCampus{
+  background-color: #fff;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
 }
-#searchMap:focus {
+#searchMap:focus ,#searchCampus:focus{
   border-color: #4d90fe;
 }
 .searchMap-container{
@@ -172,9 +172,7 @@ body{
   font-size: 13px;
   font-weight: 300;
 }
-.pac-container{
-  z-index: 4000 !important;
-}
+.pac-container{z-index: 4000 !important;}
 
 
 
