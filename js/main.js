@@ -43,6 +43,7 @@ $(document).ready( function() {
         infowindow.close(); 
   });
 
+
   //search option for Maynooth Campus
   var point = new Array;
   var options = {
@@ -68,6 +69,22 @@ $(document).ready( function() {
     }
   }
   $("#searchCampus").easyAutocomplete(options)
+
+
+  //check if passwords equal each other
+  $('#password_su, #confirm_pass_su').on('input', function() {
+    var pass = $("#password_su").val();
+    var confirm_pass = $("#confirm_pass_su").val();
+    if(confirm_pass == pass){
+      $("#equal_pass").show();
+      $("#not_equal").hide();
+    }else{
+      $("#equal_pass").hide();
+      $("#not_equal").show();
+    }
+  });
+
+
 
   $('#origin').geocomplete();
   $('#destination').geocomplete();

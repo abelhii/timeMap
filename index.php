@@ -46,7 +46,6 @@
 	</script>
 	<script src="js/main.js" type="text/javascript"></script>
 	<script src="js/oauth.js" type="text/javascript"></script>
-	<script src="js/gcoauth2.js" type="text/javascript"></script>
 	<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 	<!--FullCalendar.io-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js" type="text/javascript"></script>
@@ -83,110 +82,187 @@
 				</div>
 			    <input id="sbtn" class="btn btn-success form-control" type="submit" value="Upload File" name="submit">
 				<input id="allLectures" class="btn btn-info" type="button" value="Display All Lectures" onclick="displayAllLectures();"></input>
+				<input id="signUp" class="btn btn-warning" type="button" data-toggle="modal" data-target="#sign_up" value="Sign Up" onclick=""></input>
+				<input id="login" class="btn btn-primary" type="button" data-toggle="modal" data-target="#log_in" value="Login" onclick=""></input>
 		    </div>
 
 			</div>
 		</form>	
 
-			    <!-- Info Modal -->
-				<div class="modal fade" id="howTo" role="dialog">
-					<div class="modal-dialog">
+		    <!-- Info Modal -->
+			<div class="modal fade" id="howTo" role="dialog">
+				<div class="modal-dialog">
 
-					  <!-- Modal content-->
-					  <div class="modal-content">
-					    <div class="modal-header">
-					      <button type="button" class="close" data-dismiss="modal">&times;</button>
-					      <h3 class="modal-title">FAQ:</h3>
-					    </div>
-					    <div class="modal-body">
-							<h4><b>Search Campus:</b></h4>
-							<input id="searchCampus" class="form-control" type="text" placeholder="Search Maynooth Campus">
-							<hr>
-					    	<h4><b>How to find your MU student timetable:</b></h4>
-					    	<p>
-					    		1. To find your timetable go to: 
-					    		<a href="https://apps.maynoothuniversity.ie/timetable/" target="_blank">https://apps.maynoothuniversity.ie/timetable/</a>
-					    		and login using your student details. <br>
-					    		2. Once you're logged in, you can download your timetable in Excel format as shown below.
-					    	</p>
-					    	<p>
-					    		Or try it with a sample timetable: <a href='excelFiles/nuim_student.xls' target="_blank">nuim_student.xls</a>
-				    		</p>
-					    	<img id="excelImg" src="imgs/excelFormat.PNG">
-					    	<hr>
-					    	<h4><b>How to make your google calendar public:</b></h4>
-					    	<p>
-								1. Go into the calendar settings for your primary calendar.<br>
-								2. Click the "Share this Calendar" tab.<br>
-								3. Tick the "Make this Calendar Public" box and save
-							</p>
-							<img id="gcHowTo" src="imgs/gcHowTo.PNG">
-					    </div>
-					    <div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						</div>
-					  </div>
-					  
+				  <!-- Modal content-->
+				  <div class="modal-content">
+				    <div class="modal-header">
+				      <button type="button" class="close" data-dismiss="modal">&times;</button>
+				      <h3 class="modal-title">FAQ:</h3>
+				    </div>
+				    <div class="modal-body">
+						<h4><b>Search Campus:</b></h4>
+						<input id="searchCampus" class="form-control" type="text" placeholder="Search Maynooth Campus">
+						<hr>
+				    	<h4><b>How to find your MU student timetable:</b></h4>
+				    	<p>
+				    		1. To find your timetable go to: 
+				    		<a href="https://apps.maynoothuniversity.ie/timetable/" target="_blank">https://apps.maynoothuniversity.ie/timetable/</a>
+				    		and login using your student details. <br>
+				    		2. Once you're logged in, you can download your timetable in Excel format as shown below.
+				    	</p>
+				    	<p>
+				    		Or try it with a sample timetable: <a href='excelFiles/nuim_student.xls' target="_blank">nuim_student.xls</a>
+			    		</p>
+				    	<img id="excelImg" src="imgs/excelFormat.PNG">
+				    	<hr>
+				    	<h4><b>How to make your google calendar public:</b></h4>
+				    	<p>
+							1. Go into the calendar settings for your primary calendar.<br>
+							2. Click the "Share this Calendar" tab.<br>
+							3. Tick the "Make this Calendar Public" box and save
+						</p>
+						<img id="gcHowTo" src="imgs/gcHowTo.PNG">
+				    </div>
+				    <div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
+				  </div>
+				  
 				</div>
+			</div>
 
-				<!-- Get Directions -->
-				<div class="modal fade" id="getDir" tabindex="-1" role="dialog">
-					<div class="modal-dialog">
-					  <!-- Modal content-->
-					  <div class="modal-content">
-					    <div class="modal-header">
-					      <button type="button" class="close" data-dismiss="modal">&times;</button>
-					      <h4 class="modal-title">Get Directions</h4>
-					    </div>
-					    <div class="modal-body">
-					    	<form class="form-horizontal">
-					    		<div class="form-group">
-									<label class="control-label col-xs-2 col-sm-2">Origin:</label>
-									<div class="col-xs-8 col-sm-8">
-										<input class="form-control" type="text" id="origin" name="origin">
-									</div>
-									<i class="btn col-xs-1 col-sm-1 material-icons" onclick="findLocation();">my_location</i>
-									<div class="col-sm-1"></div>
+			<!-- Get Directions -->
+			<div class="modal fade" id="getDir" tabindex="-1" role="dialog">
+				<div class="modal-dialog">
+				  <!-- Modal content-->
+				  <div class="modal-content">
+				    <div class="modal-header">
+				      <button type="button" class="close" data-dismiss="modal">&times;</button>
+				      <h4 class="modal-title">Get Directions</h4>
+				    </div>
+				    <div class="modal-body">
+				    	<form class="form-horizontal">
+				    		<div class="form-group">
+								<label class="control-label col-xs-2 col-sm-2">Origin:</label>
+								<div class="col-xs-8 col-sm-8">
+									<input class="form-control" type="text" id="origin" name="origin">
 								</div>
-								<div class="form-group">
-									<label class="control-label col-xs-2 col-sm-2">Destination:</label>
-									<div class="col-xs-8 col-sm-8">
-										<input class="form-control" type="text" id="destination" name="destination">
-									</div>
+								<i class="btn col-xs-1 col-sm-1 material-icons" onclick="findLocation();">my_location</i>
+								<div class="col-sm-1"></div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-xs-2 col-sm-2">Destination:</label>
+								<div class="col-xs-8 col-sm-8">
+									<input class="form-control" type="text" id="destination" name="destination">
 								</div>
-								<div class="form-group">
-									<label id="mode_lbl" class="control-label col-xs-2 col-sm-2">Mode of Transport:</label>
-									<select id="mode" class="col-xs-6 col-sm-6">
-										<option value="DRIVING">Driving</option>
-										<option value="WALKING">Walking</option>
-										<option value="BICYCLING">Cycling</option>
-										<option value="TRANSIT">Transit</option>
-									</select>
-									<div class="btn-group col-xs-4 col-sm-4" id="transit_btn" style="visibility: hidden;">
-									  <button id="bus" type="button" class="btn" >Bus</button>
-									  <button id="train" type="button" class="btn" >Train</button>
-									</div>
+							</div>
+							<div class="form-group">
+								<label id="mode_lbl" class="control-label col-xs-2 col-sm-2">Mode of Transport:</label>
+								<select id="mode" class="col-xs-6 col-sm-6">
+									<option value="DRIVING">Driving</option>
+									<option value="WALKING">Walking</option>
+									<option value="BICYCLING">Cycling</option>
+									<option value="TRANSIT">Transit</option>
+								</select>
+								<div class="btn-group col-xs-4 col-sm-4" id="transit_btn" style="visibility: hidden;">
+								  <button id="bus" type="button" class="btn" >Bus</button>
+								  <button id="train" type="button" class="btn" >Train</button>
 								</div>
-								<div class="form-group">
-									<p id="duration" class="col-xs-4 col-sm-4"><b></b></p>
-									<p id="distance" class="col-xs-4 col-sm-4"><b></b></p>
-									<p id="departure" class="col-xs-4 col-sm-4"><b></b></p>
-								</div>
-								<div class="form-group">
-									<p class="col-xs-4 col-sm-4"><b></b></p>
-									<p class="col-xs-4 col-sm-4"><b></b></p>
-									<p id="arrival" class="col-xs-4 col-sm-4"><b></b></p>
-								</div>
-							    <div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal" style="float:left">Close</button>
-									<input type="submit" class="btn btn-default" value="Go">
-								</div>
-							</form>
-					    </div>
-					  </div>					  
-					</div>
+							</div>
+							<div class="form-group">
+								<p id="duration" class="col-xs-4 col-sm-4"><b></b></p>
+								<p id="distance" class="col-xs-4 col-sm-4"><b></b></p>
+								<p id="departure" class="col-xs-4 col-sm-4"><b></b></p>
+							</div>
+							<div class="form-group">
+								<p class="col-xs-4 col-sm-4"><b></b></p>
+								<p class="col-xs-4 col-sm-4"><b></b></p>
+								<p id="arrival" class="col-xs-4 col-sm-4"><b></b></p>
+							</div>
+						    <div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal" style="float:left">Close</button>
+								<input type="submit" class="btn btn-default" value="Go">
+							</div>
+						</form>
+				    </div>
+				  </div>					  
 				</div>
+			</div>
+
+			<!-- Sign Up -->
+			<div class="modal fade" id="sign_up" tabindex="-1" role="dialog">
+				<div class="modal-dialog">
+				  <!-- Modal content-->
+				  <div class="modal-content">
+				    <div class="modal-header">
+				      <button type="button" class="close" data-dismiss="modal">&times;</button>
+				      <h4 class="modal-title">Sign Up</h4>
+				    </div>
+				    <div class="modal-body">
+				    	<form class="form-horizontal">
+				    		<div class="form-group">
+								<label class="control-label col-xs-2 col-sm-2">Username:</label>
+								<div class="col-xs-8 col-sm-8">
+									<input class="form-control" type="text" id="username_su" name="username_su">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-xs-2 col-sm-2">Password:</label>
+								<div class="col-xs-8 col-sm-8">
+									<input class="form-control" type="password" id="password_su" name="password_su">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-xs-2 col-sm-2">Confirm Password:</label>
+								<div class="col-xs-8 col-sm-8">
+									<input class="form-control" type="password" id="confirm_pass_su" name="confirm_pass">
+								</div>
+								<i id="equal_pass" class="col-xs-1 col-sm-1 fa fa-check-circle fa-2x" style="color:green; display:none;"></i>
+								<i id="not_equal" class="col-xs-1 col-sm-1 fa fa-times-circle fa-2x" style="color:red; display:none;"></i>
+							</div>
+						    <div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal" style="float:left">Cancel</button>
+								<input type="submit" class="btn btn-default" value="Sign Up">
+							</div>
+						</form>
+				    </div>
+				  </div>					  
+				</div>
+			</div>
+
+			<!-- Login -->
+			<div class="modal fade" id="log_in" tabindex="-1" role="dialog">
+				<div class="modal-dialog">
+				  <!-- Modal content-->
+				  <div class="modal-content">
+				    <div class="modal-header">
+				      <button type="button" class="close" data-dismiss="modal">&times;</button>
+				      <h4 class="modal-title">Login</h4>
+				    </div>
+				    <div class="modal-body">
+				    	<form class="form-horizontal">
+				    		<div class="form-group">
+								<label class="control-label col-xs-2 col-sm-2">Username:</label>
+								<div class="col-xs-8 col-sm-8">
+									<input class="form-control" type="text" id="username" name="username">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-xs-2 col-sm-2">Password:</label>
+								<div class="col-xs-8 col-sm-8">
+									<input class="form-control" type="password" id="password" name="password">
+								</div>
+							</div>
+						    <div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal" style="float:left">Cancel</button>
+								<input type="submit" class="btn btn-default" value="Login">
+							</div>
+						</form>
+				    </div>
+				  </div>					  
+				</div>
+			</div>
+
 
 
 		<!---*** Tab layout for calendar and map ***-->
