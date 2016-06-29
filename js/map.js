@@ -51,6 +51,20 @@ function initMap() {
   });
 
 
+  /*var service = new google.maps.places.PlacesService(map);
+  service.nearbySearch({
+    location: {lat: 53.382207, lng: -6.598396},
+    radius: 800,
+    type: ['bus_station']
+  }, function callback(results, status) {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+          newMarker(results[i].geometry.location, results[i].name, "", "");
+        }
+      }
+  });*/
+
+
 
   /*------------------------SEARCH BAR-----------------------------------*/
   // This example adds a search box to a map, using the Google Place Autocomplete
@@ -63,8 +77,8 @@ function initMap() {
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
    /*-----SEARCH MAYNOOTH UNIVERSITY-----*/
-  var inputC = document.getElementById('searchCampus');
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputC);
+  //var inputC = document.getElementById('searchCampus');
+  //map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputC);
 
 	// Bias the SearchBox results towards current map's viewport.
 	map.addListener('bounds_changed', function() {
@@ -115,6 +129,7 @@ function initMap() {
 	});
   // [END region_getplaces]
 }
+
 
 
 // Sets the map on all markers in the array.

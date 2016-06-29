@@ -24,7 +24,6 @@ function login() {
                 win.close();
 
                 validateToken(acToken);
-                
             }
         } catch(e) {
         }

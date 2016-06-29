@@ -44,30 +44,30 @@ $(document).ready( function() {
   });
 
   //search option for Maynooth Campus
+  var point = new Array;
   var options = {
     url: "mu_campus.json",
-
     getValue: "name",
-
     list: {
+      /*onSelectItemEvent: function(){
+        var selected_bld = $("#searchCampus").getSelectedItemData().name;
+        console.log(selected_bld);
+        getLocation(selected_bld, point, "", "", false);
+      },*/
+      onHideListEvent: function() {
+        if($("#searchCampus").val() != ""){
+          //switch to Maps tab:
+          $('#tabs a[href="#gMap"]').tab('show');
+          getLocation($("#searchCampus").val(), point, "", "", false);
+          $('#howTo').modal('hide'); 
+        }
+      },
       match: {
         enabled: true
       }
     }
   }
-  $("#searchCampus").easyAutocomplete(options);
-
-  var point = new Array;
-  document.getElementById("searchCampus")
-      .addEventListener("keyup", function(event) {
-      event.preventDefault();
-      if (event.keyCode == 13) {
-        var building_name = document.getElementById("searchCampus").value;
-        getLocation(building_name, point, "", "", false);
-        //document.getElementById("searchCampus").click();
-      }
-  });
-
+  $("#searchCampus").easyAutocomplete(options)
 
   $('#origin').geocomplete();
   $('#destination').geocomplete();
@@ -245,21 +245,21 @@ function initialiseCal(){
         
         //open event in a seperate tab if it has a URL (google calendar)
         if (event.url) {
-            window.open(event.url);
-            return false;
+          window.open(event.url);
+          return false;
         }
       },
       eventRender: function (event, element) {
         //Right Click to delete single event:
         element.bind('mousedown', function (e) {
             if (e.which == 3) {
-                if(confirm('Are you sure you want to delete this event?')){
-                  $('#calendarr').fullCalendar('removeEvents', event.id);
-                  if(event.url != null)//check to see if its a gcal event:
-                    deleteGCalEvent();
-                }else{
-                  return false;
-                }
+              if(confirm('Are you sure you want to delete this event?')){
+                $('#calendarr').fullCalendar('removeEvents', event.id);
+                if(event.url != null)//check to see if its a gcal event:
+                  deleteGCalEvent();
+              }else{
+                return false;
+              }
             }
         });
       }

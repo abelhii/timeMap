@@ -128,14 +128,13 @@ body{
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
 #gmap .tab-pane .fade{
   height:0px;
   width:0px;
   margin:0px;
 }
 
-#searchMap, #searchCampus{
+#searchMap{
   background-color: #fff;
   font-family: Arial;
   font-size: 15px;
@@ -145,7 +144,7 @@ body{
   text-overflow: ellipsis;
   width: 300px;
 }
-#searchMap:focus ,#searchCampus:focus{
+#searchMap:focus, #searchCampus:focus{
   border-color: #4d90fe;
 }
 .searchMap-container{
@@ -173,6 +172,10 @@ body{
   font-weight: 300;
 }
 .pac-container{z-index: 4000 !important;}
+
+#searchCampus, #eac-container-searchCampus{
+  width: 55vh;
+}
 
 
 

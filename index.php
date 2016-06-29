@@ -99,6 +99,9 @@
 					      <h3 class="modal-title">FAQ:</h3>
 					    </div>
 					    <div class="modal-body">
+							<h4><b>Search Campus:</b></h4>
+							<input id="searchCampus" class="form-control" type="text" placeholder="Search Maynooth Campus">
+							<hr>
 					    	<h4><b>How to find your MU student timetable:</b></h4>
 					    	<p>
 					    		1. To find your timetable go to: 
@@ -110,7 +113,7 @@
 					    		Or try it with a sample timetable: <a href='excelFiles/nuim_student.xls' target="_blank">nuim_student.xls</a>
 				    		</p>
 					    	<img id="excelImg" src="imgs/excelFormat.PNG">
-				    		<br><br>
+					    	<hr>
 					    	<h4><b>How to make your google calendar public:</b></h4>
 					    	<p>
 								1. Go into the calendar settings for your primary calendar.<br>
@@ -186,7 +189,6 @@
 				</div>
 
 
-
 		<!---*** Tab layout for calendar and map ***-->
 		<ul id="tabs" class="nav nav-tabs nav-justified nav-size">
 			<li class="active" ><a data-toggle="tab" href="#gMap">Map</a></li>
@@ -196,7 +198,6 @@
 		<div class="tab-content">
 			<!--Map-->
 			<input id="searchMap" class="controls" type="text" placeholder="Search Google Maps">
-			<input id="searchCampus" class="controls pac-container" type="text" placeholder="Search Maynooth Campus" style="position: relative; z-index: 9999 !important;">
 			<div id="gMap" class="tab-pane fade in active"></div>
 			
 			<!--Calendar-->
