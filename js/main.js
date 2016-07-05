@@ -1,5 +1,8 @@
 //For Browse style feedback to user to show what file they uploaded:
 //http://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3/
+var passEquals = false;
+var pass, confirm_pass, username;
+
 $(document).on('change', '.btn-file :file', function() {
   var input = $(this),
   numFiles = input.get(0).files ? input.get(0).files.length : 1,
@@ -73,14 +76,16 @@ $(document).ready( function() {
 
   //check if passwords equal each other
   $('#password_su, #confirm_pass_su').on('input', function() {
-    var pass = $("#password_su").val();
-    var confirm_pass = $("#confirm_pass_su").val();
+    pass = $("#password_su").val();
+    confirm_pass = $("#confirm_pass_su").val();
     if(confirm_pass == pass){
       $("#equal_pass").show();
       $("#not_equal").hide();
+      passEquals = true;
     }else{
       $("#equal_pass").hide();
       $("#not_equal").show();
+      passEquals = false;
     }
   });
 
@@ -126,7 +131,6 @@ $(window).unload(function() {
 
     return false;
 });
-
 
 
 //*******COOKIES*******//
@@ -259,7 +263,7 @@ function initialiseCal(){
         //switch to Google Map tab and place location marker:
         if(getPos)
           $('#tabs a[href="#gMap"]').tab('show');
-        
+
         //open event in a seperate tab if it has a URL (google calendar)
         if (event.url) {
           window.open(event.url);
@@ -386,19 +390,19 @@ function getPos(event, pointArr, start, end, nMark){
     type: "POST",
     data: { eventTitle: event},
     success: function(data){
-        console.log(data);
+      console.log(data);
     },
     complete: function (response) {
-        pointArr = getLatLng(response.responseText);
-        //var pos = {lat:  , lng: };
-        var pos = new google.maps.LatLng(parseFloat(pointArr[1]),parseFloat(pointArr[0]));
-        if(nMark)
-          newMarker(pos, event, start, end);
-        else
-          placeMarker(pos, event, start, end);
+      pointArr = getLatLng(response.responseText);
+      //var pos = {lat:  , lng: };
+      var pos = new google.maps.LatLng(parseFloat(pointArr[1]),parseFloat(pointArr[0]));
+      if(nMark)
+        newMarker(pos, event, start, end);
+      else
+        placeMarker(pos, event, start, end);
     },
     error: function () {
-        $('#output').html('there was an error!');
+      $('#output').html('there was an error!');
     }
   });
 }
@@ -493,6 +497,70 @@ function deleteGCalEvent(){
 }
 //****************************************************************************************//
 
+
+
+
+
+/****************SIGN UP********************************************/
+$(function(){
+  $('#sign_up').submit(function(event) {
+    event.preventDefault(); // on submit prevent page from refreshing on submit
+    username = $.trim($("#username_su").val());
+
+    if(passEquals && username != "" && confirm_pass != "" && pass != "")
+      sendUserDetails('PHP/signup_mdb.php' ,username, pass, true);
+    else if(!passEquals)
+      alert("password not equal!");
+    else
+      alert("username/password field can't be empty");
+
+  });
+});
+
+
+/***************LOG IN************************************************/
+$(function(){
+  $('#log_in').submit(function(event) {
+    event.preventDefault(); // on submit prevent page from refreshing on submit
+    username = $.trim($("#username").val());
+    var password = $("#password").val();
+
+    if(username != "" && password != "")
+      sendUserDetails('PHP/login_mdb.php', username, pass, false);
+    else
+      alert("username/password field can't be empty");
+
+  });
+});
+
+
+
+
+/***************SEND DETAILS*********************************/
+function sendUserDetails(dbFile, user, pass, signup){
+  $.ajax({
+    url: dbFile,
+    type: "POST",
+    data: { username: user,
+            password: pass
+    },
+    success: function(data){
+      $('#output').html(data);
+      //$('#login').hide();
+      //if(signup)
+        //$('#signup').modal('toggle'); //close login modal       
+      //else
+        //$('#log_in').modal('toggle'); //close login modal
+      //$('#profilem').modal('toggle'); //open profile modal
+      //$('#profile').show();
+      //$('#profile').val(user);
+    },
+    error: function(data){
+      console.log(data['status']);
+      $('#output').html(data+'</br>'+data['status']+'</br>there was an error');
+    }
+  });
+}
 
 //for google calendar reference needed to add gcal:
 //var gcal = $.fullCalendar.gcalFeed(source); // the reference

@@ -1,4 +1,4 @@
-<?php
+ <?php
 //***EXTRACTS DATA FROM STUDENT TIMETABLE***// 
 //***ONLY WORKS WITH MAYNOOTH UNIVERSITY TIMETABLE***//
 /*******************SET UP**************************/

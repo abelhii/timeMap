@@ -8,6 +8,8 @@
 		$_SESSION['sem1_JSON'] = $_POST["sem1_JSON"];
 	if(isset($_POST["sem2_JSON"]))
 		$_SESSION['sem2_JSON'] = $_POST["sem2_JSON"];
+	if(isset($_SESSION['username']))
+		$user = $_SESSION['username'];
 
 	//print_r($_SESSION['sem1_JSON']);
 ?>
@@ -45,6 +47,7 @@
 		}
 	</script>
 	<script src="js/main.js" type="text/javascript"></script>
+	<script src="js/fb_login.js" type="text/javascript"></script>
 	<script src="js/oauth.js" type="text/javascript"></script>
 	<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 	<!--FullCalendar.io-->
@@ -82,8 +85,11 @@
 				</div>
 			    <input id="sbtn" class="btn btn-success form-control" type="submit" value="Upload File" name="submit">
 				<input id="allLectures" class="btn btn-info" type="button" value="Display All Lectures" onclick="displayAllLectures();"></input>
-				<input id="signUp" class="btn btn-warning" type="button" data-toggle="modal" data-target="#sign_up" value="Sign Up" onclick=""></input>
-				<input id="login" class="btn btn-primary" type="button" data-toggle="modal" data-target="#log_in" value="Login" onclick=""></input>
+				<!--input id="signUp" class="btn btn-warning" type="button" data-toggle="modal" data-target="#sign_up" value="Sign Up" onclick=""></input>
+				<input id="profile" class="btn btn-primary" type="button" data-toggle="modal" data-target="#profilem" value="" style="display:none;"></input>-->
+				<input id="login" class="btn btn-primary" type="button" data-toggle="modal" data-target="#log_in" value="Login" style="display:show"></input>
+				<!-- LOGIN -->
+			
 		    </div>
 
 			</div>
@@ -237,7 +243,43 @@
 				  <div class="modal-content">
 				    <div class="modal-header">
 				      <button type="button" class="close" data-dismiss="modal">&times;</button>
-				      <h4 class="modal-title">Login</h4>
+				      <h4 id="status" class="modal-title"></h4>
+				    </div>
+				    <div class="modal-body">
+				    	<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" onlogin="checkLoginState();"></div>
+				    	<br><br>
+						<input id="saveCal" class="btn btn-warning" type="button" value="Save Calendar" style="display:none;"></input>
+				    	<!--form class="form-horizontal">
+				    		<div class="form-group">
+								<label class="control-label col-xs-2 col-sm-2">Username:</label>
+								<div class="col-xs-8 col-sm-8">
+									<input class="form-control" type="text" id="username" name="username">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-xs-2 col-sm-2">Password:</label>
+								<div class="col-xs-8 col-sm-8">
+									<input class="form-control" type="password" id="password" name="password">
+								</div>
+							</div>
+						    <div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal" style="float:left">Cancel</button>
+								<input type="submit" class="btn btn-default" value="Login">
+							</div>
+						</form-->
+				    </div>
+				  </div>					  
+				</div>
+			</div>
+
+			<!-- User Profile -->
+			<div class="modal fade" id="profilem" tabindex="-1" role="dialog">
+				<div class="modal-dialog">
+				  <!-- Modal content-->
+				  <div class="modal-content">
+				    <div class="modal-header">
+				      <button type="button" class="close" data-dismiss="modal">&times;</button>
+				      <h4 class="modal-title">Welcome <?php echo $user ?></h4>
 				    </div>
 				    <div class="modal-body">
 				    	<form class="form-horizontal">
@@ -262,7 +304,6 @@
 				  </div>					  
 				</div>
 			</div>
-
 
 
 		<!---*** Tab layout for calendar and map ***-->
