@@ -1,12 +1,11 @@
 <?php
 	//****USED TO SWITCH AND DISPLAY SEMESTERS****//
 	session_start();
-	if(isset($_SESSION['sem1_JSON'])){
+	if(isset($_SESSION['sem1_JSON']))
 		$sem1_JSON = $_SESSION['sem1_JSON'];
-	}
-	if(isset($_SESSION['sem2_JSON'])){
+	if(isset($_SESSION['sem2_JSON']))
 		$sem2_JSON = $_SESSION['sem2_JSON'];
-	}
+
 
 	if($_GET["sem"] == "sem1" && !empty($sem1_JSON)){
 		echo json_encode($sem1_JSON);		

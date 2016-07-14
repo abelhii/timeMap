@@ -1,7 +1,7 @@
 //For Browse style feedback to user to show what file they uploaded:
 //http://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3/
 var passEquals = false;
-var pass, confirm_pass, username;
+var pass, confirm_pass, username, edit;
 
 $(document).on('change', '.btn-file :file', function() {
   var input = $(this),
@@ -90,10 +90,15 @@ $(document).ready( function() {
   });
 
 
+  //on modal close
+  $('#addEvent-modal').on('hidden.bs.modal', function () {
+    $('#delete_btn').hide();
+  })
+
 
   $('#origin').geocomplete();
   $('#destination').geocomplete();
-  $('#where_event').geocomplete(); //autocompletes location field like in Google Maps *************************************************************
+  $('#location').geocomplete(); //autocompletes location field like in Google Maps
 });
 
 //For bootstrap tabs to work with hashes, to enable switching tabs with the URL:
@@ -120,6 +125,7 @@ function myFunction(event){
     return console.log(false);
     //return false;
 }*/
+
 
 //****DOESNT WORK IN CHROME FOR SOME REASON :/
 //change the url to prevent reuse of token on refresh
@@ -172,6 +178,7 @@ window.onload = function() {
     });
 }
 console.log(readCookie('gLoggedin'));
+console.log(readCookie('loggedin'));
 //*********************//
 
 
@@ -211,12 +218,13 @@ function initialiseCal(){
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'agendaWeek,agendaDay'
+        right: 'month,agendaWeek,agendaDay'
       },
       prev: function(){
         alert("test");
       },
       defaultView: 'agendaWeek',
+      allDaySlot:false,
       editable: true,
       eventLimit: true, // allow "more" link when too many events
       minTime:'7:00',
@@ -242,47 +250,69 @@ function initialiseCal(){
           if(allEvents[i].color != "#ffee55")
             return stillEvent.allDay && movingEvent.allDay;
       },
-      //FOR ADD EVENT TO GOOGLE CALENDAR:
+      //FOR ADD EVENT //TO GOOGLE CALENDAR:
       select: function(start, end) {
-        if(readCookie('gLoggedin') == 'true')
-          addEvent(start.format(), end.format());//moment(start).format('dddd hh:mm a'),moment(end).format('dddd hh:mm a'));
+        if(readCookie('loggedin') == 'true')
+          addEvent(start.format(), end.format(), false);//moment(start).format('dddd hh:mm a'),moment(end).format('dddd hh:mm a'));
       },
       eventClick: function(event, jsEvent, view) {
+        curr_event = event;
         //On CLick event for when the user clicks an item in the calendar:
         var point = new Array();
         //format the time to be readable using 'moment'
         var start = moment(event.start).format('dddd: hh:mm');
         var end = moment(event.end).format('hh:mm');
 
-        //javascript to read json of locations
-        getLocation(event.title, point, start, end, false);
+        if(readCookie('loggedin') == 'false' || event.source.color == "#ffee55"){ //open modal of events
+          //ajax to call php function to query sql which will show the location of the lecture.
+          //getPos(event.title, point, start, end, false);
+          getLocation(event.title, point, start, end, false); //get location of campus buildings
+        }else if(readCookie('loggedin') == 'true' && event.source.color != "#ffee55"){
+          editEvent(event.title, event.location, event.description, start, end, true);
+        }
 
-        //ajax to call php function to query sql which will show the location of the lecture.
-        //getPos(event.title, point, start, end, false);
-
-        //switch to Google Map tab and place location marker:
-        if(getPos)
-          $('#tabs a[href="#gMap"]').tab('show');
-
-        //open event in a seperate tab if it has a URL (google calendar)
-        if (event.url) {
+        
+        if (event.url) {//open event in a seperate tab if it has a URL (google calendar)
           window.open(event.url);
           return false;
         }
       },
       eventRender: function (event, element) {
-        //Right Click to delete single event:
-        element.bind('mousedown', function (e) {
-            if (e.which == 3) {
-              if(confirm('Are you sure you want to delete this event?')){
-                $('#calendarr').fullCalendar('removeEvents', event.id);
-                if(event.url != null)//check to see if its a gcal event:
-                  deleteGCalEvent();
-              }else{
-                return false;
-              }
-            }
+        element.bind('dblclick', function() {
+          if(event.source.color == '#ffee55'){
+            setTimeout(function() {
+              $('#addEvent-modal').modal('hide');
+            }, 260);
+            var point = new Array();
+            var start = moment(event.start).format('dddd: hh:mm');
+            var end = moment(event.end).format('hh:mm');
+            getLocation(event.title, point, start, end, false); //get location of campus buildings
+          }
         });
+        
+        if(readCookie('loggedin') == 'true'){ //right click to get location if user is logged in
+          element.bind('mousedown', function (e) {
+              if (e.which == 3) {
+                
+                if(event.source.color == '#ffee55'){
+                  var point = new Array();
+                  var start = moment(event.start).format('dddd: hh:mm');
+                  var end = moment(event.end).format('hh:mm');
+                  getLocation(event.title, point, start, end, false); //get location of campus buildings
+                }
+                else{
+                  return false;
+                }
+                /*if(confirm('Are you sure you want to delete this event?')){
+                  $('#calendarr').fullCalendar('removeEvents', event.id);
+                  if(event.url != null)//check to see if its a gcal event:
+                    deleteGCalEvent();
+                }else{
+                  return false;
+                }*/
+              }
+          });
+        }
       }
     });
 
@@ -325,63 +355,13 @@ function getLocation(event, pointArr, start, end, nMark){
   //var pos = {lat:  , lng: };
   var pos = new google.maps.LatLng(parseFloat(pointArr[1]),parseFloat(pointArr[0]));
   if(pos != null){
+    $('#tabs a[href="#gMap"]').tab('show'); //switch to google maps tab
     if(nMark)
       newMarker(pos, event, start, end);
     else
       placeMarker(pos, event, start, end);
   }
 }
-
-
-
-/****Insert Google Event****/
-var newID = 100;
-function addEvent(start, end){
-  $('#addEvent-modal').modal('show');
-  $('#start').attr('value', start);
-  $('#end').attr('value', end);
-}
-
-/*********** We get the form data ****************/ 
-$(function(){
-  $('#addEvent-modal').submit(function(event) {
-      event.preventDefault(); // on submit prevent page from refreshing on submit
-      //get the data from modal
-      var title = $('#title').val();
-      var start = $('#start').val();
-      var end = $('#end').val();
-      var where_event = $('#where_event').val();
-      var description = $('#content_event').val();
-
-      // because we want immediate reaction of FullCalendar, we render the created event on the FullCalendar, even if it's only temporarily
-      if (title) {
-        $('#calendarr').fullCalendar('renderEvent',
-            {
-              title: title,
-              id: newID,
-              start: start,
-              end: end,
-              color:'#CF5656' //shade of red
-            },
-            true // make the event "stick"
-        );
-
-        // Now we push it to Google:
-        var gLoggedin = readCookie('gLoggedin');
-        if(gLoggedin == 'true'){
-          sendEvents(title, start, end, where_event, description); 
-        }
-      }
-
-      // Wether we had the form fulfilled or not, we clean FullCalendar and close the popup  
-      newID++; 
-      $('#calendarr').fullCalendar('unselect');
-      $('#addEvent-modal').modal('hide');
-  });
-
-});
-
-
 
 //ajax for sql query to get the locations of lectures:
 function getPos(event, pointArr, start, end, nMark){
@@ -423,9 +403,9 @@ function getLatLng(point){
 function displayAllLectures(){
     //remove previous markers:
     clearMarkers();
-    //switch to Maps tab:
-    $('#tabs a[href="#gMap"]').tab('show');
-
+    //so it doesnt return all the events in the one month
+    $(".fc-agendaWeek-button").click;//***************************************************************************************************
+    $('#tabs a[href="#gMap"]').tab('show');//switch to Maps tab:
     var start, end;
     var pointArr = new Array;
     var event = getAllLectures('source');
@@ -443,6 +423,7 @@ function displayAllLectures(){
         //TODO: GET AND DISPLAY GOOGLE CALENDAR EVENT LOCATION
     }
 }
+
 //gets filtered events in fullcalendar 
 function getAllLectures(filter){
   var events = $('#calendarr').fullCalendar('clientEvents', function(evt) {
@@ -499,6 +480,96 @@ function deleteGCalEvent(){
 
 
 
+/********************ADD EVENT********************************************/
+/****Insert Google Event****/
+function addEvent(start, end, eventFlag){
+  $('#title').val("");
+  $('#location').val("");
+  $('#description').val("");
+  $('#start').val(start);
+  $('#end').val(end);
+  $('#eventFlag').val(eventFlag);
+  $('#addEvent-modal').modal('show');
+}
+
+/*******************EDIT EVENT**************************************/
+function editEvent(title, location, descr, start, end, eventFlag){
+  $('#delete_btn').show();
+  $('#title').val(title);
+  $('#location').val(location);
+  $('#description').val(descr);
+  $('#start').val(start);
+  $('#end').val(end);
+  $('#eventFlag').val(eventFlag);
+  setTimeout(function() {
+    $('#addEvent-modal').modal('show');
+  }, 260);
+}
+
+
+/*********** We get the form data ****************/ 
+var tempid=1000;
+$(function(){
+  $('#addEvent-modal').submit(function(event) {
+      event.preventDefault(); // on submit prevent page from refreshing on submit
+      //get the data from modal
+      var title = $('#title').val();
+      var start = $('#start').val();
+      var end = $('#end').val();
+      var location = $('#location').val();
+      var description = $('#description').val();
+      var eventFlag = $('#eventFlag').val();
+
+      if(eventFlag == "true"){ //update event
+        console.log(curr_event);
+        curr_event.title = title;
+        curr_event.location = location;
+        curr_event.description = description;
+       /* $.extend(curr_event, {
+            title: title,
+            start: moment(start, 'YYYY-MM-DDTHH:mm:ss'),
+            end: moment(end, 'YYYY-MM-DDTHH:mm:ss'),
+            location: location,
+            description: description
+        });*/
+        $('#calendarr').fullCalendar('updateEvent', curr_event);
+      }else{ // because we want immediate reaction of FullCalendar, we render the created event on the FullCalendar, even if it's only temporarily
+        if (title) {
+          $('#calendarr').fullCalendar('renderEvent',
+              {
+                id: tempid++,
+                title: title,
+                start: start,
+                end: end,
+                location: location,
+                description: description,
+                color:'#CF5656' //shade of red
+              },
+              true // make the event "stick"
+          );
+
+          // Now we push it to Google:
+          var gLoggedin = readCookie('gLoggedin');
+          if(gLoggedin == 'true'){
+            sendEvents(title, start, end, location, description); 
+          }
+        }else{
+          alert("oops title is empty!");
+        }
+      }
+
+      // Wether we had the form fulfilled or not, we clean FullCalendar and close the popup  
+      $('#calendarr').fullCalendar('unselect');
+      $('#addEvent-modal').modal('hide');
+  });
+
+});
+
+function deleteEvent(){
+  if(confirm('Are you sure you want to delete this event?'))
+    $('#calendarr').fullCalendar('removeEvents', curr_event.id);
+}
+
 
 
 /****************SIGN UP********************************************/
@@ -537,12 +608,12 @@ $(function(){
 
 
 /***************SEND DETAILS*********************************/
-function sendUserDetails(dbFile, user, pass, signup){
+function sendUserDetails(dbFile, userId, events, signup){
   $.ajax({
     url: dbFile,
     type: "POST",
-    data: { username: user,
-            password: pass
+    data: { userId: userId,
+            events: events
     },
     success: function(data){
       $('#output').html(data);
@@ -556,7 +627,7 @@ function sendUserDetails(dbFile, user, pass, signup){
       //$('#profile').val(user);
     },
     error: function(data){
-      console.log(data['status']);
+      console.log(data);
       $('#output').html(data+'</br>'+data['status']+'</br>there was an error');
     }
   });

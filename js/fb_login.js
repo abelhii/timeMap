@@ -72,6 +72,48 @@ window.fbAsyncInit = function() {
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
+
+
+
+//handles converting circular structure to json
+function censor(censor) { 
+  var i = 0;
+  return function(key, value) {
+    if(i !== 0 && typeof(censor) === 'object' && typeof(value) == 'object' && censor == value) 
+      return '';//'[Circular]'; 
+    if(i >= 29) // seems to be a harded maximum of 30 serialized objects?
+      return '[Unknown]';
+    ++i; // so we know we aren't using the original object anymore
+    return value;  
+  }
+}
+
+function getEvents(userId){ //load events wehn user logs in
+  $.ajax({
+    url: 'PHP/getEvents.php',
+    type: "POST",
+    data: {userId: userId},
+    success: function(data){
+      $('#output').html(data);
+      timetable = '../timeMap/PHP/getEvents.php';
+      //remove events
+      $('#calendarr').fullCalendar('removeEventSource', '../timeMap/PHP/timetable_json.php?sem=sem1');
+      $('#calendarr').fullCalendar('removeEventSource', '../timeMap/PHP/timetable_json.php?sem=sem2');
+      //add events switch events
+      /*$('#calendarr').fullCalendar('addEventSource', {
+                  url: timetable,
+                  color:'#ffee55',
+                  textColor:'#555'
+      });*/
+      $('#calendarr').fullCalendar('renderEvent', data, true);
+    },
+    error: function(data){
+      console.log(data);
+      $('#output').html(data+'</br>'+data['status']+'</br>there was an error');
+    }
+  });
+}
+
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
 function testAPI(connected) {
@@ -81,18 +123,50 @@ function testAPI(connected) {
     
     if(connected){//if account is connected
       console.log('Successful login for: ' + response.name);
+      
+
+      writeCookie('loggedin', 'true', 1);//to notify fullcalendar that the user is logged in
       login.value = response.name;
       login.className = "btn btn-warning"
       document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
       $('#saveCal').show();
 
-      $('#saveCal').click(function(){
-        sendUserDetails('PHP/signup_mdb.php', response.id, "testing testing", true);
+
+      $('#saveCal').click(function(){ //the user will click this to save their calendar in the database
+        var events = getAllLectures('source');
+        var jsonev = "";//= JSON.stringify(events[0], censor(events[0])); 
+        var createEvent, desc = "", loc = "" ;
+
+        if(events[0] != null){
+          for(var i = 0; i<=events.length; i++){
+            try{
+              console.log(events[i]);
+              console.log(events[i].description);
+              if(events[i].description != null)
+                desc = events[i].description;
+              if(events[i].location != null)
+                loc = events[i].location;
+              createEvent = "{"+
+                               "title:" + events[i].title   +","+
+                               "start:" + events[i].start._d +","+
+                               "end:" + events[i].end._d   +","+
+                               "description: "+ desc + "," +
+                               "location: "+ loc +
+                            "}"
+              jsonev = jsonev.concat(createEvent);//JSON.stringify(events[i], censor(events[i]))); //concat each event (json objects) together 
+            }catch(err){
+              console.log(err);
+            }
+          }
+        }
+        sendUserDetails('PHP/saveCal_mdb.php', response.id, jsonev, true);
       });
 
-      //console.log(response.id);
+      console.log(response.id);
+      getEvents(response.id); //load events into fullcalendar:
     }
     else if(!connected){
+      writeCookie('loggedin', 'false', 1);
       $('#saveCal').hide();
       login.value = "Login";
       login.className = "btn btn-primary";

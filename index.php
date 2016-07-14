@@ -366,7 +366,7 @@
 					</div>
 				</div>
 
-				<!--Add Google Event-->
+				<!--Add Event-->
 				<div class="modal fade" id="addEvent-modal" tabindex="-1" role="dialog">
 					<div class="modal-dialog">
 					  <!-- Modal content-->
@@ -386,20 +386,22 @@
 								<div class="form-group">
 								  <label class="control-label col-xs-2 col-sm-2">Location:</label>
 								  <div class="col-xs-10 col-sm-10">
-								  	<input class="form-control" type="text" id="where_event" name="where_event">
+								  	<input class="form-control" type="text" id="location" name="location">
 								  </div>
 								</div>
 								<div class="form-group">
 								  <label class="control-label col-xs-2 col-sm-2">Description:</label>
 								  <div class="col-xs-10 col-sm-10">
-								  	<textarea class="form-control" id="content_event" name="content_event"></textarea>
+								  	<textarea class="form-control" id="description" name="description"></textarea>
 								  </div>
 								</div>
 							    <input type="hidden" id="start" name="start" value="">
 							    <input type="hidden" id="end" name="end" value="">
+							    <input type="hidden" id="eventFlag" name="eventFlag" value="">
 							    <div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal" style="float:left">Cancel</button>
-									<input type="submit" class="btn btn-default" value="Save">
+									<button type="button" class="btn btn-info" data-dismiss="modal" style="float:left">Cancel</button>
+									<button id="delete_btn" type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteEvent()" style="float:left; display:none;">Delete</button>
+									<input type="submit" class="btn btn-success" value="Save">
 								</div>
 							</form>
 					    </div>
