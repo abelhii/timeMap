@@ -88,6 +88,7 @@
 				<!--input id="signUp" class="btn btn-warning" type="button" data-toggle="modal" data-target="#sign_up" value="Sign Up" onclick=""></input>
 				<input id="profile" class="btn btn-primary" type="button" data-toggle="modal" data-target="#profilem" value="" style="display:none;"></input>-->
 				<input id="login" class="btn btn-primary" type="button" data-toggle="modal" data-target="#log_in" value="Login" style="display:show"></input>
+				<input id="example_dataset" class="btn btn-success" type="button" data-toggle="modal" onclick="switchUrl(); initMap();" value="NIAH Survey"></input>
 				<!-- LOGIN -->
 			
 		    </div>

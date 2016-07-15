@@ -95,17 +95,14 @@ function getEvents(userId){ //load events wehn user logs in
     data: {userId: userId},
     success: function(data){
       $('#output').html(data);
-      timetable = '../timeMap/PHP/getEvents.php';
+      //timetable = '../timeMap/PHP/getEvents.php';
       //remove events
-      $('#calendarr').fullCalendar('removeEventSource', '../timeMap/PHP/timetable_json.php?sem=sem1');
-      $('#calendarr').fullCalendar('removeEventSource', '../timeMap/PHP/timetable_json.php?sem=sem2');
+      //$('#calendarr').fullCalendar('removeEventSource', '../timeMap/PHP/timetable_json.php?sem=sem1');
+      //$('#calendarr').fullCalendar('removeEventSource', '../timeMap/PHP/timetable_json.php?sem=sem2');
       //add events switch events
-      /*$('#calendarr').fullCalendar('addEventSource', {
-                  url: timetable,
-                  color:'#ffee55',
-                  textColor:'#555'
-      });*/
-      $('#calendarr').fullCalendar('renderEvent', data, true);
+      $('#calendarr').fullCalendar('addEventSource', JSON.parse(data));
+      
+      //$('#calendarr').fullCalendar('renderEvent', data, true);
     },
     error: function(data){
       console.log(data);
@@ -113,6 +110,7 @@ function getEvents(userId){ //load events wehn user logs in
     }
   });
 }
+
 
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
@@ -148,8 +146,8 @@ function testAPI(connected) {
                 loc = events[i].location;
               createEvent = "{"+
                                "title:" + events[i].title   +","+
-                               "start:" + events[i].start._d +","+
-                               "end:" + events[i].end._d   +","+
+                               "start:" + events[i].start.format() +","+
+                               "end:" + events[i].end.format()   +","+
                                "description: "+ desc + "," +
                                "location: "+ loc +
                             "}"

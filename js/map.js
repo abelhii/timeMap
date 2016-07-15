@@ -2,6 +2,21 @@ var map, marker, userPos, infowindow, userFlag = false;
 var directionsDisplay, directionsService, gcd;
 var bus, train, transit_options;
 var markers = [];
+var url = 'https://webcourse.cs.nuim.ie/~se415003/timeMap/map/maynooth_campus.kml';
+
+
+//Example of adding a different dataset to Google Maps
+function switchUrl(){ 
+  if(url == 'https://webcourse.cs.nuim.ie/~se415003/timeMap/map/maynooth_campus.kml'){
+    url = 'http://217.78.6.75/dataset/741a70f7-dbc7-48b4-8ce8-788576181d32/resource/e91caa4d-fc13-4aa5-bb85-14c27431266c/download/fingalniahsurveyp20111128-1157.kml';
+    $("#example_dataset").removeClass('btn-success');
+  }
+  else{
+    url = 'https://webcourse.cs.nuim.ie/~se415003/timeMap/map/maynooth_campus.kml';
+    $("#example_dataset").addClass('btn-success');
+  }
+}
+
 //initialise google map:
 function initMap() {
   directionsService = new google.maps.DirectionsService;
@@ -13,12 +28,12 @@ function initMap() {
    });
   directionsDisplay.setMap(map);
 
-	var kmlOptions = {
-		url: 'https://webcourse.cs.nuim.ie/~se415003/timeMap/map/maynooth_campus.kml',//'http://abelhii.com/timeMap/maynooth_campus.kml',
-		suppressInfoWindows: false,
-		preserveViewport: false,
-		map: map
-	};
+  var kmlOptions = {
+    url: url,
+    suppressInfoWindows: false,
+    preserveViewport: false,
+    map: map
+  };
 	var muLayer = new google.maps.KmlLayer(kmlOptions);
 
   //turns on scroll to zoom when map is clicked

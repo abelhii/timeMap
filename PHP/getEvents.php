@@ -8,7 +8,7 @@
 	$db = $m->timemap;
 	$collection = $db->users;
 	
-	if(isset($_POST['userId'])){
+	//if(isset($_POST['userId'])){
 		$userId = $_POST['userId'];
 
 		//check if user exists; If yes update
@@ -26,7 +26,7 @@
 			}
 		}
 
-	}
+	//}
 	
 
 	function lastError() {
